@@ -1,0 +1,111 @@
+{% extends "Reportes/reportes.html" %}
+
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+{% block section_superior %}
+    <div id="modal_filtro_reporte" class="modal fade" role="dialog">
+      <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <form method="post" action="/reportes/reporte_mov_int_organismos">{% csrf_token %}
+              <div class="modal-header">
+                <h4 class="modal-title">Filtrar reporte</h4>
+              </div>
+              <div class="modal-body">
+                  <label for="id_fecha_inicio" class="label label-default control-label">Fecha de inicio</label>
+                  <input type="date" name="fecha_inicio" class="form-control" id="id_fecha_inicio" required>
+                  <label for="id_fecha_fin" class="label label-default control-label">Fecha de fin</label>
+                  <input type="date" name="fecha_fin" class="form-control" id="id_fecha_fin" required>
+              </div>
+              <div class="modal-footer">
+                  <input type="submit" class="btn btn-success" value="Aceptar">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+              </div>
+            </form>
+        </div>
+  </div>
+</div>
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+{% endblock %}
+
+{% block contenido_tabla %}
+    <div class="panel panel-primary row">
+        <div class="panel-heading">Totales de Movimientos Internos por Organismos
+             <div class="pull-right">
+                <a data-toggle="modal" data-target="#modal_filtro_reporte">
+                    <span class="glyphicon glyphicon-menu-hamburger" style="color:white; cursor: pointer"></span>
+                </a>
+             </div>
+        </div>
+        <div class="panel-body">
+
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
+                    <thead>
+                    <tr>
+                        <th>Organismos-OSDEs</th>
+					    <th>Siglas</th>
+                        <th>Cant. expedientes</th>
+
+                    </tr>
+                    </thead>
+
+                    <tbody>
+                    {% for dato in datos %}
+
+                        <tr>
+                            <td>{{ dato.org_nombre }}</td>
+							<td>{{ dato.org_siglas }}</td>
+                            <td>{{ dato.cant_expedientes}}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                <thead style="background-color: lightgrey">
+                        <td><strong>Total</strong></td>
+						<td><strong></strong></td>
+                        <td><strong>{{ suma }}</strong></td>
+
+
+                    </thead>
+
+                </table>
+            </div>
+
+
+            <div class="panel-footer">
+                <button class="btn btn-primary btn_gestion" onclick="export_to_pdf();">
+                    <span class="glyphicon glyphicon-export"></span>
+                    Exportar a excel
+                </button>
+                <a class="btn btn-success btn_gestion" href="/reportes"><span class="glyphicon glyphicon-arrow-left"> </span> Atrás
+               </a>
+            </div>
+
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+

@@ -1,0 +1,29 @@
+{% extends "Usuarios/gestion_usuarios.html" %}
+
+{% block encabezado %}
+    <header></header>
+{% endblock %}
+
+
+{% block section_superior %}
+    <div class="col-xs-8 placeholder" id="div_registrar_usuario">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Cambiar contraseña de usuario</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" id="cambiar_contrasenna" >{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                 <a class="btn btn-success btn_gestion" href="/usuarios">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+            </a>
+
+            </div>
+        </form>
+    {% endif %}
+    </div> </div>
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+{% block contenido_tabla %}{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "Ubicados/GestionUbicados.html" %}
+
+{% block paginate %}
+    <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+        {% if ubicados.has_previous %}
+            <li>
+                <a href="/ubicados/propios/{{ opcion }}/{{ id_opcion }}?pagina={{ ubicados.previous_page_number }}" aria-label="Previous">
+                    Anterior
+                </a>
+            </li>
+        {% else %}
+
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                    Anterior
+                </a>
+            </li>
+        {% endif %}
+
+        {% if paginas %}
+            {% for pagina in paginas %}
+                {% if pagina == ubicados.number  %}
+                    <li class="active"><a href="/ubicados/propios/{{ opcion }}/{{ id_opcion }}?pagina={{ pagina }}">{{ pagina }}</a></li>
+                {% else %}
+                    <li><a href="/ubicados/propios/{{ opcion }}/{{ id_opcion }}?pagina={{ pagina }}">{{ pagina }}</a></li>
+                {% endif %}
+            {% endfor %}
+        {% else %}
+            <li class="active"><a href="/ubicados/propios/{{ opcion }}/{{ id_opcion }}?pagina=1">1</a></li>
+        {% endif %}
+        {% if ubicados.has_next %}
+            <li>
+                <a href="/ubicados/propios/{{ opcion }}/{{ id_opcion }}?pagina={{ ubicados.next_page_number }}" aria-label="Next">
+                    Próximo
+                </a>
+            </li>
+        {% else %}
+            <li class="disabled">
+                <a  href="#" aria-label="Next">
+                    Próximo
+                </a>
+            </li>
+        {% endif %}
+    </ul>
+{% endblock %}

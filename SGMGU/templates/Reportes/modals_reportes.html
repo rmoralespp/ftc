@@ -1,0 +1,204 @@
+    <div class="modal fade" id="modal_exportar_resumen_mensual" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <form method="post" action="/exportar_resumen_mensual">{% csrf_token %}
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Exportar resumen mensual</h4>
+                                </div>
+
+                                <div class="modal-body">
+
+                                   <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_exportar_carreras_expedientes" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <form method="post" action="/exportar_carreras_expedientes">{% csrf_token %}
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Exportar total de expedientes aprobados por carreras</h4>
+                                </div>
+
+                                <div class="modal-body">
+
+                                   <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="modal_exportar_causales_expedientes" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <form method="post" action="/exportar_causales_expedientes">{% csrf_token %}
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Exportar total de expedientes aprobados por causales</h4>
+                                </div>
+
+                                <div class="modal-body">
+
+                                   <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    </div>
+
+    <div class="modal fade" id="modal_exportar_provincias_expedientes" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <form method="post" action="/exportar_provincias_expedientes">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Exportar total de expedientes aprobados por provincias</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                       <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_exportar_organismos_expedientes" role="dialog">
+                                <div class="modal-dialog">
+                                    <!-- Modal content-->
+                                    <div class="modal-content">
+                                        <form method="post" action="/exportar_organismos_expedientes">{% csrf_token %}
+                                        <div class="modal-header">
+                                            <h4 class="modal-title modal_reporte_title">Exportar total de expedientes aprobados por organismos</h4>
+                                        </div>
+
+                                        <div class="modal-body">
+
+                                           <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                        </div>
+                                            <div class="modal-footer">
+                                                <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_ubicados" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <form method="post" action="/exportar_ubicados">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar registro de ubicados propios</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                       <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+    </div>
+
+
+
+
+    <div class="modal fade" id="modal_total_ubicados_organismos" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_total_ubicados_organismos">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar total de ubicados por organismos</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                       <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>
+
+
+     <div class="modal fade" id="modal_total_ubicados_provincias_residencia" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_total_ubicados_provincias_residencia">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar total de ubicados por provincias de residencia</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                       <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>
+
+
+    <div class="modal fade" id="modal_total_ubicados_provincias_ubicacion" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_total_ubicados_provincias_ubicacion">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar total de ubicados por provincias de ubicación</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+
+                                       <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>

@@ -1,0 +1,78 @@
+{% extends "General/index.html" %}
+
+
+
+{% block encabezado %}
+    <header></header>
+    {% endblock %}
+
+
+{% block section_superior %}
+{% endblock %}
+
+
+{% block titulo_tabla %}
+  {% include "Reportes/modals_reportes.html" %}
+{% endblock %}
+
+{% block contenido_tabla %}
+    <div class="panel panel-primary">
+    <div class="panel-heading">Reportes disponibles</div>
+    <div class="panel-body">
+
+        <ul class="nav nav-pills nav-tabs ">
+            <li class="active"><a class="tab_movimiento_laboral" data-toggle="tab" href="#movimiento_laboral">Movimiento Laboral</a></li>
+            <li><a class="tab_ubicados" data-toggle="tab" href="#ubicados">Ubicación Laboral</a></li>
+        </ul>
+        <br>
+
+        <div class="tab-content">
+            <div id="movimiento_laboral" class="tab-pane fade in active">
+                    {% if user.perfil_usuario.categoria.nombre == "administrador" or  user.perfil_usuario.categoria.nombre == "especialista" or   user.perfil_usuario.categoria.nombre == "invitado"%}
+                        <!--
+                        <a href="/reportes/reporte_exp_organismos"><p class="bg_primary "><span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes aprobados por organismos  </p></a>
+                        <a href="/reportes/reporte_exp_org_carrera"><p class="bg_primary "> <span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes aprobados por organismos y carreras </p></a>
+                        <a href="/reportes/reporte_exp_org_provincia"><p class="bg_primary "><span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes aprobados por provincias y organismos</p></a>
+                        <a href="/reportes/reporte_noexp_organismos"><p class="bg_danger "><span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes no aprobados por organismos  </p></a>
+                        <a href="/reportes/reporte_noexp_org_carrera"><p class="bg_danger "> <span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes no aprobados por organismos y carreras </p></a>
+                        <a href="/reportes/reporte_mov_int_organismos"><p class="bg_success "><span class="glyphicon glyphicon-paperclip"></span> Totales de Movimientos Internos por Organismos</p></a>
+                        -->
+                        <a href="#" data-toggle="modal" data-target="#modal_exportar_resumen_mensual"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de Expedientes aprobados de cada organismo por meses</p></a>
+                    {% endif %}
+                    {% if user.perfil_usuario.categoria.nombre == "administrador" or  user.perfil_usuario.categoria.nombre == "especialista" or  user.perfil_usuario.categoria.nombre == "organismo"%}
+                        {% if user.perfil_usuario.organismo.hijode == None %}
+                            <a href="#" data-toggle="modal" data-target="#modal_exportar_organismos_expedientes"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de Expedientes aprobados por organismos </p></a>
+                        {% endif %}
+                    {% endif %}
+                    {% if user.perfil_usuario.categoria.nombre != "dpts" %}
+                        <a href="#" data-toggle="modal" data-target="#modal_exportar_carreras_expedientes"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de Expedientes aprobados por carreras </p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_exportar_causales_expedientes"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de Expedientes aprobados por causales </p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_exportar_provincias_expedientes"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de Expedientes aprobados por provincias</p></a>
+                        <a href="/exportar_expedientes_causal"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de Expedientes aprobados según causal </p></a>
+                        <a href="/exportar_expedientes_carrera"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de Expedientes aprobados según carrera </p></a>
+                        <hr>
+                    {% endif %}
+            </div>
+
+            <div id="ubicados" class="tab-pane">
+                    {% if user.perfil_usuario.categoria.nombre != "dpts"  and  user.perfil_usuario.categoria.nombre != "organismo"%}
+                        <a href="/exportar_ubicados_provincia_ubicacion"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados según provincia de ubicación</p></a>
+                        <a href="/exportar_ubicados_provincia_residencia"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados según provincia de residencia</p></a>
+                        <a href="/exportar_ubicados_organismo"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados según organismo</p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_organismos"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por organismos</p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_provincias_ubicacion"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por provincias de ubicación</p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_provincias_residencia"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por provincias de residencia</p></a>
+                    {% endif %}
+                    {% if user.perfil_usuario.categoria.nombre == "dpts"  or  user.perfil_usuario.categoria.nombre == "organismo" %}
+                        <a href="#" data-toggle="modal" data-target="#modal_ubicados"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados propios</p></a>
+                    {% endif %}
+            </div>
+        </div>
+    </div>
+    <div class="panel-footer"></div>
+    </div>
+
+{% endblock %}
+
+
+

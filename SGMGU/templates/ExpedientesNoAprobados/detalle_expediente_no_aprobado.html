@@ -1,0 +1,267 @@
+{% extends "ExpedientesNoAprobados/expedientes_no_aprobados.html" %}
+
+{% block encabezado %}
+    <header></header>
+{% endblock %}
+
+
+{% block section_superior %}
+
+     <div class="modal fade" id="modal_aprobar_exp" role="dialog">
+        <div class="modal-dialog">
+            <!-- Modal content-->
+            <div class="modal-content">
+
+                <form id="aprobar_expediente_no_aprob"  action="/aprobar_expediente_no_aprobado/{{ expediente.id }}" enctype="multipart/form-data" class="form-horizontal" method="post" role="form">{% csrf_token %}
+
+                    <div class="modal-header">
+                        <h4 class="modal-title">Aprobar expediente</h4>
+                    </div>
+
+                    <div class="modal-body" style="overflow:hidden;">
+
+                        <div class="form-group has-feedback col-xs-12">
+                             <label for="id_registro_entrada" class="  label label-default control-label">Registro de entrada</label>
+                            <input class="form-control" type="text" id="id_registro_entrada" name="registro_entrada" placeholder="Escriba solo el número">
+                        </div>
+
+
+                        <div class="form-group has-feedback col-xs-12">
+                              <label for="id_registro_salida" class=" label label-default control-label">Registro de salida</label>
+                            <input class="form-control" type="text" id="id_registro_salida"  name="registro_salida" placeholder="Escriba solo el número">
+                        </div>
+
+
+                         <div class="form-group has-feedback col-xs-12">
+                              <label for="id_fecha_aprobado" class=" label label-default control-label ">Fecha de aprobado</label>
+
+                            <input  type='text' class="form-control" id='id_fecha_aprobado' name="fecha_aprobado">
+                        </div>
+
+
+                         <div class="form-group has-feedback col-xs-12">
+                            <label for="id_informe_expediente" class=" label label-default control-label ">Informe del expediente</label>
+                            <input  type='file'  id='id_informe_expediente' name="informe_expediente">
+                        </div>
+
+                        <div class="form-group has-feedback col-xs-12">
+                            <label for="id_notificar_dir" class="label label-default control-label ">Notificar</label><br>
+                            <input  type='checkbox'  id='id_notificar_dir' name="notificar_dir"><em class="text-muted"> Notificar a Dirección de Trabajo Provincial</em>
+                        </div>
+
+                       <div class="pull-right">
+                            <input type="submit" class="btn btn-primary" value="Aceptar" id="aceptar_exp_aprobado">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                       </div>
+
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+     <div class="modal fade" id="modal_rechazar_exp" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                 <form id="rechazar_expediente_no_aprob"  class="form-horizontal" method="post" role="form">{% csrf_token %}
+
+                                     <div class="modal-header">
+                                         <h4 class="modal-title">Rechazar expediente</h4>
+                                     </div>
+
+                                     <div class="modal-body">
+                                        <div class="form-group col-sm-12">
+                                            <label for="id_causa_rechazo" class="  label label-default control-label ">Causa</label>
+                                            <textarea class="form-control "  id="id_causa_rechazo" name="causa_rechazo" rows="2">
+                                            </textarea>
+                                        </div>
+                                         <br><br><br><br><br>
+                                     </div>
+                                     <div class="modal-footer">
+                                         <input type="submit" class="btn btn-primary" value="Aceptar" id="aceptar_exp_rechazado">
+                                         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                     </div>
+                                 </form>
+                            </div>
+                        </div>
+     </div>
+
+     <div class="modal fade" id="modal_pasar_pend_exp" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Pasar a pendientes</h4>
+                                </div>
+
+                                <div class="modal-body">
+                                    <p>¿Está seguro de pasar a pendientes el expediente seleccionado?</p>
+                                </div>
+                                    <div class="modal-footer">
+                                               <a class="btn btn-primary"  id="aceptar_exp_aprobado">Aceptar </a>
+                                               <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        </div>
+
+
+                            </div>
+                        </div>
+    </div>
+
+     <div class="modal fade" id="modal_editar_exp" style="overflow-y: scroll" >
+      <div class="modal-dialog">
+          <form class="form_editar_exp" method="post" action="/editar_expediente/{{ expediente.expediente.id }}">
+              <div class="modal-header">
+                   <h4 class="modal-title">Editar expediente</h4>
+              </div>
+              <div class="modal-body">
+                  {% csrf_token %}
+                  {% include "General/forms_snippets.html" %}
+              </div>
+              <div class="modal-footer">
+                    <input type="submit" class="btn btn-primary" value="Aceptar" id="aceptar_exp_editado">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+              </div>
+          </form>
+      </div>
+      </div>
+
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+{% endblock %}
+
+
+{% block contenido_tabla %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Expediente del graduado {{ expediente.expediente.graduado.nombre  }} </div>
+        <div class="panel-heading">
+
+            <div class="btn-group" data-toggle="buttons" >
+                {% if categoria == "especialista" or categoria == "administrador"%}
+                    <button name="btn_pasar_a_pend_exp_no" id="{{ expediente.id  }}" class="btn btn-danger modal_expediente_pend " data-toggle="modal" data-target="#modal_pasar_pend_exp">
+                        <span class="glyphicon glyphicon-chevron-up"></span> Pasar a Pendientes
+                    </button>
+
+                    <button name="btn_aprobar_exp" id="{{ expediente.id  }}" class="btn btn-danger modal_expediente_pend " data-toggle="modal" data-target="#modal_aprobar_exp">
+                        <span class="glyphicon glyphicon-ok"> </span> Aprobar
+                    </button>
+
+                    <button name="btn_rechazar_exp" id="{{ expediente.id  }}" class="btn btn-danger modal_expediente_pend " data-toggle="modal" data-target="#modal_rechazar_exp">
+                        <span class="glyphicon glyphicon-remove"></span> Rechazar
+                    </button>
+
+                    <a name="{{expediente.expediente.id }}" id="editar_exp_desde_pend" href="/expedientes_no_aprobados/{{ expediente.id }}/editar" name="btn_editar_exp" id="{{ expediente.id  }}" class="btn btn-danger modal_expediente_pend ">
+                        <span class="glyphicon glyphicon-pencil"></span> Editar expediente
+                    </a>
+
+                {% endif %}
+
+                <a class="btn btn-danger btn_gestion " href="/expedientes_no_aprobados">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+
+
+
+        <div id="datos_exp"  class="col-xs-12">
+        <h4 class="text-center">Datos del graduado:</h4>
+        <p><strong>Nombre y apellidos:</strong> {{ expediente.expediente.graduado.nombre }} {{ expediente.expediente.graduado.apellidos }}</p>
+        {% if expediente.expediente.graduado.carrera %}
+             <p><strong>Carrera:</strong> {{ expediente.expediente.graduado.carrera }}</p>
+        {% endif %}
+
+        {% if expediente.expediente.graduado.centro_estudio %}
+             <p><strong>Centro de estudio:</strong> {{ expediente.expediente.graduado.centro_estudio }}</p>
+        {% endif %}
+
+        {% if expediente.expediente.graduado.ci %}
+             <p><strong>Carnet de identidad:</strong> {{ expediente.expediente.graduado.ci }}</p>
+        {% endif %}
+
+        {% if expediente.expediente.graduado.detalle_direccion_residencia and expediente.expediente.graduado.municipio_direccion_residencia and expediente.expediente.graduado.provincia_direccion_residencia %}
+              <p><strong>Dirección de residencia:</strong> {{ expediente.expediente.graduado.detalle_direccion_residencia }}, {{ expediente.expediente.graduado.municipio_direccion_residencia }},{{ expediente.expediente.graduado.provincia_direccion_residencia }}</p>
+        {% else %}
+             <p><strong>Dirección de residencia:</strong> {{ expediente.expediente.graduado.municipio_direccion_residencia }},{{expediente.expediente.graduado.provincia_direccion_residencia }}</p>
+
+        {% endif %}
+
+        {% if expediente.expediente.graduado.anno_graduacion %}
+             <p><strong>Año de graduación:</strong> {{expediente.expediente.graduado.anno_graduacion }}</p>
+        {% endif %}
+
+        {% if expediente.expediente.causal_movimiento%}
+             <p><strong>Causa del movimiento:</strong> {{expediente.expediente.causal_movimiento.nombre }}</p>
+        {% endif %}
+        {% if expediente.expediente.sintesis_causal_movimiento%}
+             <p><strong>Síntesis de la causa del movimiento:</strong>
+                 <p>{{expediente.expediente.sintesis_causal_movimiento }}</p>
+             </p>
+        {% endif %}
+           {% if expediente.expediente.graduado.codigo_boleta %}
+               <p><strong>Código de la boleta</strong> {{ expediente.expediente.graduado.codigo_boleta }}</p>
+           {% endif %}
+
+           {% if expediente.expediente.graduado.imagen_boleta %}
+               <figure class="col-xs-12 imagen_boleta">
+                <img  id="img_boleta" class="img-thumbnail" src="/media/{{ expediente.expediente.graduado.imagen_boleta }}">
+                <figcaption>Imagen de la boleta</figcaption>
+               </figure>
+        {% endif %}
+       </div>
+
+
+
+
+       <div id="datos_exp"    class="col-xs-12">
+        <h4 class="text-center">Datos de la entidad que lo libera:</h4>
+        <p><strong>Nombre de la entidad:</strong> {{ expediente.expediente.entidad_liberacion }}</p>
+        <p><strong>Organismo:</strong> {{ expediente.expediente.organismo_liberacion.nombre}}</p>
+        <p><strong>Provincia:</strong> {{ expediente.expediente.mun_entidad_liberacion.provincia.nombre }}</p>
+        <p><strong>Municipio:</strong> {{ expediente.expediente.mun_entidad_liberacion.nombre }}</p>
+        <p><strong>Facultado:</strong> {{ expediente.expediente.facultado_liberacion }}</p>
+       </div>
+
+
+       <div id="datos_exp"  class="col-xs-12">
+        <h4 class="text-center">Datos de la entidad que lo acepta:</h4>
+        <p><strong>Nombre de la entidad:</strong> {{ expediente.expediente.entidad_aceptacion }}</p>
+        <p><strong>Organismo:</strong> {{ expediente.expediente.organismo_aceptacion.nombre}}</p>
+        <p><strong>Provincia:</strong> {{ expediente.expediente.mun_entidad_aceptacion.provincia.nombre }}</p>
+        <p><strong>Municipio:</strong> {{ expediente.expediente.mun_entidad_aceptacion.nombre }}</p>
+        <p><strong>Facultado:</strong> {{ expediente.expediente.facultado_aceptacion }} </p>
+       </div>
+
+        <div id="datos_exp"  class="col-xs-12">
+        <h4 class="text-center">Causa de la no aprobación:</h4>
+        <p><strong>Síntesis:</strong>
+            <p style="word-wrap: break-word">{{ expediente.sintesis_no_aprobado }}</p>
+            </p>
+         </div>
+
+
+       {% if   expediente.expediente.comprimido %}
+          <div id="datos_exp" class="col-xs-12">
+               <h4 class="text-center">Comprimido con los documentos del expediente:</h4>
+               <a style="margin-left: 150px; font-weight: 900; color: #575151" href="/descargar_comprimido/{{ expediente.expediente.id }}"><span class="glyphicon glyphicon-download-alt"></span> Descargar Comprimido</a>
+          </div>
+    {% endif %}
+
+ </div>
+        <div class="panel-footer">
+            {% if  expediente.fecha_no_aprobado %}
+                <p class="text-muted"> <span class="glyphicon glyphicon-time"></span> Expediente no aprobado el {{ expediente.fecha_no_aprobado }}</p>
+            {% endif %}
+        </div>
+
+    </div>
+
+
+{% endblock %}
+
+

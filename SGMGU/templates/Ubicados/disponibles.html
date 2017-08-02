@@ -1,0 +1,129 @@
+<div class="panel-body">
+        <div class="panel-body-superior">
+            <div class="btn-group btn_group pull-left" >
+
+             {% if user.perfil_usuario.categoria.nombre == 'administrador' or  user.perfil_usuario.categoria.nombre == 'especialista' or user.perfil_usuario.categoria.nombre == 'mes' %}
+
+                <a class="btn btn-success btn_gestion" href="/disponibles/registrar">
+                        <span class="glyphicon glyphicon-plus"></span>
+                        Registrar disponibilidad
+                </a>
+             {% endif %}
+
+                {% if user.perfil_usuario.categoria.nombre == 'administrador' or  user.perfil_usuario.categoria.nombre == 'especialista'%}
+                    <a class="btn btn-success btn_gestion" data-toggle="modal" data-target="#modal_importar_disponibles">
+                            <span class="glyphicon glyphicon-import"></span>
+                            Importar disponibilidad
+                     </a>
+                {% endif %}
+            </div>
+
+            <div class="row">
+            <div class="col-xs-3 pull-right">
+                <div class="input-group">
+                    {% if busqueda %}
+                        <input disabled type="number" id="ci_disponible" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
+                    {% else %}
+                        <input type="text" id="ci_disponible" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
+                    {% endif %}
+                    <div class="input-group-btn">
+                        {% if busqueda %}
+                             <a type="button" class="btn btn-default btn_normal" href="/disponibles"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
+                        {% else %}
+                             <button type="button" class="btn btn-default btn_normal" onclick="buscar_ci_disponible();"><span class="glyphicon glyphicon-search"></span></button>
+                        {% endif %}
+                        <button type="button" class="btn btn-default dropdown-toggle btn_normal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Otros <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right usar_disenno_new">
+                            <li><a href="/disponibles/buscar_disponibles_carrera"><span class="glyphicon glyphicon-search"></span> Por carrera</a></li>
+                            <li><a href="/disponibles/buscar_disponibles_municipio_residencia"><span class="glyphicon glyphicon-search"></span> Por municipio de residencia</a></li>
+                            <li><a href="/disponibles/buscar_disponibles_centro_estudio"><span class="glyphicon glyphicon-search"></span> Por centro de estudio</a></li>
+                        </ul>
+                    </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            </div><!-- /input-group -->
+          </div>
+        </div>
+            <div class="table-responsive" style="clear: both">
+                <br>
+                <table class="usar_DataTable_2 table table-striped table-bordered dt-responsive nowrap gestion_ubicado" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>Año </th>
+                        <th>Centro </th>
+                        <th>P. Res</th>
+                        <th>Carrera</th>
+                        <th>Ci</th>
+                        <th>Nombre y Apellidos</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for disponible in disponibles %}
+                        <tr>
+                             <td>{{ disponible.fecha_registro|date:"Y" }} </td>
+                             <td>{{ disponible.centro_estudio.siglas }} </td>
+                             <td>{{ disponible.municipio_residencia.provincia.siglas }} </td>
+                             <td>{{ disponible.carrera }} </td>
+                             <td>{{ disponible.ci }}
+                             <td>{{ disponible.nombre_apellidos }} </td>
+                          <td id="opciones_gestion">
+                              <a href="/disponibles/{{ disponible.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Detalles</a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             {% block paginate %}
+                <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+                {% if disponibles.has_previous %}
+                    <li>
+                        <a href="?pagina={{ disponibles.previous_page_number }}" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% endif %}
+                {% if paginas %}
+                {% for pagina in paginas %}
+                    {% if pagina == disponibles.number  %}
+                          <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                         <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    <li class="active"><a href="?pagina=1">1</a></li>
+                {% endif %}
+
+                {% if disponibles.has_next %}
+                    <li>
+                        <a href="?pagina={{ disponibles.next_page_number }}" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% else %}
+
+                    <li class="disabled">
+                        <a  href="#" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+                 {% endblock %}
+
+
+            {% if errors != "None" %}
+                  <script>
+                     $('#mostrar_errores_importar').modal('show');
+                  </script>
+
+            {% endif %}
+
+        </div>

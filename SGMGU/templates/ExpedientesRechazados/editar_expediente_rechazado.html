@@ -1,0 +1,34 @@
+{% extends "ExpedientesRechazados/expedientes_rechzados.html" %}
+
+
+
+{% block encabezado %}
+
+{% endblock %}
+
+
+
+{% block section_superior %}
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+
+{% block contenido_tabla %}
+    <div class="col-xs-10 placeholder" id="div_registrar_expediente">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Editar expediente</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" id="registrar_expediente" enctype="multipart/form-data">{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                 <a class="btn btn-success btn_gestion" href="/expedientes_rechazados/{{ id_exp }}">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+                </a>
+            </div>
+        </form>
+    {% endif %}
+    </div></div></div>
+{% endblock %}

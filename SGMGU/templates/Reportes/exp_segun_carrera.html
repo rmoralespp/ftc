@@ -1,0 +1,31 @@
+{% extends "Reportes/reportes.html" %}
+
+{% block encabezado %}
+
+{% endblock %}
+
+
+{% block section_superior %}
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+
+{% block contenido_tabla %}
+    <div class="col-xs-8 placeholder div_form">
+     <div class="panel panel-primary">
+        <div class="panel-heading">Registro de expedientes según carrera</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" id="registrar_expediente">{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                   <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
+                <a class="btn btn-success btn_gestion" href="/reportes">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+            </a>
+            </div>
+        </form>
+    {% endif %}
+    </div>   </div>   </div>
+{% endblock %}

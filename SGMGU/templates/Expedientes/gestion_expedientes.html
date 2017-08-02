@@ -1,0 +1,128 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+
+    <div class="modal fade" id="modal_eliminar_exp" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de eliminar el expediente seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modal_modificar_exp" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de modificación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de modificar el expediente seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+{% endblock %}
+
+{% block section_superior %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el expediente a modificar</div>
+        <div class="panel-body">
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap gestion_exp" cellspacing="0" width="100%">
+
+            <thead>
+            <tr>
+                <th>Id</th>
+                <th>Graduado</th>
+                <th>Org Liberación</th>
+                <th>Org Aceptación</th>
+                <th>Registrado</th>
+                <th>Opciones</th>
+            </tr>
+              </thead>
+              <tbody>
+              {% for expediente in expedientes %}
+                  <tr>
+                      <td>{{ expediente.id }} </td>
+                      <td>{{ expediente.graduado__nombre }} </td>
+                      <td>{{expediente.organismo_liberacion__siglas}}</td>
+                      <td>{{expediente.organismo_aceptacion__siglas}}</td>
+                      <td>{{ expediente.fecha_registro|date:"Y/m/d" }}</td>
+                      <td id="opciones_gestion">
+                              <a href="/gestion_expedientes/{{ expediente.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Detalles</a>
+                              <button id="{{ expediente.id  }}" onclick="click_btn_mod_exp({{ expediente.id  }});" class="btn btn-info  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp">
+                                  <span class="glyphicon glyphicon-pencil">
+                                  </span>
+                              </button>
+
+                              <button id="{{ expediente.id  }}"  onclick="click_btn_eli_exp({{ expediente.id  }});" class="btn btn-danger modal-expediente" data-toggle="modal" data-target="#modal_eliminar_exp">
+                                  <span class="glyphicon glyphicon-trash">
+                                  </span>
+                              </button>
+
+                      </td>
+
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div></div>
+        <div class="panel-footer">
+            <a class="btn btn-success btn_gestion" href="/gestion_expedientes/registrar_expediente">
+                <span class="glyphicon glyphicon-plus"></span>
+                Registrar expediente
+            </a>
+
+            <ul class="pager">
+                {% if expedientes.has_previous %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                {% endif %}
+
+                {% if expedientes.paginator.num_pages %}
+                    <span class="text-muted">Página {{ expedientes.number }} de {{ expedientes.paginator.num_pages }}</span>
+                {% endif %}
+
+
+                {% if expedientes.has_next %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                {% endif %}
+            </ul>
+    </div>
+        </div>
+    </div>
+
+{% endblock %}

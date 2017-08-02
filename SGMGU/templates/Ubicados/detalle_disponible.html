@@ -1,0 +1,92 @@
+{% extends "Ubicados/GestionUbicados.html" %}
+
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block section_superior %}
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+      <div class="modal fade" id="modal_eliminar_disponibilidad" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title modal_reporte_title">Confirmación de eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de eliminar la disponibilidad seleccionada</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a type="submit" class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+                        </div>
+    </div>
+
+{% endblock %}
+
+
+{% block contenido_tabla %}
+    <div class="row panel panel-primary">
+        <div class="panel-heading">Datos de {{ disponibilidad.nombre_apellidos  }} </div>
+        <div class="panel-heading">
+            <div class="btn-group"  data-toggle="buttons">
+                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "dpts"%}
+                    <a class="btn btn-danger btn_gestion " href="/disponibles/{{ disponibilidad.id }}/ubicar">
+                        <span class="glyphicon glyphicon-pencil"></span> Ubicar
+                    </a>
+                {% endif %}
+                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista"%}
+                    <button id="{{ disponibilidad.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_disponibilidad" onclick="eliminar_disponibilidad({{ disponibilidad.id }});">
+                        <span class="glyphicon glyphicon-trash">
+                        </span> Eliminar disponibilidad
+                    </button>
+                {% endif %}
+
+                <a class="btn btn-danger btn_gestion " href="/disponibles">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+
+            <div id="datos_exp"  class="col-xs-12">
+            <h4 class="text-center">Datos del graduado:</h4>
+                <p><strong>Nombre y apellidos:</strong> {{ disponibilidad.nombre_apellidos }}</p>
+                <p><strong>Carnet de identidad:</strong> {{ disponibilidad.ci }}</p>
+                <p><strong>Sexo:</strong> {{ disponibilidad.sexo_verbose }}</p>
+                <p><strong>Carrera:</strong> {{ disponibilidad.carrera }}</p>
+                <p><strong>Centro de estudio:</strong> {{ disponibilidad.centro_estudio }}</p>
+                <p><strong>Dirección de residencia:</strong> {{ disponibilidad.direccion_particular }}, {{ disponibilidad.municipio_residencia }},{{ disponibilidad.municipio_residencia.provincia }}</p>
+                <p><strong>Cumple con el Servicio Social:</strong> {{disponibilidad.cumple_servicio_social|yesno }}</p>
+           </div>
+
+
+        </div>
+    <div class="panel-footer">
+        <p class="text-muted"> <span class="glyphicon glyphicon-time"></span> Registrado el {{ disponibilidad.fecha_registro }}</p>
+    </div>
+    </div>
+
+
+{% endblock %}
+
+

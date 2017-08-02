@@ -1,0 +1,135 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block titulo_tabla %}
+
+    <div class="modal fade" id="modal_importar_disponibles" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content" >
+                                <form method="post" enctype="multipart/form-data" action="/disponibles/importar">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Importar disponibilidad de graduados</h4>
+                                    </div>
+                                    <div class="modal-body" style="height: 500px; overflow-y: auto">
+                                        <div class="form-group">
+                                             <label class="label label-default">Código Centro de estudio</label>
+                                             <input  name="centro_estudio" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+                                        </div>
+                                        <div class="form-group">
+                                             <label class="label label-default">Código Carrera</label>
+                                             <input  name="carrera" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+                                        </div>
+                                          <div class="form-group">
+                                             <label class="label label-default">Código Municipio de residencia</label>
+                                          <input   name="municipio_residencia" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div>
+                                           <div class="form-group">
+                                              <label class="label label-default">Dirección de residencia</label>
+                                          <input name="direccion_residencia" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div>
+
+                                           <div class="form-group">
+                                             <label class="label label-default">Nombre y Apellidos</label>
+                                          <input name="nombre_apellidos" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div >
+                                          <div class="form-group">
+                                              <label class="label label-default">Ci</label>
+                                          <input  name="ci" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div >
+                                         <div class="form-group">
+                                              <label class="label label-default">Cumple el Servicio Social</label>
+                                          <input  name="css" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div>
+                                        <div class="form-group">
+                                              <label class="label label-default">Sexo</label>
+                                          <input name="sexo" min="1" class="form-control" type="number" required placeholder="Escriba la posición de la columna del excel a cargar">
+
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="file" value="Importar" required name="disponibles_file">
+                                        </div>
+
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+        </div>
+
+
+
+    <div class="modal fade" id="mostrar_errores_importar" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Errores encontrados al cargar los datos de la disponibilidad</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                    <ul>
+                                     {% for error in errors %}
+                                         <li>{{ error }}</li>
+                                     {% endfor %}
+                                    </ul>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-primary" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
+
+                            </div>
+                        </div>
+    </div>
+{% endblock %}
+
+{% block section_superior %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{ nombre_pag }}</div>
+
+        <div class="tab-content">
+            {% if tab == 'disponibles' %}
+                   <div id="disponibles" class="tab-pane fade in active">
+                       {% include "Ubicados/disponibles.html" %}
+                   </div>
+            {% else %}
+                <div id="ubicados" class="tab-pane fade in active">
+                       {% include "Ubicados/ubicados.html" %}
+                </div>
+            {% endif %}
+
+
+
+
+        </div>
+        <div class="panel-footer" style="overflow: hidden">
+
+    </div>
+        </div>
+    </div>
+
+{% endblock %}

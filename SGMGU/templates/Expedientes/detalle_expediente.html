@@ -1,0 +1,183 @@
+{% extends "Expedientes/gestion_expedientes.html" %}
+
+
+{% block encabezado %}
+    <header></header>
+{% endblock %}
+
+{% block section_superior %}
+
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+    <div class="modal fade" id="modal_eliminar_exp" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de eliminar el expediente seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modal_modificar_exp" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de modificación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de modificar el expediente seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+{% endblock %}
+
+
+
+
+
+{% block contenido_tabla %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Expediente del graduado {{ expediente.graduado.nombre  }} </div>
+        <div class="panel-heading">
+                 <div class="btn-group" data-toggle="buttons" >
+
+                {% if categoria == "especialista" or categoria == "administrador"%}
+                    <button id="{{ expediente.id  }}" onclick="click_btn_mod_exp({{ expediente.id  }});" class="btn btn-danger  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp">
+                                  <span class="glyphicon glyphicon-pencil">
+                                  </span> Editar Expediente
+                    </button>
+
+                    <button id="{{ expediente.id  }}"  onclick="click_btn_eli_exp({{ expediente.id  }});" class="btn btn-danger modal-expediente" data-toggle="modal" data-target="#modal_eliminar_exp">
+                                  <span class="glyphicon glyphicon-trash">
+                                  </span> Eliminar Expediente
+                    </button>
+                {% endif %}
+
+                <a class="btn btn-danger btn_gestion " href="/gestion_expedientes">
+                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                </a>
+            </div>
+        </div>
+        <div class="panel-body">
+
+
+
+        <div id="datos_exp"  class="col-xs-12">
+        <h4 class="text-center">Datos del graduado:</h4>
+        <p><strong>Nombre y apellidos:</strong> {{ expediente.graduado.nombre }} {{ expediente.graduado.apellidos }}</p>
+        {% if expediente.graduado.carrera %}
+             <p><strong>Carrera:</strong> {{ expediente.graduado.carrera }}</p>
+        {% endif %}
+
+        {% if expediente.graduado.centro_estudio %}
+             <p><strong>Centro de estudio:</strong> {{ expediente.graduado.centro_estudio }}</p>
+        {% endif %}
+
+        {% if expediente.graduado.ci %}
+             <p><strong>Carnet de identidad:</strong> {{ expediente.graduado.ci }}</p>
+        {% endif %}
+
+        {% if expediente.graduado.detalle_direccion_residencia and expediente.graduado.municipio_direccion_residencia and expediente.graduado.provincia_direccion_residencia %}
+              <p><strong>Dirección de residencia:</strong> {{ expediente.graduado.detalle_direccion_residencia }}, {{ expediente.graduado.municipio_direccion_residencia }},{{ expediente.graduado.provincia_direccion_residencia }}</p>
+        {% else %}
+             <p><strong>Dirección de residencia:</strong> {{ expediente.graduado.municipio_direccion_residencia }},{{expediente.graduado.provincia_direccion_residencia }}</p>
+
+        {% endif %}
+
+        {% if expediente.graduado.anno_graduacion %}
+             <p><strong>Año de graduación:</strong> {{expediente.graduado.anno_graduacion }}</p>
+        {% endif %}
+
+        {% if expediente.causal_movimiento%}
+             <p><strong>Causa del movimiento:</strong> {{expediente.causal_movimiento.nombre }}</p>
+        {% endif %}
+        {% if expediente.sintesis_causal_movimiento%}
+             <p><strong>Síntesis de la causa del movimiento:</strong>
+                 <p>{{expediente.sintesis_causal_movimiento }}</p>
+             </p>
+        {% endif %}
+           {% if expediente.graduado.codigo_boleta %}
+               <p><strong>Código de la boleta</strong> {{ expediente.graduado.codigo_boleta }}</p>
+           {% endif %}
+
+           {% if expediente.graduado.imagen_boleta %}
+               <figure class="col-xs-12 imagen_boleta">
+                <img  id="img_boleta" class="img-thumbnail" src="/media/{{ expediente.graduado.imagen_boleta }}">
+                <figcaption>Imagen de la boleta</figcaption>
+               </figure>
+        {% endif %}
+       </div>
+
+
+
+
+       <div id="datos_exp"    class="col-xs-12">
+        <h4 class="text-center">Datos de la entidad que lo libera:</h4>
+        <p><strong>Nombre de la entidad:</strong> {{ expediente.entidad_liberacion }}</p>
+        <p><strong>Organismo:</strong> {{ expediente.organismo_liberacion.nombre}}</p>
+        <p><strong>Provincia:</strong> {{ expediente.mun_entidad_liberacion.provincia.nombre }}</p>
+        <p><strong>Municipio:</strong> {{ expediente.mun_entidad_liberacion.nombre }}</p>
+        <p><strong>Facultado:</strong> {{ expediente.facultado_liberacion }}</p>
+       </div>
+
+
+       <div id="datos_exp"  class="col-xs-12">
+        <h4 class="text-center">Datos de la entidad que lo acepta:</h4>
+        <p><strong>Nombre de la entidad:</strong> {{ expediente.entidad_aceptacion }}</p>
+        <p><strong>Organismo:</strong> {{ expediente.organismo_aceptacion.nombre}}</p>
+        <p><strong>Provincia:</strong> {{ expediente.mun_entidad_aceptacion.provincia.nombre }}</p>
+        <p><strong>Municipio:</strong> {{ expediente.mun_entidad_aceptacion.nombre }}</p>
+        <p><strong>Facultado:</strong> {{ expediente.facultado_aceptacion }} </p>
+       </div>
+
+
+        {% if   expediente.comprimido %}
+           <div id="datos_exp" class="col-xs-12">
+               <h4 class="text-center">Comprimido con los documentos del expediente:</h4>
+               <a style="margin-left: 150px; font-weight: 900; color: #575151" href="/descargar_comprimido/{{ expediente.id }}"><span class="glyphicon glyphicon-download-alt"></span> Descargar Comprimido</a>
+           </div>
+        {% endif %}
+
+            {% if   expediente.carta_expediente %}
+
+               <div id="datos_exp" class="col-xs-12">
+                    <h4 class="text-center">Informe del expediente aprobado por el MTSS :</h4>
+                    <a style="margin-left: 150px; font-weight: 900; color:  #575151" href="/descargar_informe/{{ expediente.id }}" class="pull-left"><span class="glyphicon glyphicon-download-alt"></span> Descargar Informe</a>
+                    <a style="margin-right: 150px; font-weight: 900; color: #575151" href="/ver_informe/{{ expediente.id }}" class="pull-right"><span class="glyphicon glyphicon-eye-open"></span> Ver Informe</a> </p>
+
+               </div>
+        {% endif %}
+
+        </div>
+        <div class="panel-footer">
+            {% if  expediente.fecha_aprobado %}
+            <p class="text-muted"> <span class="glyphicon glyphicon-time"></span> Expediente aprobado el {{ expediente.fecha_aprobado }}</p>
+            {% endif %}
+        </div>
+    </div>
+
+
+{% endblock %}

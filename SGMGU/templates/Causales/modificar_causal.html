@@ -1,0 +1,28 @@
+{% extends "Causales/gestion_causales.html" %}
+
+{% block encabezado %}
+  <header></header>
+{% endblock %}
+
+
+{% block section_superior %}
+    <div class="col-xs-8 placeholder" id="div_registrar_causal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Modificar causal</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" id="registrar_causal">{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                <a class="btn btn-success btn_gestion" href="/causales">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+            </a>
+            </div>
+        </form>
+    {% endif %}
+    </div></div></div>
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+{% block contenido_tabla%} {% endblock %}

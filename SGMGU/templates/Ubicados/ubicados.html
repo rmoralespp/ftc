@@ -1,0 +1,130 @@
+<div class="panel-body">
+        <div class="panel-body-superior">
+            <div class="btn-group btn_group pull-left" >
+                  {% if user.perfil_usuario.categoria.nombre == 'administrador' or user.perfil_usuario.categoria.nombre == 'especialista' or user.perfil_usuario.categoria.nombre == 'dpts'%}
+                      <a class="btn btn-success btn_gestion" href="/ubicados/registrar">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Registrar ubicado
+                      </a>
+                  {% endif %}
+
+                       <button class="btn btn-success dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true">
+                        Filtrar
+                        <span class="caret"></span>
+                      </button>
+                      <ul class="dropdown-menu dropdown-menu-right usar_disenno_new" aria-labelledby="dropdownMenu1">
+                        <li><a href="/ubicados/desfasados"><span class="glyphicon glyphicon-filter"></span> Desfasados</a></li>
+                        <li><a href="/ubicados/graduados"><span class="glyphicon glyphicon-filter"></span> Graduados</a></li>
+                      </ul>
+                
+
+
+            </div>
+            {% if filtro != 'desfasados' %}
+                <div class="row">
+            <div class="col-xs-3 pull-right">
+                <div class="input-group">
+                    {% if busqueda %}
+                        <input disabled type="number" id="ci_ubicado" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
+                    {% else %}
+                        <input type="text" id="ci_ubicado" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
+                    {% endif %}
+                    <div class="input-group-btn">
+                        {% if busqueda %}
+                             <a type="button" class="btn btn-default btn_normal" href="/ubicados"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
+                        {% else %}
+                             <button type="button" class="btn btn-default btn_normal" onclick="buscar_ci_ubicado();"><span class="glyphicon glyphicon-search"></span></button>
+                        {% endif %}
+                         <button type="button" class="btn btn-default dropdown-toggle btn_normal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Otros <span class="caret"></span></button>
+                        <ul class="dropdown-menu dropdown-menu-right usar_disenno_new">
+                            <li><a href="/ubicados/buscar_ubicados_provincia_carrera"><span class="glyphicon glyphicon-search"></span> Por carrera</a></li>
+                            <li><a href="/ubicados/buscar_ubicados_organismo"><span class="glyphicon glyphicon-search"></span> Por organismo</a></li>
+                            <li><a href="/ubicados/buscar_ubicados_provincia_residencia"><span class="glyphicon glyphicon-search"></span> Por provincia de residencia</a></li>
+                            <li><a href="/ubicados/buscar_ubicados_provincia_ubicacion"><span class="glyphicon glyphicon-search"></span> Por provincia de ubicación</a></li>
+                            <li><a href="/ubicados/buscar_ubicados_centro_estudio"><span class="glyphicon glyphicon-search"></span> Por centro de estudio</a></li>
+                        </ul>
+                    </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            </div><!-- /input-group -->
+          </div>
+            {% endif %}
+
+        </div>
+            <div class="table-responsive" style="clear: both">
+                <br>
+                <table class="usar_DataTable_2 table table-striped table-bordered dt-responsive nowrap gestion_ubicado" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+
+                        <th>Año Grad</th>
+                        <th>Organismo</th>
+                        <th>P. Res</th>
+                        <th>Centro</th>
+                        <th>Carrera</th>
+                        <th>Nombre y Apellidos</th>
+                        <th>Presentado</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for ubicado in ubicados %}
+                        <tr>
+                            <td>{{ ubicado.anno_graduado }} </td>
+                            <td>{{ ubicado.organismo.siglas }} </td>
+                            <td>{{ ubicado.municipio_residencia.provincia.siglas }} </td>
+                            <td>{{ ubicado.centro_estudio.siglas }} </td>
+                             <td>{{ ubicado.carrera }} </td>
+                            <td>{{ ubicado.nombre_apellidos }} </td>
+                            <td>{{ ubicado.is_presentado }} </td>
+                          <td id="opciones_gestion">
+                              <a href="/ubicados/{{ ubicado.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Detalles</a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             {% block paginate %}
+                <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+                {% if ubicados.has_previous %}
+                    <li>
+                        <a href="?pagina={{ ubicados.previous_page_number }}" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% endif %}
+                {% if paginas %}
+                {% for pagina in paginas %}
+                    {% if pagina == ubicados.number  %}
+                          <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                         <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    <li class="active"><a href="?pagina=1">1</a></li>
+                {% endif %}
+
+                {% if ubicados.has_next %}
+                    <li>
+                        <a href="?pagina={{ ubicados.next_page_number }}" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% else %}
+
+                    <li class="disabled">
+                        <a  href="#" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+                 {% endblock %}
+        </div>

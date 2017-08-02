@@ -1,0 +1,150 @@
+{% extends "General/index.html" %}
+
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+
+
+
+
+{% block titulo_tabla %}
+{% endblock %}
+
+
+
+{% block section_superior %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el usuario a modificar</div>
+        <div class="panel-body">
+
+
+
+
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
+            <thead>
+            <tr>
+                <th>Usuario</th>
+                <th>Email</th>
+                <th>Organismo</th>
+                <th>Nombre y Apellidos</th>
+                <th>Prov.</th>
+                <th>Categoría</th>
+                <th>Teléfono</th>
+                <th id="opciones_gestion_titulo">Opciones</th>
+            </tr>
+              </thead>
+              <tbody>
+
+              {% for usuario in usuarios %}
+
+                  <tr>
+                      <td>{{ usuario.username }}</td>
+                      <td>{{ usuario.email }}</td>
+                      <td>{{ usuario.perfil_usuario.organismo.siglas }}</td>
+                      <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>
+                      <td>{{usuario.perfil_usuario.provincia.siglas }}</td>
+                      <td>{{ usuario.perfil_usuario.categoria }}</td>
+                      <td>{{ usuario.perfil_usuario.telefono }}</td>
+                      <td  class="opciones_gestion">
+                              <button id="{{ usuario.id  }}" class="btn btn-info modal-usuario" data-toggle="modal" data-target="#modal_modificar_user" onclick="modificar_usuario({{ usuario.id }});">
+                                  <span class="glyphicon glyphicon-pencil"></span>
+                              </button>
+
+                              <button id="{{ usuario.id  }}" class="btn btn-danger modal-usuario" data-toggle="modal" data-target="#modal_eliminar_user" onclick="eliminar_usuario({{ usuario.id }});">
+                                  <span class="glyphicon glyphicon-trash"></span>
+                              </button>
+
+                              <button id="{{ usuario.id  }}" class="btn btn-default modal-usuario" data-toggle="modal" data-target="#modal_contrasenna_user" onclick="cambiar_contrasenna({{ usuario.id }});">
+                                  <span class="glyphicon glyphicon-edit"></span>
+                              </button>
+
+
+                      </td>
+                  </tr>
+
+              {% endfor %}
+              </tbody>
+            </table>
+
+    </div>
+        </div>
+        <div class="panel-footer">
+            <a class="btn btn-success btn_gestion" href="/usuarios/registrar_usuario">
+                <span class="glyphicon glyphicon-plus"></span>
+                Registrar usuario
+            </a>
+        </div>
+
+    </div>
+
+    <div class="modal fade" id="modal_eliminar_user" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de eliminar el usuario seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a type="submit" class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modal_modificar_user" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Confirmación de modificación</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p>Está seguro de modificar el usuario seleccionado</p>
+                    </div>
+                    <div class="modal-footer">
+                        <a class="btn btn-default">Aceptar</a>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+      <div class="modal fade" id="modal_contrasenna_user" role="dialog">
+          <div class="modal-dialog">
+                            <!-- Modal content-->
+              <div class="modal-content">
+                  <div class="modal-header">
+                      <h4 class="modal-title">Confirmación de modificación de contraseña</h4>
+                  </div>
+                  <div class="modal-body">
+                      <p>Está seguro de cambiar la contraseña del usuario seleccionado</p>
+                  </div>
+                  <div class="modal-footer">
+                      <a type="submit" class="btn btn-default">Aceptar</a>
+                      <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                  </div>
+              </div>
+          </div>
+      </div>
+{% endblock %}
+

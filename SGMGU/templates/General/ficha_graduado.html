@@ -1,0 +1,117 @@
+{% extends "General/index.html" %}
+
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block section_superior %}
+{% endblock %}
+
+
+
+{% block titulo_tabla %}
+
+{% endblock %}
+
+
+{% block busqueda %}
+                    <div class="input-group nav_busqueda_graduado">
+                        {% if busqueda %}
+                            <input disabled type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="{{ ci }}" style="height:32px;">
+                        {% else %}
+                            <input type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
+                        {% endif %}
+                         <div class="input-group-btn">
+                            {% if busqueda %}
+                                 <a type="button" class="btn btn-default btn_normal" href="/inicio"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
+                            {% else %}
+                                 <button type="button" class="btn btn-default btn_normal" onclick="buscar_ficha_graduado();"><span class="glyphicon glyphicon-search"></span></button>
+                            {% endif %}
+                         </div>
+                    </div>
+                {% endblock %}
+
+{% block contenido_tabla %}
+    <div class="row panel panel-primary">
+        <div class="panel-heading">
+            {% if datos_ubicado  %}Datos de {{ datos_ubicado.nombre_apellidos  }}
+            {% elif datos_movimientos %}Datos de {{ datos_movimientos.0.expediente.graduado }}
+            {% else %}No se encontró ningún graduado registrado con ese CI
+            {% endif %}
+        </div>
+
+        <div class="panel-body">
+        {% if datos_ubicado  %}
+            <div id="datos_exp"  class="col-xs-12">
+                <h4 class="text-center">Ubicación Laboral</h4>
+                <p><strong>Carnet de identidad:</strong> {{ datos_ubicado.ci }}</p>
+                <p><strong>Sexo:</strong> {{ datos_ubicado.sexo_verbose }}</p>
+                <p><strong>Carrera:</strong> {{ datos_ubicado.carrera }}</p>
+                <p><strong>Centro de estudio:</strong> {{ datos_ubicado.centro_estudio }}</p>
+                <p><strong>Dirección de residencia:</strong> {{ datos_ubicado.direccion_particular }}, {{ datos_ubicado.municipio_residencia }},{{ datos_ubicado.municipio_residencia.provincia }}</p>
+                <p><strong>Año de graduación:</strong> {{datos_ubicado.anno_graduado }}</p>
+                <p><strong>Cumple con el Servicio Social:</strong> {{datos_ubicado.cumple_servicio_social|yesno }}</p>
+                <p><strong>Entidad:</strong> {{ datos_ubicado.entidad }}</p>
+                <p><strong>Organismo:</strong> {{ datos_ubicado.organismo.nombre}}</p>
+                <p><strong>Provincia:</strong> {{ datos_ubicado.provincia_ubicacion }}</p>
+                {% if not datos_ubicado.presentado %}
+                    <p><strong>Causa de la no presentación del ubicado:</strong> {{ datos_ubicado.causa_no_presentacion|linebreaksbr }}</p>
+                {% endif %}
+             </div>
+        {% endif %}
+
+            {% for expediente in datos_movimientos %}
+                <div id="datos_exp"    class="col-xs-12">
+                            <h4 class="text-center">Movimiento Laboral</h4>
+                            <h3 class="text-center subtexto_ficha_graduado">Causa del movimiento:</h3>
+                            <p><strong>Causa:</strong> {{expediente.expediente.causal_movimiento.nombre }}</p>
+                            {% if expediente.expediente.sintesis_causal_movimiento%}
+                                <p><strong>Síntesis:</strong><p>{{expediente.expediente.sintesis_causal_movimiento }}</p>
+                            {% endif %}
+
+                            <h3 class="text-center subtexto_ficha_graduado">Datos de la entidad que lo libera:</h3>
+                            <p><strong>Nombre de la entidad:</strong> {{ expediente.expediente.entidad_liberacion }}</p>
+                            <p><strong>Organismo:</strong> {{ expediente.expediente.organismo_liberacion.nombre}}</p>
+                            <p><strong>Provincia:</strong> {{ expediente.expediente.mun_entidad_liberacion.provincia.nombre }}</p>
+                            <p><strong>Municipio:</strong> {{ expediente.expediente.mun_entidad_liberacion.nombre }}</p>
+                            <p><strong>Facultado:</strong> {{ expediente.expediente.facultado_liberacion }}</p>
+
+
+                            <h3 class="text-center subtexto_ficha_graduado">Datos de la entidad que lo acepta:</h3>
+                            <p><strong>Nombre de la entidad:</strong> {{ expediente.expediente.entidad_aceptacion }}</p>
+                            <p><strong>Organismo:</strong> {{ expediente.expediente.organismo_aceptacion.nombre}}</p>
+                            <p><strong>Provincia:</strong> {{ expediente.expediente.mun_entidad_aceptacion.provincia.nombre }}</p>
+                            <p><strong>Municipio:</strong> {{ expediente.expediente.mun_entidad_aceptacion.nombre }}</p>
+                            <p><strong>Facultado:</strong> {{ expediente.expediente.facultado_aceptacion }} </p>
+                            <p><strong>Fecha:</strong> {{ expediente.fecha_aprobado }} </p>
+                            {% if   expediente.expediente.comprimido %}
+
+                                   <h3 class="text-center subtexto_ficha_graduado">Comprimido con los documentos del movimiento:</h3>
+                                   <a style="margin-left: 150px; font-weight: 900; color: #575151" href="/descargar_comprimido/{{ expediente.expediente.id }}"><span class="glyphicon glyphicon-download-alt"></span> Descargar Comprimido</a>
+
+                            {% endif %}
+
+                                {% if   expediente.carta_expediente %}
+                                        <h3 class="text-center subtexto_ficha_graduado">Informe del expediente aprobado por el MTSS :</h3>
+                                        <a style="margin-left: 150px; font-weight: 900; color:  #575151" href="/descargar_informe/{{ expediente.id }}" class="pull-left"><span class="glyphicon glyphicon-download-alt"></span> Descargar Informe</a>
+                                        <a style="margin-right: 150px; font-weight: 900; color: #575151" href="/ver_informe/{{ expediente.id }}" class="pull-right"><span class="glyphicon glyphicon-eye-open"></span> Ver Informe</a> </p>
+                                {% endif %}
+                        </div>
+				   {% endfor %}
+                
+        </div>
+    </div>
+{% endblock %}
+

@@ -1,0 +1,238 @@
+{% extends "General/index.html" %}
+
+
+
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </header>
+
+
+    <div class="modal fade" id="modal_eliminar_exp_int" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de eliminación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de eliminar el movimiento seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+
+
+
+        <div class="modal fade" id="modal_modificar_exp_int" role="dialog">
+                        <div class="modal-dialog">
+
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Confirmación de modificación</h4>
+                                </div>
+                                <div class="modal-body">
+                                    <p>Está seguro de modificar el movimiento seleccionado</p>
+                                </div>
+                                <div class="modal-footer">
+                                    <a  class="btn btn-default">Aceptar</a>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                </div>
+                            </div>
+
+                        </div>
+        </div>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block section_superior %}
+
+    {% if categoria == "organismo" %}
+        <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el movimiento a modificar</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
+
+            <thead>
+            <tr>
+                <th>Graduado</th>
+                <th>CI Graduado</th>
+                <th>Cód. Boleta</th>
+                <th>Carrera</th>
+                <th>Centro de estudio</th>
+                <th>Año de Graud.</th>
+                <th>Dir. Residencia</th>
+                <th>Ent. Liberación</th>
+                <th>Mun-Prov Liberación</th>
+                <th>Ent. Aceptación</th>
+                <th>Mun-Prov Aceptación</th>
+                <th>Aprobado por</th>
+                <th>Causal</th>
+                <th>Síntesis Causal</th>
+                 <th>Registrado</th>
+                <th>Opciones</th>
+            </tr>
+              </thead>
+              <tbody>
+              {% for expediente in expedientes %}
+                  <tr>
+                      <td>{{ expediente.graduado.nombre }} {{ expediente.graduado.apellidos }}</td>
+                      <td>{{ expediente.graduado.ci }}</td>
+                      <td>{{ expediente.graduado.codigo_boleta }}</td>
+                      <td>{{ expediente.graduado.carrera.nombre }}</td>
+                      <td>{{ expediente.graduado.centro_estudio }}</td>
+                      <td>{{ expediente.graduado.anno_graduacion }}</td>
+                      <td>{{ expediente.graduado.detalle_direccion_residencia}} {{ expediente.graduado.municipio_direccion_residencia}} {{ expediente.graduado.provincia_direccion_residencia}}</td>
+
+                      <td>{{ expediente.entidad_liberacion }}</td>
+                      <td>{{ expediente.mun_entidad_liberacion }} - {{ expediente.mun_entidad_liberacion.provincia.nombre }}  </td>
+
+                      <td> {{ expediente.entidad_aceptacion }}</td>
+                      <td>{{ expediente.mun_entidad_aceptacion }} - {{ expediente.mun_entidad_aceptacion.provincia.nombre }} </td>
+                      <td>{{ expediente.aprobado_por }} </td>
+                      <td>{{ expediente.causal_movimiento.nombre }}</td>
+                      <td>{{ expediente.sintesis_causal_movimiento }}</td>
+
+                      <td>{{ expediente.fecha_registro|date:"Y/m/d" }}</td>
+                      <td id="opciones_gestion">
+                              <button id="{{ expediente.id  }}" onclick="click_btn_mod_exp_int({{ expediente.id  }});" class="btn btn-info  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp_int">
+                                  <span class="glyphicon glyphicon-pencil">
+                                  </span>
+                              </button>
+
+                              <button id="{{ expediente.id  }}"  onclick="click_btn_eli_exp_int({{ expediente.id  }});" class="btn btn-danger modal-expediente" data-toggle="modal" data-target="#modal_eliminar_exp_int">
+                                  <span class="glyphicon glyphicon-trash">
+                                  </span>
+                              </button>
+                      </td>
+
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div></div>
+     <div class="panel-footer">
+            <a class="btn btn-success btn_gestion" href="/movimientos_internos/registrar">
+                <span class="glyphicon glyphicon-plus"></span>
+                Registrar movimiento
+            </a>
+
+
+                <ul class="pager ">
+                    {% if expedientes.has_previous %}
+                        <li><a class="pager_pp_handler" href="?pagina={{ expedientes.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                    {% endif %}
+
+                    {% if expedientes.paginator.num_pages %}
+                        <span class="text-muted">Página {{ expedientes.number }} de {{ expedientes.paginator.num_pages }}</span>
+                    {% endif %}
+
+
+                    {% if expedientes.has_next %}
+                        <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                    {% endif %}
+                </ul>
+
+
+        </div>
+    </div>
+    {% else %}
+
+               <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el expediente a modificar</div>
+        <div class="panel-body">
+            <div class="table-responsive">
+        <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
+
+            <thead>
+            <tr>
+                <th>Organismo</th>
+                <th>Graduado</th>
+                <th>CI Graduado</th>
+                <th>Cód. Boleta</th>
+                <th>Carrera</th>
+                <th>Centro de estudio</th>
+                <th>Año de Graud.</th>
+                <th>Dir. Residencia</th>
+                <th>Ent. Liberación</th>
+                <th>Mun-Prov Liberación</th>
+                <th>Ent. Aceptación</th>
+                <th>Mun-Prov Aceptación</th>
+                <th>Aprobado por</th>
+                <th>Causal</th>
+                <th>Síntesis Causal</th>
+                <th>Registrado</th>
+
+            </tr>
+              </thead>
+              <tbody>
+              {% for expediente in expedientes %}
+                  <tr>
+                      <td>{{ expediente.organismo.siglas }}</td>
+                      <td>{{ expediente.graduado.nombre }} {{ expediente.graduado.apellidos }}</td>
+                      <td>{{ expediente.graduado.ci }}</td>
+                      <td>{{ expediente.graduado.codigo_boleta }}</td>
+                      <td>{{ expediente.graduado.carrera.nombre }}</td>
+                      <td>{{ expediente.graduado.centro_estudio }}</td>
+                      <td>{{ expediente.graduado.anno_graduacion }}</td>
+                      <td>{{ expediente.graduado.detalle_direccion_residencia}} {{ expediente.graduado.municipio_direccion_residencia}} {{ expediente.graduado.provincia_direccion_residencia}}</td>
+
+                      <td>{{ expediente.entidad_liberacion }}</td>
+                      <td>{{ expediente.mun_entidad_liberacion }} - {{ expediente.mun_entidad_liberacion.provincia.nombre }}  </td>
+
+                      <td> {{ expediente.entidad_aceptacion }}</td>
+                      <td>{{ expediente.mun_entidad_aceptacion }} - {{ expediente.mun_entidad_aceptacion.provincia.nombre }} </td>
+                      <td>{{ expediente.aprobado_por }} </td>
+                      <td>{{ expediente.causal_movimiento.nombre }}</td>
+                      <td>{{ expediente.sintesis_causal_movimiento }}</td>
+
+                      <td>{{ expediente.fecha_registro|date:"Y/m/d" }}</td>
+
+
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+          </div></div>
+                   <div class="panel-footer">
+                <ul class="pager ">
+                    {% if expedientes.has_previous %}
+                        <li><a class="pager_pp_handler" href="?pagina={{ expedientes.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                    {% endif %}
+
+                    {% if expedientes.paginator.num_pages %}
+                        <span class="text-muted">Página {{ expedientes.number }} de {{ expedientes.paginator.num_pages }}</span>
+                    {% endif %}
+
+
+                    {% if expedientes.has_next %}
+                        <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                    {% endif %}
+                </ul>
+
+            </div>
+    </div>
+
+
+    {% endif %}
+
+{% endblock %}
+

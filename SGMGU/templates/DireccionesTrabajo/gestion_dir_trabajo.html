@@ -1,0 +1,87 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+
+
+
+{% block section_superior %}
+    <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione la dirección de trabajo a modificar</div>
+        <div class="panel-body">
+
+
+
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
+              <thead>
+
+            <tr>
+                <th>Provincia</th>
+                <th>Director</th>
+                <th>Sexo Director</th>
+                <th>Correo Director</th>
+                <th>Especialista</th>
+                <th>Correo Especialista</th>
+                <th  id="opciones_gestion_titulo">Opciones</th>
+            </tr>
+              </thead>
+              <tbody>
+
+              {% for direccion in direcciones %}
+                  <tr>
+                      <td>{{ direccion.provincia.nombre }}</td>
+                      <td>{{ direccion.director }}</td>
+                      <td>{{ direccion.sexo_director }}</td>
+                      <td>{{ direccion.correo_director }}</td>
+                      <td>{{ direccion.especialista }}</td>
+                      <td>{{ direccion.correo_especialista }}</td>
+                      <td  class="opciones_gestion">
+                              <button id="{{ direccion.id  }}" class="btn btn-info modal-direccion" data-toggle="modal" data-target="#modal_modificar_dir" onclick="modificar_direccion({{ direccion.id }});">
+                                  <span class="glyphicon glyphicon-pencil">
+                                  </span>
+                              </button>
+                      </td>
+                  </tr>
+              {% endfor %}
+              </tbody>
+            </table>
+        </div>
+        </div>
+     </div>
+
+
+
+
+
+
+    <div class="modal fade" id="modal_modificar_dir" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Confirmación de modificación</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Está seguro de modificar la dirección de trabajo seleccionada</p>
+                </div>
+                <div class="modal-footer">
+                    <a type="submit" class="btn btn-default">Aceptar</a>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+{% endblock %}
+

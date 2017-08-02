@@ -1,0 +1,46 @@
+
+        {% for field in form %}
+
+               <label for="id_{{ field.name }}" style="font-size: 15px" class="label label-default control-label">{{ field.label }}</label>
+
+               <div class="form-group has-feedback">
+                     {{ field }}
+               </div>
+                   {% if field.errors %}
+
+                       <ul class="errorlist">
+                           {% for error in field.errors %}
+                               <li style="color: #ac2925; font-size: 12px">{{ error }}</li>
+                           {% endfor %}
+                       </ul>
+
+
+                   {% endif %}
+
+               <p class="help-block">{{ field.help_text }} </p>
+
+        {% endfor %}
+
+        {% if form_perfil %}
+             {% for field in form_perfil %}
+                <label for="id_{{ field.name }}" style="font-size: 12px" class="label label-default control-label">{{ field.label }}</label>
+
+               <div class="form-group has-feedback">
+                     {{ field }}
+               </div>
+                   {% if field.errors %}
+
+                       <ul class="errorlist">
+                           {% for error in field.errors %}
+                               <li style="color: #ac2925; font-size: 12px">{{ error }}</li>
+                           {% endfor %}
+
+                       </ul>
+
+                   {% endif %}
+
+               <p class="help-block">{{ field.help_text }} </p>
+             {% endfor %}
+        {% endif %}
+
+

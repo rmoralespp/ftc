@@ -1,0 +1,81 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+
+
+{% block contenido_tabla %} {% endblock %}
+
+{% block section_superior %}
+<div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el expediente a gestionar </div>
+        <div class="panel-body">
+              <div class="table-responsive"> <table class="tabla_exp table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" >
+
+                  <thead>
+                      <tr>
+                          <th>Re Salida</th>
+                          <th>Nombre y apellidos</th>
+                          <th>Organismo Lib</th>
+                          <th>Organismo Acept</th>
+                          <th>Carrera</th>
+                          <th>Aprobado</th>
+                          <th>Opciones</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for expediente_aprobado in expedientes%}
+                          <tr>
+                              <td>{{ expediente_aprobado.codigo_DE_RS }}</td>
+                              <td>{{ expediente_aprobado.expediente__graduado__nombre }}</td>
+                              <td>{{ expediente_aprobado.expediente__organismo_liberacion__siglas}}</td>
+                              <td>{{ expediente_aprobado.expediente__organismo_aceptacion__siglas}}</td>
+                              <td>{{ expediente_aprobado.expediente__graduado__carrera__nombre}}</td>
+                              <td>{{ expediente_aprobado.fecha_aprobado|date:"Y/m/d" }} {{ expediente_aprobado.fecha_aprobado|time:"H:i" }}</td>
+                              <td  id="opciones_gestion">
+                                  <a href="/expedientes_aprobados/{{expediente_aprobado.id}}" id="{{ expediente_aprobado.id }}" class="btn btn-primary ">
+                                      <span class="glyphicon glyphicon-plus"></span> Detalles
+                                  </a>
+                              </td>
+                          </tr>
+                      {% endfor %}
+                  </tbody>
+
+              </table>
+              </div>
+    </div>
+    <div class="panel-footer">
+            <ul class="pager ">
+                {% if expedientes.has_previous %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                {% endif %}
+
+                {% if expedientes.paginator.num_pages %}
+                    <span class="text-muted">Página {{ expedientes.number }} de {{ expedientes.paginator.num_pages }}</span>
+                {% endif %}
+
+
+                {% if expedientes.has_next %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                {% endif %}
+            </ul>
+
+        </div>
+    </div>
+
+ {% endblock %}
+

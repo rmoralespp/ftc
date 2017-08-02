@@ -1,0 +1,92 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+
+
+
+
+
+
+{% block section_superior %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">Seleccione el expediente a gestionar</div>
+        <div class="panel-body">
+             <div class="table-responsive">
+                 <table class="tabla_exp table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                     <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nombre y apellidos</th>
+                            {% if categoria != "organismo" %}
+                                <th>Organismo Lib</th>
+                            {% else %}
+                                <th>Entidad Lib</th>
+                            {% endif %}
+                            <th>Carrera</th>
+                            <th>Causa</th>
+                            <th>Rechazado</th>
+                            <th>Opciones</th>
+                        </tr>
+                     </thead>
+
+                     <tbody>
+                        {% for expediente_pend in expedientes_rechazados%}
+                            <tr>
+                                <td>{{ expediente_pend.expediente.id }}</td>
+                                <td>{{ expediente_pend.expediente.graduado.nombre }}</td>
+                                 {% if categoria != "organismo" %}
+                                     <td>{{ expediente_pend.expediente.organismo_liberacion.siglas}}</td>
+                                {% else %}
+                                    <td>{{ expediente_pend.expediente.entidad_liberacion}}</td>
+                                 {% endif %}
+                                <td>{{ expediente_pend.expediente.graduado.carrera.nombre}}</td>
+                                <td>{{ expediente_pend.sintesis_rechazo|truncatewords:8}}</td>
+
+                                <td>{{ expediente_pend.fecha_rechazo|date:"Y/m/d" }} {{ expediente_pend.fecha_rechazo|time:"H:i" }}</td>
+
+                                <td  id="opciones_gestion">
+                                    <a href="/expedientes_rechazados/{{expediente_pend.id}}" id="{{ expediente_pend.id }}" class="btn btn-primary ">
+                                        <span class="glyphicon glyphicon-plus"></span> Detalles
+                                    </a>
+                                </td>
+                            </tr>
+                        {% endfor %}
+                     </tbody>
+                 </table>
+             </div>
+        </div>
+        <div class="panel-footer">
+            <ul class="pager ">
+                {% if expedientes_rechazados.has_previous %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes_rechazados.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                {% endif %}
+
+                {% if expedientes_rechazados.paginator.num_pages %}
+                    <span class="text-muted">Página {{ expedientes_rechazados.number }} de {{ expedientes_rechazados.paginator.num_pages }}</span>
+                {% endif %}
+
+
+                {% if expedientes.has_next %}
+                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                {% endif %}
+            </ul>
+        </div>
+    </div>
+
+{% endblock %}
+

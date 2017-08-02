@@ -1,0 +1,28 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+     <header></header>
+{% endblock %}
+
+
+{% block section_superior %}
+    <div class="col-xs-8 placeholder" style="margin-left: 150px">
+    <div class="panel panel-primary">
+        <div class="panel-heading">Modificar datos personales</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" id="modificar_usuario" enctype="multipart/form-data">{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                 <a class="btn btn-success btn_gestion" href="/inicio">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+            </a>
+            </div>
+        </form>
+    {% endif %}
+    </div></div></div>
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+{% block contenido_tabla %}{% endblock %}

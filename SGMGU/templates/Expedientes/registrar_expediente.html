@@ -1,0 +1,71 @@
+{% extends "Expedientes/gestion_expedientes.html" %}
+
+{% block encabezado %}
+    <header class="col-xs-12">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block section_superior %}
+     <div class="modal fade" id="modal_autocompletar_expediente" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content">
+                                <form method="POST" action="/autocompletar_expediente">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Autocompletar datos del graduado</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                         <div class="form-group">
+                                            <label class="label label-default">CI del Graduado</label>
+                                            <input required type="number"  class="form-control" name="ci" placeholder="Escriba el CI">
+                                         </div>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <input type="submit" class="btn btn-success" value="Aceptar">
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+    </div>
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+
+{% block contenido_tabla %}
+    <div class="col-xs-11 placeholder" id="div_registrar_expediente">
+     <div class="panel panel-primary">
+        <div class="panel-heading" style="overflow: hidden">
+            <div class="pull-left">Registrar expediente</div>
+            <div class="pull-right autocompletar_epxediente"><a  class="btn btn-danger" data-toggle="modal" data-target="#modal_autocompletar_expediente" href="#">Autocompletar</a></div>
+        </div>
+        <div class="panel-body">
+    {% if form %}
+        {% if autocompletar %}
+            <form action="/gestion_expedientes/registrar_expediente" method="post" id="registrar_expediente" enctype="multipart/form-data">{% csrf_token %}
+        {% else %}
+            <form method="post" id="registrar_expediente" enctype="multipart/form-data">{% csrf_token %}
+        {% endif %}
+            {% include "General/forms_snippets.html" %}
+
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                   <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
+                <a class="btn btn-success btn_gestion" href="/gestion_expedientes">
+                <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+            </a>
+            </div>
+        </form>
+    {% endif %}
+    </div>   </div>   </div>
+{% endblock %}
