@@ -91,6 +91,10 @@ class Carrera(models.Model):
     codigo_mes=models.CharField(max_length=100,blank=True,null=True)
     nombre=models.CharField(max_length=1000)
     activo=models.BooleanField(default=True)
+    tipo=models.CharField(max_length=90,choices=[
+        ('nm', 'Nivel Medio'),
+        ('ns', 'Nivel Superior')
+    ])
 
     def __unicode__(self):
         return self.nombre
@@ -313,6 +317,17 @@ class GraduadoInhabilitacion(models.Model):
     provincia=models.ForeignKey(Provincia)
     organismo=models.ForeignKey(Organismo)
     fecha_registrado=models.DateTimeField(auto_now_add=True)
+
+
+    def c_nc(self):
+        if self.cumple_servicio_social == 'Si':return "C"
+        else: return "NC"
+
+    def nm_ns(self):
+        if self.nivel_educacional == 'Superior':return "NS"
+        else: return "NM"
+
+
 
 
 class ProcesoInhabilitacion(models.Model):

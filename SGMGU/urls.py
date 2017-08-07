@@ -168,8 +168,8 @@ urlpatterns = [
      url(r'^exportar_total_procesos$',exportar_total_procesos),
      url(r'^exportar_total_procesos_causales$',exportar_total_procesos_causales),
      url(r'^exportar_total_procesos_organismos$',exportar_total_procesos_organismos),
-
-
+     url(r'^exportar_total_procesos_niveles$',exportar_total_procesos_niveles),
+     url(r'^exportar_procesos_registro_nominal$',exportar_procesos_registro_nominal),
 
 
 

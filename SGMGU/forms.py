@@ -345,7 +345,7 @@ class RegistroExpedienteForm(forms.Form):
 
       carrera_graduado = forms.ModelChoiceField(
         label="Carrera del graduado",
-        queryset=Carrera.objects.all(),
+        queryset=Carrera.objects.filter(tipo='ns'),
         required=True,
 
         widget=forms.Select(
@@ -548,7 +548,7 @@ class RegistroMovimientoInternoForm(forms.Form):
 
       carrera_graduado = forms.ModelChoiceField(
         label="Carrera del graduado",
-        queryset=Carrera.objects.all(),
+        queryset=Carrera.objects.filter(tipo='ns'),
         required=True,
 
         widget=forms.Select(
@@ -816,7 +816,7 @@ class Expedientes_segun_carrera_form(forms.Form):
 
 
         carrera = forms.ModelChoiceField(
-        queryset=Carrera.objects.filter(activo=True).order_by("nombre"),
+        queryset=Carrera.objects.filter(activo=True,tipo='ns').order_by("nombre"),
         required=True,
         widget=forms.Select(
             attrs={ 'class': 'form-control'}))

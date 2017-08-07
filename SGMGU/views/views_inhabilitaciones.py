@@ -280,8 +280,6 @@ def exportar_total_procesos_causales(request):
     else:
         return Http404
 
-
-
 @login_required
 def exportar_total_procesos_organismos(request):
 
@@ -345,6 +343,125 @@ def exportar_total_procesos_organismos(request):
             sheet.write(total_orgsanismos+1, 3, formula_3,bold)
         book.close()
         return response
+
+    else:
+        return Http404
+
+
+@login_required
+def exportar_total_procesos_niveles(request):
+
+    niveles=['Medio','Superior']
+    if request.method== "POST":
+        anno=int(request.POST['anno'])
+        tipo=request.POST.get('tipo', None)
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = "attachment; filename=Totales_procesos_nivel_%s.xlsx"%anno
+        book = Workbook(response, {'in_memory': True})
+        bold = book.add_format({'bold': True, 'border': 1})
+        format = book.add_format({'border': 1})
+        sheet = book.add_worksheet("Procesos")
+        sheet.set_column('A:A', 20)
+        sheet.write(0, 0,  "Nivel",bold)
+        if tipo == 'mensual':
+            sheet.write(1, 0,  "I/S/Total",bold)
+            control=True
+            for i,nivel in enumerate(niveles):
+                sheet.write(i+2, 0, nivel,format)
+                no=1
+                for j in range(1,13):
+                    if control==True:
+                        sheet.merge_range(0,no,0,no+2, MESES[j],bold)
+                        sheet.write(1, no, "I",bold)
+                        sheet.write(1, no+1, "S",bold)
+                        sheet.write(1, no+2, "Total",bold)
+                    where = '%(year)s =  EXTRACT(YEAR FROM fecha) AND %(month)s =  EXTRACT(MONTH FROM fecha)'%{'year': anno, 'month': j}
+                    procesos=ProcesoInhabilitacion.objects.filter(graduado__nivel_educacional=nivel).extra(where=[where])
+                    total_inhabilitaciones=procesos.filter(proceso='i').count()
+                    total_suspensiones=procesos.filter(proceso='s').count()
+                    total=total_inhabilitaciones+total_suspensiones
+                    sheet.write(i+2, no, total_inhabilitaciones,format)
+                    sheet.write(i+2, no+1, total_suspensiones,format)
+                    sheet.write(i+2, no+2, total,format)
+                    no=(j*3)+1
+                control=False
+        else:
+            sheet.write(0, 1,  "Inhabilitaciones",bold)
+            sheet.write(0, 2,  "Suspensiones",bold)
+            sheet.write(0, 3,  "Total",bold)
+            sheet.set_column('B:B', 20)
+            sheet.set_column('C:C', 20)
+            for i,nivel in enumerate(niveles):
+                sheet.write(i+1, 0, nivel,format)
+                procesos=ProcesoInhabilitacion.objects.filter(graduado__nivel_educacional=nivel,fecha__year=anno)
+                total_inhabilitaciones=procesos.filter(proceso='i').count()
+                total_suspensiones=procesos.filter(proceso='s').count()
+                total=total_inhabilitaciones+total_suspensiones
+                sheet.write(i+1, 1, total_inhabilitaciones,format)
+                sheet.write(i+1, 2, total_suspensiones,format)
+                sheet.write(i+1, 3, total,format)
+            formula_1 = '=SUM(%s)' % xl_range(1, 1,len(niveles), 1)
+            formula_2 = '=SUM(%s)' % xl_range(1, 2,len(niveles), 2)
+            formula_3 = '=SUM(%s)' % xl_range(1, 3,len(niveles), 3)
+            sheet.write(len(niveles)+1, 0, "Total",bold)
+            sheet.write(len(niveles)+1, 1, formula_1,bold)
+            sheet.write(len(niveles)+1, 2, formula_2,bold)
+            sheet.write(len(niveles)+1, 3, formula_3,bold)
+        book.close()
+        return response
+
+    else:
+        return Http404
+
+@login_required
+def exportar_procesos_registro_nominal(request):
+    if request.method== "POST":
+            anno=int(request.POST['anno'])
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = "attachment; filename=Registro_nominal_procesos_%s.xlsx"%anno
+            book = Workbook(response, {'in_memory': True})
+            bold = book.add_format({'bold': True, 'border': 1})
+            format = book.add_format({'border': 1})
+            for j in range(1,13):
+                    sheet = book.add_worksheet(MESES[j])
+                    sheet.set_column('A:A', 5)
+                    sheet.set_column('B:B', 15)
+                    sheet.set_column('C:C', 30)
+                    sheet.set_column('D:D', 20)
+                    sheet.set_column('E:E', 10)
+                    sheet.set_column('F:F', 10)
+                    sheet.set_column('G:G', 50)
+                    sheet.set_column('H:H', 30)
+                    sheet.set_column('I:I', 10)
+                    sheet.set_column('J:J', 20)
+
+
+                    sheet.write(0, 0,  "No",bold)
+                    sheet.write(0, 1,  "CI",bold)
+                    sheet.write(0, 2,  "Nombre y Apellidos",bold)
+                    sheet.write(0, 3,  "OACE",bold)
+                    sheet.write(0, 4,  "MN/NS",bold)
+                    sheet.write(0, 5,  "S/I",bold)
+                    sheet.write(0, 6,  "Especialidades",bold)
+                    sheet.write(0, 7,  "Causales de Incumplimiento",bold)
+                    sheet.write(0, 8,  "C/NC",bold)
+                    sheet.write(0, 9,  "Provincias",bold)
+                    where = '%(year)s =  EXTRACT(YEAR FROM fecha) AND %(month)s =  EXTRACT(MONTH FROM fecha)'%{'year': anno, 'month': j}
+                    procesos=ProcesoInhabilitacion.objects.all().extra(where=[where])
+                    for i, proceso in enumerate(procesos):
+                        sheet.write(i+1, 0,  proceso.numero_resolucion,format)
+                        sheet.write(i+1, 1,  proceso.graduado.ci,bold)
+                        sheet.write(i+1, 2,  proceso.graduado.nombre_apellidos,format)
+                        sheet.write(i+1, 3,  proceso.graduado.organismo.siglas,format)
+                        sheet.write(i+1, 4,  proceso.graduado.nm_ns(),format)
+                        sheet.write(i+1, 5,  proceso.proceso.capitalize(),format)
+                        sheet.write(i+1, 6,  proceso.graduado.carrera.nombre,format)
+                        sheet.write(i+1, 7,  proceso.causal.nombre,format)
+                        sheet.write(i+1, 8,  proceso.graduado.c_nc(),format)
+                        sheet.write(i+1, 9,  proceso.graduado.provincia.nombre,format)
+
+            book.close()
+            return response
 
     else:
         return Http404

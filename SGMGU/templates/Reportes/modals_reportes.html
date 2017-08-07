@@ -311,3 +311,56 @@
                                     </form></div>
         </div>
     </div>
+
+
+     <div class="modal fade" id="modal_total_procesos_niveles" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_total_procesos_niveles">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar total de procesos por nivel educacional</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                        </div>
+
+                                        <div class="form-group">
+                                           <select name="tipo" class="form-control" style="display: block; width: 100%">
+                                               <option value="anual">Anual</option>
+                                               <option value="mensual">Mensual</option>
+                                           </select>
+                                        </div>
+
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>
+
+     <div class="modal fade" id="modal_procesos_registro_nominal" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_procesos_registro_nominal">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Exportar registro nominal de procesos de inhabilitaciones</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                        </div>
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>

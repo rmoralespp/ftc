@@ -371,7 +371,7 @@ def exportar_organismos_expedientes(request):
         return Http404
 
 def exportar_carreras_expedientes(request):
-    carreras=Carrera.objects.all()
+    carreras=Carrera.objects.filter(tipo='ns')
     total_carreras=len(carreras)
 
     if request.method == "POST":
