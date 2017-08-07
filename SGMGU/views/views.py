@@ -175,5 +175,18 @@ def ubicacion_laboral(request):
 def nomencladores(request):
     return render(request, "General/index.html", {})
 
+import xlrd
 
+def extra():
+    book = xlrd.open_workbook("D:\\ctm.xlsx")
+    matriz=book.sheet_by_index(0)._cell_values
+    for i,fila in enumerate(matriz):
+                try:
+                     carrera=Carrera(
+                            nombre=unicode(fila[0]),
+                            tipo="nm"
+                     )
 
+                     carrera.save()
+                except Exception as e:
+                    print i

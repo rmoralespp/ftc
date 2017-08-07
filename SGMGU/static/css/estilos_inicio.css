@@ -834,3 +834,10 @@ input[type=file]{
     margin-bottom: 2px;
 
 }
+
+ul.pagination.pull-right{
+    position: relative;
+    top: -25px;
+    padding: 0;
+    margin: 0
+}

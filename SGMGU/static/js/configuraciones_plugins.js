@@ -153,7 +153,7 @@ $(document).on('ready',function(){
         }
     });
     $('.usar_DataTable_3').DataTable({
-        order: [[ 7, 'desc' ], [ 1, 'asc' ]],
+        ordering:false,
         searching:false,
         paging: false,
         language: {
