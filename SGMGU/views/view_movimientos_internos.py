@@ -23,7 +23,7 @@ def movimientos_internos(request):
        movimientos_internos=paginar(request,Expediente_movimiento_interno.objects.filter(organismo=organismo).order_by("-fecha_registro"))
     else:
       movimientos_internos=paginar(request,Expediente_movimiento_interno.objects.all().order_by("-fecha_registro"))
-    context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes':movimientos_internos}
+    context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes':movimientos_internos,'paginas':crear_lista_pages(movimientos_internos)}
     return render(request, "MovimietosInternos/movimientos_internos.html", context)
 
 
