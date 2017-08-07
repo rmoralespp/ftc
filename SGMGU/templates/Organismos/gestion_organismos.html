@@ -17,7 +17,7 @@
 
 {% block section_superior %}
     <div class="panel panel-primary">
-        <div class="panel-heading">Seleccione el organismo a modificar</div>
+        <div class="panel-heading">Listado de Organismos</div>
         <div class="panel-body">
 
 
@@ -46,12 +46,12 @@
                       {% endif %}
 
                       <td  class="opciones_gestion">
-                              <button id="{{ organismo.id  }}" class="btn btn-info modal-organismo" data-toggle="modal" data-target="#modal_modificar_org" onclick="modificar_organismo({{ organismo.id }});">
+                              <button id="{{ organismo.id  }}" class="btn btn-info modal-organismo" data-toggle="modal" data-target="#modal_modificar_org" onclick="Objeto.__init__({{ organismo.id }},'organismos','modal_modificar_org').modificar();">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>
                               </button>
 
-                              <button id="{{ organismo.id  }}" class="btn btn-danger modal-organismo" data-toggle="modal" data-target="#modal_eliminar_org" onclick="eliminar_organismo({{ organismo.id }});">
+                              <button id="{{ organismo.id  }}" class="btn btn-danger modal-organismo" data-toggle="modal" data-target="#modal_eliminar_org" onclick="Objeto.__init__({{ organismo.id }},'organismos','modal_eliminar_org').eliminar();">
                                   <span class="glyphicon glyphicon-trash">
                                   </span>
                               </button>

@@ -22,7 +22,7 @@
             <div class="col-xs-3 pull-right">
                 <div class="input-group">
                     {% if busqueda %}
-                        <input disabled type="number" id="ci_disponible" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
+                        <input value="{{ valor_busqueda }}" disabled type="number" id="ci_disponible" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
                     {% else %}
                         <input type="text" id="ci_disponible" class="form-control" aria-label="..." placeholder="Escriba el CI a buscar" style="height:32px;">
                     {% endif %}
@@ -30,7 +30,7 @@
                         {% if busqueda %}
                              <a type="button" class="btn btn-default btn_normal" href="/disponibles"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
                         {% else %}
-                             <button type="button" class="btn btn-default btn_normal" onclick="buscar_ci_disponible();"><span class="glyphicon glyphicon-search"></span></button>
+                             <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','disponibles','ci_disponible').buscar('ci');"><span class="glyphicon glyphicon-search"></span></button>
                         {% endif %}
                         <button type="button" class="btn btn-default dropdown-toggle btn_normal" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Otros <span class="caret"></span></button>
                         <ul class="dropdown-menu dropdown-menu-right usar_disenno_new">

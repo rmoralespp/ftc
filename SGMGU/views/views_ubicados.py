@@ -94,7 +94,7 @@ def buscar_ci_ubicado(request,ci):
   elif request.user.perfil_usuario.categoria.nombre == 'organismo':
       ubicados=ubicados.filter(organismo=request.user.perfil_usuario.organismo)
   ubicados=ubicados.filter(ci=ci)
-  context={'ubicados':ubicados,'nombre_pag':"Listado de ubicados por ci: %s"%ci,'busqueda':'si'}
+  context={'ubicados':ubicados,'nombre_pag':"Listado de ubicados por ci: %s"%ci,'busqueda':'si',"valor_busqueda":ci}
   return render(request, "Ubicados/GestionUbicados.html", context)
 
 
@@ -489,4 +489,65 @@ def exportar_ubicados(request):
     else:
         return Http404
 
-
+#solo dpts
+def exportar_ubicados_universidades(request):
+    anno=int(request.POST["anno"])
+    if request.method == "POST":
+        ubicados=UbicacionLaboral.objects.filter(centro_estudio__provincia=request.user.perfil_usuario.provincia,anno_graduado=anno)
+        response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+        response['Content-Disposition'] = "attachment; filename=registro_ubicados_universidades_%s.xlsx"%anno
+        book = Workbook(response, {'in_memory': True})
+        bold = book.add_format({'bold': True, 'border': 1})
+        format = book.add_format({'border': 1})
+        sheet = book.add_worksheet("Ubicados")
+        sheet.set_column('A:A', 5)
+        sheet.set_column('B:B', 10)
+        sheet.set_column('C:C', 30)
+        sheet.set_column('D:D', 50)
+        sheet.set_column('E:E', 30)
+        sheet.set_column('F:F', 50)
+        sheet.set_column('G:G', 10)
+        sheet.set_column('H:H', 40)
+        sheet.set_column('I:I', 20)
+        sheet.set_column('J:J', 22)
+        sheet.set_column('K:K', 15)
+        sheet.set_column('L:L', 15)
+        sheet.set_column('M:M', 40)
+        sheet.set_column('N:N', 20)
+        sheet.set_column('O:O', 60)
+        sheet.write(0, 0, "Anno",bold)
+        sheet.write(0, 1, "Boleta",bold)
+        sheet.write(0, 2, "Centro Estudio",bold)
+        sheet.write(0, 3, "Carrera",bold)
+        sheet.write(0, 4, "Carnet de identidad",bold)
+        sheet.write(0, 5, "Nombre Apellidos",bold)
+        sheet.write(0, 6,  "CSS",bold)
+        sheet.write(0, 7, "Entidad",bold)
+        sheet.write(0, 8, "Organismo",bold)
+        sheet.write(0, 9, "Municipio de Residencia",bold)
+        sheet.write(0, 10, "Provincia de Ubicacion",bold)
+        sheet.write(0, 11, "Sexo",bold)
+        sheet.write(0, 12, "Direccion Particular",bold)
+        sheet.write(0, 13, "Presentado",bold)
+        sheet.write(0, 14, "Causa No Pres",bold)
+        for i,ubicado in enumerate(ubicados):
+               i=i+1
+               sheet.write(i, 0, ubicado.anno_graduado,format)
+               sheet.write(i, 1, ubicado.boleta,format)
+               sheet.write(i, 2, ubicado.centro_estudio.nombre,format)
+               sheet.write(i, 3, ubicado.carrera.nombre,format)
+               sheet.write(i, 4, ubicado.ci,format)
+               sheet.write(i, 5, ubicado.nombre_apellidos,format)
+               sheet.write(i, 6, ubicado.css(),format)
+               sheet.write(i, 7, ubicado.entidad,format)
+               sheet.write(i, 8, ubicado.organismo.siglas,format)
+               sheet.write(i, 9, ubicado.municipio_residencia.nombre,format)
+               sheet.write(i, 10, ubicado.provincia_ubicacion.siglas,format)
+               sheet.write(i, 11, ubicado.sexo,format)
+               sheet.write(i, 12, ubicado.direccion_particular,format)
+               sheet.write(i, 13, ubicado.is_presentado(),format)
+               sheet.write(i, 14, ubicado.causa_no_presentacion,format)
+        book.close()
+        return response
+    else:
+        return Http404

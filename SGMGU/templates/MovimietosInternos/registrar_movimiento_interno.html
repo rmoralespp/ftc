@@ -1,10 +1,25 @@
 {% extends "MovimietosInternos/movimientos_internos.html" %}
 
 {% block encabezado %}
-    <header class="col-xs-12"></header>
+
+     <header class="col-xs-11" style="margin: auto; margin-left: 3%;">
+            {% if messages %}
+                {% for message in messages %}
+                     {% if message.level == 40 %}
+                         <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                     {% else %}
+                        <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                     {% endif %}
+                {% endfor %}
+            {% endif %}
+    </header>
+
 {% endblock %}
 
 {% block section_superior %}
+
+
+
     <div class="modal fade" id="modal_autocompletar_expediente" role="dialog">
                         <div class="modal-dialog">
                             <!-- Modal content-->

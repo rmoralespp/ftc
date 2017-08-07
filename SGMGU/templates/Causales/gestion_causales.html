@@ -16,13 +16,14 @@
 {% block section_superior %}
 
     <div class="panel panel-primary">
-        <div class="panel-heading">Seleccione la causal a modificar</div>
+        <div class="panel-heading">Listado de Causales</div>
         <div class="panel-body">
             <div class="table-responsive">
                 <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
                     <thead>
                     <tr>
                         <th>Nombre</th>
+                        <th>Tipo</th>
                         <th id="opciones_gestion_titulo">Opciones</th>
                     </tr>
                     </thead>
@@ -31,14 +32,15 @@
                     {% for causal in causales %}
                         <tr>
                             <td>{{ causal.nombre }}</td>
+                            <td>{{ causal.get_tipo_display }}</td>
 
                             <td id="opciones_gestion">
-                                <button id="{{ causal.id  }}" class="btn btn-info modal-causal" data-toggle="modal" data-target="#modal_modificar_causal" onclick="modificar_causal({{ causal.id }});">
+                                <button id="{{ causal.id  }}" class="btn btn-info modal-causal" data-toggle="modal" data-target="#modal_modificar_causal" onclick="Objeto.__init__({{ causal.id }},'causales','modal_modificar_causal').modificar();">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>
                                 </button>
 
-                                <button id="{{ causal.id  }}" class="btn btn-danger modal-causal" data-toggle="modal" data-target="#modal_eliminar_causal" onclick="eliminar_causal({{ causal.id }});">
+                                <button id="{{ causal.id  }}" class="btn btn-danger modal-causal" data-toggle="modal" data-target="#modal_eliminar_causal" onclick="Objeto.__init__({{ causal.id }},'causales','modal_eliminar_causal').eliminar();">
                                   <span class="glyphicon glyphicon-trash">
                                   </span>
                                 </button>

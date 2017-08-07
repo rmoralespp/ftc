@@ -54,7 +54,7 @@
                     </a>
                 {% endif %}
                 {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista"%}
-                    <button id="{{ disponibilidad.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_disponibilidad" onclick="eliminar_disponibilidad({{ disponibilidad.id }});">
+                    <button id="{{ disponibilidad.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_disponibilidad" onclick="Objeto.__init__({{ disponibilidad.id }},'disponibles','modal_eliminar_disponibilidad').eliminar();">
                         <span class="glyphicon glyphicon-trash">
                         </span> Eliminar disponibilidad
                     </button>

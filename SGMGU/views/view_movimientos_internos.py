@@ -8,40 +8,12 @@ from SGMGU.models import *
 from django.contrib import messages
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger,InvalidPage
 from django.core.cache import cache
+from .utiles import *
 
-def cache_per_user(ttl=None, prefix=None, cache_post=False):
-    def decorator(function):
-        def apply_cache(request, *args, **kwargs):
-            if request.user.is_anonymous():
-                user = 'anonymous'
-            else:
-                user = request.user.id
 
-            if prefix:
-                CACHE_KEY = '%s_%s'%(prefix, user)
-            else:
-                CACHE_KEY = 'view_cache_%s_%s'%(function.__name__, user)
 
-            # Verifica se pode fazer o cache do request
-            if not cache_post and request.method == 'POST':
-                can_cache = False
-            else:
-                can_cache = True
 
-            if can_cache:
-                response = cache.get(CACHE_KEY, None)
-            else:
-                response = None
-
-            if not response:
-                response = function(request, *args, **kwargs)
-                if can_cache:
-                    cache.set(CACHE_KEY, response, ttl)
-            return response
-        return apply_cache
-    return decorator
-
-@cache_per_user(ttl=3600, cache_post=False)
+#@cache_per_user(ttl=3600, cache_post=False)
 def movimientos_internos(request):
     perfil=Perfil_usuario.objects.get(usuario=request.user)
     foto=perfil.foto
@@ -55,19 +27,13 @@ def movimientos_internos(request):
     return render(request, "MovimietosInternos/movimientos_internos.html", context)
 
 
+#Busqueda---------------------------------------------------------------------------------------------------------------
+@login_required
+def buscar_movimientos_internos_ci(request,ci):
+  expedientes=paginar(request,Expediente_movimiento_interno.objects.filter(graduado__ci=ci).order_by("-fecha_registro"))
+  context={'expedientes':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "MovimietosInternos/movimientos_internos.html", context)
 
-
-def paginar(request,lista_objetos):
-    paginator=Paginator(lista_objetos,100)
-    try:
-        pagina=int(request.GET.get("pagina","1"))
-    except ValueError:
-        pagina=1
-    try:
-        lista_objetos=paginator.page(pagina)
-    except(InvalidPage, EmptyPage):
-        lista_objetos=paginator.page(paginator.num_pages)
-    return lista_objetos
 
 
 @login_required

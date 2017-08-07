@@ -17,7 +17,7 @@
 
 {% block section_superior %}
     <div class="panel panel-primary">
-        <div class="panel-heading">Seleccione la dirección de trabajo a modificar</div>
+        <div class="panel-heading">Listado de Direcciones Provinciales de Trabajo</div>
         <div class="panel-body">
 
 
@@ -47,7 +47,7 @@
                       <td>{{ direccion.especialista }}</td>
                       <td>{{ direccion.correo_especialista }}</td>
                       <td  class="opciones_gestion">
-                              <button id="{{ direccion.id  }}" class="btn btn-info modal-direccion" data-toggle="modal" data-target="#modal_modificar_dir" onclick="modificar_direccion({{ direccion.id }});">
+                              <button id="{{ direccion.id  }}" class="btn btn-info modal-direccion" data-toggle="modal" data-target="#modal_modificar_dir" onclick="Objeto.__init__({{ direccion.id }},'direcciones_trabajo','modal_modificar_dir').modificar();">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>
                               </button>

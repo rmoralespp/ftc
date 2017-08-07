@@ -21,13 +21,23 @@
     <div class="panel-body">
 
         <ul class="nav nav-pills nav-tabs ">
-            <li class="active"><a class="tab_movimiento_laboral" data-toggle="tab" href="#movimiento_laboral">Movimiento Laboral</a></li>
-            <li><a class="tab_ubicados" data-toggle="tab" href="#ubicados">Ubicación Laboral</a></li>
+            {% if user.perfil_usuario.categoria.nombre != "juridico"%}
+                <li class="active"><a class="tab_movimiento_laboral" data-toggle="tab" href="#movimiento_laboral">Movimiento Laboral</a></li>
+                <li><a class="tab_ubicados" data-toggle="tab" href="#ubicados">Ubicación Laboral</a></li>
+                <li><a class="tab_ubicados" data-toggle="tab" href="#inhabilitaciones">Inhabilitaciones</a></li>
+            {% else %}
+                <li class="active"><a class="tab_ubicados" data-toggle="tab" href="#inhabilitaciones">Inhabilitaciones</a></li>
+            {% endif %}
         </ul>
         <br>
 
         <div class="tab-content">
-            <div id="movimiento_laboral" class="tab-pane fade in active">
+           {% if user.perfil_usuario.categoria.nombre  != 'juridico'  %}
+                <div id="movimiento_laboral" class="tab-pane fade in active">
+           {% else %}
+                <div id="movimiento_laboral" class="tab-pane">
+           {% endif %}
+
                     {% if user.perfil_usuario.categoria.nombre == "administrador" or  user.perfil_usuario.categoria.nombre == "especialista" or   user.perfil_usuario.categoria.nombre == "invitado"%}
                         <!--
                         <a href="/reportes/reporte_exp_organismos"><p class="bg_primary "><span class="glyphicon glyphicon-paperclip"></span> Totales de Expedientes aprobados por organismos  </p></a>
@@ -66,6 +76,20 @@
                     {% if user.perfil_usuario.categoria.nombre == "dpts"  or  user.perfil_usuario.categoria.nombre == "organismo" %}
                         <a href="#" data-toggle="modal" data-target="#modal_ubicados"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados propios</p></a>
                     {% endif %}
+                    {% if user.perfil_usuario.categoria.nombre == "dpts" %}
+                        <a href="#" data-toggle="modal" data-target="#modal_ubicados_universidades"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados de universidades propias</p></a>
+                    {% endif %}
+            </div>
+            {% if user.perfil_usuario.categoria.nombre  != 'juridico'  %}
+                <div id="inhabilitaciones" class="tab-pane">
+            {% else %}
+                <div id="inhabilitaciones" class="tab-pane fade in active">
+            {% endif %}
+                <a href="#" data-toggle="modal" data-target="#modal_total_procesos"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Total de procesos</p></a>
+                <a href="#" data-toggle="modal" data-target="#modal_total_procesos_causales"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Total de procesos por causales</p></a>
+                <a href="#" data-toggle="modal" data-target="#modal_total_procesos_organismos"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Total de procesos por organismos</p></a>
+                <a href="/exportar_procesos_nivel"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Total de procesos por nivel educacional</p></a>
+                <a href="/exportar_procesos_registro"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro Nominal</p></a>
             </div>
         </div>
     </div>

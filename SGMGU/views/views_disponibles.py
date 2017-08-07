@@ -32,7 +32,7 @@ def buscar_ci_disponible(request,ci):
   else:
       disponibles=DisponibilidadGraduados.objects.all()
   disponibles=disponibles.filter(ci=ci)
-  context={'disponibles':disponibles,'nombre_pag':"Listado de disponibles por ci: %s"%ci,'busqueda':'si','tab':'disponibles'}
+  context={'disponibles':disponibles,'nombre_pag':"Listado de disponibles por ci: %s"%ci,'busqueda':'si','tab':'disponibles',"valor_busqueda":ci}
   return render(request, "Ubicados/GestionUbicados.html", context)
 
 

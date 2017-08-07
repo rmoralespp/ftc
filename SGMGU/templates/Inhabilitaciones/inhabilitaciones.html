@@ -1,0 +1,146 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header class="row">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block titulo_tabla %}
+
+
+{% endblock %}
+
+{% block section_superior %}
+
+    <div class="panel panel-primary">
+        <div class="panel-heading" style="overflow:hidden;">
+            <div class="pull-left">Listado de Inhabilitaciones {{ termino_busqueda }} {{ valor_busqueda }}</div>
+        </div>
+
+        <div class="panel-body">
+        <div class="panel-body-superior">
+            <div class="btn-group btn_group pull-left" >
+                  {% if user.perfil_usuario.categoria.nombre == 'administrador' or user.perfil_usuario.categoria.nombre == 'especialista' or user.perfil_usuario.categoria.nombre == 'juridico'%}
+                      <a class="btn btn-success btn_gestion" href="/inhabilitaciones/registrar">
+                            <span class="glyphicon glyphicon-plus"></span>
+                            Registrar proceso
+                      </a>
+                  {% endif %}
+
+
+
+            </div>
+
+            <div class="row">
+            <div class="col-xs-3 pull-right">
+                <div class="input-group">
+                    {% if busqueda %}
+                        <input value="{{ valor_busqueda }}" disabled type="number" id="ci_inhabilitado" class="form-control" aria-label="..." placeholder="Escriba aquí" style="height:32px;">
+                    {% else %}
+                        <input type="text" id="ci_inhabilitado" class="form-control" aria-label="..." placeholder="Escriba aquí" style="height:32px;">
+                    {% endif %}
+                    <div class="input-group-btn">
+                        {% if busqueda %}
+                             <a type="button" class="btn btn-default btn_normal" href="/inhabilitaciones"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
+                        {% else %}
+                             <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','inhabilitaciones','ci_inhabilitado').buscar('ci');">Buscar CI</button>
+                             <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','inhabilitaciones','ci_inhabilitado').buscar('no');">Buscar No</button>
+                        {% endif %}
+                    </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            </div><!-- /input-group -->
+          </div>
+
+        </div>
+            <div class="table-responsive" style="clear: both">
+                <br>
+                <table class="usar_DataTable_3 table table-striped table-bordered dt-responsive nowrap gestion_ubicado" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th>No</th>
+                        <th>Nombre y Apellidos</th>
+                        <th>OACE</th>
+                        <th>Nivel</th>
+                        <th>Proceso</th>
+                        <th>CSS</th>
+                        <th>Provincia</th>
+                        <th>Registrado</th>
+                        <th>Opciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for inhabilitacion in inhabilitaciones %}
+                        <tr>
+                            <td>{{ inhabilitacion.numero_resolucion }} </td>
+                            <td>{{ inhabilitacion.graduado.nombre_apellidos }} </td>
+                            <td>{{ inhabilitacion.graduado.organismo.siglas }} </td>
+                            <td>{{ inhabilitacion.graduado.nivel_educacional }} </td>
+                            <td>{{ inhabilitacion.get_proceso_display }} </td>
+                            <td>{{ inhabilitacion.graduado.cumple_servicio_social }} </td>
+                            <td>{{ inhabilitacion.graduado.provincia.siglas }} </td>
+                            <td>{{ inhabilitacion.fecha|date:"Y/m/d" }} {{inhabilitacion.fecha|time:"H:i" }} </td>
+                          <td id="opciones_gestion">
+                              <a href="/inhabilitaciones/{{ inhabilitacion.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Opciones</a>
+                          </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+             {% block paginate %}
+                <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+                {% if inhabilitaciones.has_previous %}
+                    <li>
+                        <a href="?pagina={{ inhabilitaciones.previous_page_number }}" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% endif %}
+                {% if paginas %}
+                {% for pagina in paginas %}
+                    {% if pagina == inhabilitaciones.number  %}
+                          <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                         <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    <li class="active"><a href="?pagina=1">1</a></li>
+                {% endif %}
+
+                {% if inhabilitaciones.has_next %}
+                    <li>
+                        <a href="?pagina={{ inhabilitaciones.next_page_number }}" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% else %}
+
+                    <li class="disabled">
+                        <a  href="#" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% endif %}
+            </ul>
+                 {% endblock %}
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,6 +1,8 @@
 # -*- coding: utf-8 -*-
 from django.shortcuts import render,redirect
 from django.core.paginator import Paginator, EmptyPage,InvalidPage
+from django.views.decorators.cache import cache_page,cache_control
+from django.core.cache import cache
 
 def crear_lista_pages(listado):
     izquiera=1
@@ -40,3 +42,39 @@ def permission_required(lista_categorias_permitidas):
                 return redirect("/inicio")
         return apply_function
     return _permission_required
+
+
+def cache_por_user(ttl=None, prefix=None, cache_post=False):
+    def decorator(function):
+        def apply_cache(request, *args, **kwargs):
+            if request.user.is_anonymous():
+                user = 'anonymous'
+            else:
+                user = request.user.id
+            try:
+                pagina=int(request.GET.get("pagina","1"))
+            except ValueError:
+                pagina=1
+
+            if prefix:
+                CACHE_KEY = '%s_%s_%s'%(prefix, user,pagina)
+            else:
+                CACHE_KEY = 'view_cache_%s_%s_%s'%(function.__name__, user,pagina)
+
+            if not cache_post and request.method == 'POST':
+                can_cache = False
+            else:
+                can_cache = True
+
+            if can_cache:
+                response = cache.get(CACHE_KEY, None)
+            else:
+                response = None
+
+            if not response:
+                response = function(request, *args, **kwargs)
+                if can_cache:
+                    cache.set(CACHE_KEY, response, ttl)
+            return response
+        return apply_cache
+    return decorator

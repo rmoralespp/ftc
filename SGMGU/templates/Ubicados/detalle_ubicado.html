@@ -52,8 +52,8 @@
                                     </div>
                                     <div class="modal-body">
                                         <input required hidden type="text" id="id_graduado_no_presentacion" name="graduado">
-                                        <label  class="label label-default">Escriba la causa</label>
-                                        <textarea required class="form-control" rows="5" name="causa"></textarea>
+                                        <label  class="label label-default">Causa</label>
+                                        <textarea placeholder="Escriba la causa..." required class="form-control" rows="4" name="causa"></textarea>
                                     </div>
                                     <div class="modal-footer">
                                         <input type="submit" class="btn btn-success" value="Aceptar">
@@ -94,7 +94,7 @@
                             <span class="glyphicon glyphicon-check"></span> Confirmar  presentación
                        </a>
                    {% else %}
-                       <a class="btn btn-danger btn_gestion " data-toggle="modal" data-target="#modal_confirmar_no_presentacion_ubicado" href="#" onclick="confirmar_no_presentacion({{ ubicacion.id }});">
+                       <a class="btn btn-danger btn_gestion " data-toggle="modal" data-target="#modal_confirmar_no_presentacion_ubicado" href="#" onclick="Objeto.__init__({{ ubicacion.id }},'','modal_confirmar_no_presentacion_ubicado').no_presentar_ubicado();">
                             <span class="glyphicon glyphicon-check"></span> Confirmar no presentación
                        </a>
                    {% endif %}
@@ -102,7 +102,7 @@
                 {% endif %}
 
                 {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" %}
-                    <button id="{{ ubicacion.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_ubicacion" onclick="eliminar_ubicacion({{ ubicacion.id }});">
+                    <button id="{{ ubicacion.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_ubicacion" onclick="Objeto.__init__({{ ubicacion.id }},'ubicados','modal_eliminar_ubicacion').eliminar();">
                         <span class="glyphicon glyphicon-trash"></span> Eliminar ubicado
                     </button>
                 {% endif %}

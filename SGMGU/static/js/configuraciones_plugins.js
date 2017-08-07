@@ -152,6 +152,34 @@ $(document).on('ready',function(){
             }
         }
     });
-
+    $('.usar_DataTable_3').DataTable({
+        order: [[ 7, 'desc' ], [ 1, 'asc' ]],
+        searching:false,
+        paging: false,
+        language: {
+            "decimal":        "",
+            "emptyTable":     "No hay datos disponibles en la tabla",
+            "info":           "Mostrando _START_ de _END_ de _TOTAL_ registros",
+            "infoEmpty":      "Mostrando 0 de 0 de 0 registros",
+            "infoFiltered":   "(filtrado de _MAX_ registros)",
+            "infoPostFix":    "",
+            "thousands":      ",",
+            "lengthMenu":     "Mostrando _MENU_  registros",
+            "loadingRecords": "Cargando...",
+            "processing":     "Procesando...",
+            "search":         "Buscar:",
+            "zeroRecords":    "No se encontraron registros coincidentes",
+            "paginate": {
+                "first":      "Primero",
+                "last":       "Último",
+                "next":       "Próximo",
+                "previous":   "Anterior"
+            },
+            "aria": {
+                "sortAscending":  ": activar para ordenar la columna ascendentemente",
+                "sortDescending": ": activar para ordenar la columna descendentemente"
+            }
+        }
+    });
 
 });

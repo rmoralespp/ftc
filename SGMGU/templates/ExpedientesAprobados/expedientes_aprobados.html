@@ -22,9 +22,31 @@
 
 {% block section_superior %}
 <div class="panel panel-primary">
-        <div class="panel-heading">Seleccione el expediente a gestionar </div>
+        <div class="panel-heading">Listado de Aprobados </div>
         <div class="panel-body">
-              <div class="table-responsive"> <table class="tabla_exp table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" >
+        <div class="panel-body-superior">
+            <div class="row">
+            <div class="col-xs-3 pull-right">
+                <div class="input-group">
+                    {% if busqueda %}
+                        <input value="{{ valor_busqueda }}" disabled type="number" id="input_busqueda_expediente" class="form-control" aria-label="..." placeholder="Escriba aquí" style="height:32px;">
+                    {% else %}
+                        <input type="text" id="input_busqueda_expediente" class="form-control" aria-label="..." placeholder="Escriba aquí" style="height:32px;">
+                    {% endif %}
+                    <div class="input-group-btn">
+                        {% if busqueda %}
+                             <a type="button" class="btn btn-default btn_normal" href="/expedientes_aprobados"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
+                        {% else %}
+                             <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','expedientes_aprobados','input_busqueda_expediente').buscar('rs');">Buscar RS</button>
+                             <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','expedientes_aprobados','input_busqueda_expediente').buscar('ci');">Buscar CI</button>
+                        {% endif %}
+                    </div><!-- /btn-group -->
+                </div><!-- /input-group -->
+            </div><!-- /input-group -->
+          </div>
+        </div>
+
+              <div class="table-responsive"> <table class="table table-striped table-bordered dt-responsive nowrap usar_DataTable_3" cellspacing="0" width="100%" >
 
                   <thead>
                       <tr>
@@ -57,25 +79,50 @@
 
               </table>
               </div>
-    </div>
-    <div class="panel-footer">
-            <ul class="pager ">
+               <ul class="pagination pull-right">
                 {% if expedientes.has_previous %}
-                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.previous_page_number }}"><i class="material-icons"><span class="glyphicon glyphicon-arrow-left"></span> Anterior</i></a></li>
+                    <li>
+                        <a href="?pagina={{ expedientes.previous_page_number }}" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
+                {% else %}
+                    <li class="disabled">
+                        <a href="#" aria-label="Previous">
+                            Anterior
+                        </a>
+                    </li>
                 {% endif %}
-
-                {% if expedientes.paginator.num_pages %}
-                    <span class="text-muted">Página {{ expedientes.number }} de {{ expedientes.paginator.num_pages }}</span>
+                {% if paginas %}
+                {% for pagina in paginas %}
+                    {% if pagina == expedientes.number  %}
+                          <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% else %}
+                         <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                    {% endif %}
+                {% endfor %}
+                {% else %}
+                    <li class="active"><a href="?pagina=1">1</a></li>
                 {% endif %}
-
 
                 {% if expedientes.has_next %}
-                    <li><a class="pager_pp_handler" href="?pagina={{ expedientes.next_page_number }}"><i class="material-icons">Siguiente <span class="glyphicon glyphicon-arrow-right"></span></i></a></li>
+                    <li>
+                        <a href="?pagina={{ expedientes.next_page_number }}" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
+                {% else %}
+
+                    <li class="disabled">
+                        <a  href="#" aria-label="Next">
+                            Próximo
+                        </a>
+                    </li>
                 {% endif %}
             </ul>
-
         </div>
-    </div>
+
+</div>
 
  {% endblock %}
 

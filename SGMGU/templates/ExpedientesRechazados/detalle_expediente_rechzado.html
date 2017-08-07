@@ -16,32 +16,32 @@
                         <h4 class="modal-title">Aprobar expediente</h4>
                     </div>
 
-                    <div class="modal-body" style="overflow: hidden">
+                    <div class="modal-body" style="overflow: hidden; margin: auto;width: 95%;">
 
-                        <div class="form-group has-feedback col-xs-12">
+                        <div class="form-group has-feedback">
                              <label for="id_registro_entrada" class="  label label-default control-label">Registro de entrada</label>
                             <input class="form-control" type="text" id="id_registro_entrada" name="registro_entrada" placeholder="Escriba solo el número">
                         </div>
 
 
-                        <div class="form-group has-feedback col-xs-12">
+                        <div class="form-group has-feedback">
                               <label for="id_registro_salida" class=" label label-default control-label">Registro de salida</label>
                             <input class="form-control" type="text" id="id_registro_salida"  name="registro_salida" placeholder="Escriba solo el número">
                         </div>
 
 
-                         <div class="form-group has-feedback col-xs-12">
+                         <div class="form-group has-feedback">
                               <label for="id_fecha_aprobado" class=" label label-default control-label ">Fecha de aprobado</label>
 
                             <input  type='text' class="form-control" id='id_fecha_aprobado' name="fecha_aprobado">
                         </div>
 
-                         <div class="form-group has-feedback col-xs-12">
+                         <div class="form-group has-feedback">
                             <label for="id_informe_expediente" class=" label label-default control-label ">Informe del expediente</label>
                             <input  type='file'  id='id_informe_expediente' name="informe_expediente">
                         </div>
 
-                        <div class="form-group has-feedback col-xs-12">
+                        <div class="form-group has-feedback">
                             <label for="id_notificar_dir" class="label label-default control-label ">Notificar</label><br>
                             <input  type='checkbox'  id='id_notificar_dir' name="notificar_dir"><em class="text-muted"> Notificar a Dirección de Trabajo Provincial</em>
                         </div>
@@ -89,13 +89,12 @@
                                     <div class="modal-header">
                                         <h4 class="modal-title">No aprobar expediente</h4>
                                     </div>
-                                    <div class="modal-body">
-                                        <div class="form-group col-sm-12">
+                                    <div class="modal-body" style="width: 95%; margin: auto">
+                                        <div class="form-group">
                                             <label for="id_causa_no_aprobado" class=" label label-default control-label ">Causa</label>
-                                            <textarea class="form-control "  id="id_causa_no_aprobado" name="causa_no_aprobado" rows="2">
-                                            </textarea>
+                                            <textarea placeholder="Escriba la causa...." class="form-control "  id="id_causa_no_aprobado" name="causa_no_aprobado" rows="4"></textarea>
                                         </div>
-                                         <br><br><br><br><br>
+
                                      </div>
 
                                     <div class="modal-footer">

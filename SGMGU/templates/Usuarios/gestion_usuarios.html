@@ -57,15 +57,15 @@
                       <td>{{ usuario.perfil_usuario.categoria }}</td>
                       <td>{{ usuario.perfil_usuario.telefono }}</td>
                       <td  class="opciones_gestion">
-                              <button id="{{ usuario.id  }}" class="btn btn-info modal-usuario" data-toggle="modal" data-target="#modal_modificar_user" onclick="modificar_usuario({{ usuario.id }});">
+                              <button id="{{ usuario.id  }}" class="btn btn-info modal-usuario" data-toggle="modal" data-target="#modal_modificar_user" onclick="Objeto.__init__({{ usuario.id }},'usuarios','modal_modificar_user').modificar();">
                                   <span class="glyphicon glyphicon-pencil"></span>
                               </button>
 
-                              <button id="{{ usuario.id  }}" class="btn btn-danger modal-usuario" data-toggle="modal" data-target="#modal_eliminar_user" onclick="eliminar_usuario({{ usuario.id }});">
+                              <button id="{{ usuario.id  }}" class="btn btn-danger modal-usuario" data-toggle="modal" data-target="#modal_eliminar_user" onclick="Objeto.__init__({{ usuario.id }},'usuarios','modal_eliminar_user').eliminar();">
                                   <span class="glyphicon glyphicon-trash"></span>
                               </button>
 
-                              <button id="{{ usuario.id  }}" class="btn btn-default modal-usuario" data-toggle="modal" data-target="#modal_contrasenna_user" onclick="cambiar_contrasenna({{ usuario.id }});">
+                              <button id="{{ usuario.id  }}" class="btn btn-default modal-usuario" data-toggle="modal" data-target="#modal_contrasenna_user" onclick="Objeto.__init__({{ usuario.id }},'usuarios','modal_contrasenna_user').cambiar_contrasenna();">
                                   <span class="glyphicon glyphicon-edit"></span>
                               </button>
 

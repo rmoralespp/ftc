@@ -102,6 +102,10 @@ class Carrera(models.Model):
 
 class Causal_movimiento(models.Model):
      nombre=models.CharField(max_length=500)
+     tipo=models.CharField(max_length=90,choices=[
+        ('ml', 'Movimiento Laboral'),
+        ('i', 'Inhabilitación')
+    ])
      activo=models.BooleanField(default=True)
 
 
@@ -288,6 +292,40 @@ class UbicacionLaboral(models.Model):
 
 
 
+class GraduadoInhabilitacion(models.Model):
+    nombre_apellidos=models.CharField(max_length=256)
+    ci=models.CharField(max_length=11,blank=True,null=True,validators= [RegexValidator(
+                regex='^[0-9]{2}(0[1-9]|1[0-2])(31|30|(0[1-9]|[1-2][0-9]))[0-9]{5}$',
+                message='CI incorrecto',
+            )])
+
+    carrera=models.ForeignKey(Carrera)
+    nivel_educacional=models.CharField(max_length=90,choices=[
+        ('Superior', 'NS'),
+        ('Medio', 'NM'),
+    ])
+    cumple_servicio_social=models.CharField(max_length=90,choices=[
+        ('Si', 'C'),
+        ('No', 'NC'),
+    ])
+
+
+    provincia=models.ForeignKey(Provincia)
+    organismo=models.ForeignKey(Organismo)
+    fecha_registrado=models.DateTimeField(auto_now_add=True)
+
+
+class ProcesoInhabilitacion(models.Model):
+    numero_resolucion=models.IntegerField()
+    graduado=models.ForeignKey(GraduadoInhabilitacion)
+    fecha=models.DateTimeField(auto_now_add=True)
+    causal=models.ForeignKey(Causal_movimiento)
+    proceso=models.CharField(max_length=90,choices=[
+        ('i', 'Inhabilitación'),
+        ('s', 'Suspensión'),
+    ])
+
+
 class DisponibilidadGraduados(models.Model):
 
     ESTADOS_SEXO = [
@@ -318,9 +356,6 @@ class DisponibilidadGraduados(models.Model):
 
     class Meta:
         ordering=["-fecha_registro"]
-
-
-
 
 
 

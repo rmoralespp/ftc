@@ -416,7 +416,7 @@ def exportar_carreras_expedientes(request):
         return Http404
 
 def exportar_causales_expedientes(request):
-    causales=Causal_movimiento.objects.all()
+    causales=Causal_movimiento.objects.filter(activo=True,tipo='ml')
     total_causales=len(causales)
 
     if request.method == "POST":

@@ -17,66 +17,34 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.units import inch
 from django.core.mail import EmailMessage
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger,InvalidPage
-from django.views.decorators.cache import cache_page,cache_control
 from itertools import chain
-from django.core.cache import cache
 from django.conf import settings
+from .utiles import *
 
-def cache_por_user(ttl=None, prefix=None, cache_post=False):
-    def decorator(function):
-        def apply_cache(request, *args, **kwargs):
-            if request.user.is_anonymous():
-                user = 'anonymous'
-            else:
-                user = request.user.id
-            try:
-                pagina=int(request.GET.get("pagina","1"))
-            except ValueError:
-                pagina=1
+fields=['id','graduado__nombre','organismo_liberacion__siglas','organismo_aceptacion__siglas','fecha_registro']
 
-            if prefix:
-                CACHE_KEY = '%s_%s_%s'%(prefix, user,pagina)
-            else:
-                CACHE_KEY = 'view_cache_%s_%s_%s'%(function.__name__, user,pagina)
-
-            if not cache_post and request.method == 'POST':
-                can_cache = False
-            else:
-                can_cache = True
-
-            if can_cache:
-                response = cache.get(CACHE_KEY, None)
-            else:
-                response = None
-
-            if not response:
-                response = function(request, *args, **kwargs)
-                if can_cache:
-                    cache.set(CACHE_KEY, response, ttl)
-            return response
-        return apply_cache
-    return decorator
-
-def permission_required(lista_categorias_permitidas):
-    def _permission_required(function):
-        def apply_function(request,*args, **kwargs):
-            if lista_categorias_permitidas.__contains__(request.user.perfil_usuario.categoria.nombre):
-                return function(request,*args, **kwargs)
-            else:
-                return redirect("/inicio")
-        return apply_function
-    return _permission_required
-
-
-@cache_por_user(ttl=3600, cache_post=False)
+#@cache_por_user(ttl=3600, cache_post=False)
 @login_required
 @permission_required(['administrador','especialista'])
 def gestion_expedientes(request):
-    fields=['id','graduado__nombre','organismo_liberacion__siglas','organismo_aceptacion__siglas','fecha_registro']
-
     expedientes=paginar(request,Expediente_movimiento_externo.objects.all().order_by("-fecha_registro").values(*fields))
-    context = {'expedientes': expedientes}
+    context = {'expedientes': expedientes,'paginas':crear_lista_pages(expedientes)}
     return render(request, "Expedientes/gestion_expedientes.html", context)
+
+
+#Busqueda---------------------------------------------------------------------------------------------------------------
+@login_required
+def buscar_expediente_ci(request,ci):
+  expedientes=paginar(request,Expediente_movimiento_externo.objects.filter(graduado__ci=ci).order_by("-fecha_registro").values(*fields))
+  context={'expedientes':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "Expedientes/gestion_expedientes.html", context)
+
+
+@login_required
+def buscar_expediente_id(request,id):
+  expedientes=paginar(request,Expediente_movimiento_externo.objects.filter(id=id).order_by("-fecha_registro").values(*fields))
+  context={'expedientes':expedientes,'busqueda':'si','termino_busqueda':'por ID',"valor_busqueda":id,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "Expedientes/gestion_expedientes.html", context)
 
 
 def autocompletar_expediente(request,vista):
@@ -146,32 +114,34 @@ def registrar_expediente(request,vista):
             municipio_residencia=form.cleaned_data['municipio_residencia']
 
             ci=form.cleaned_data['ci']
+
+
             graduado=Graduado(
-                nombre=nombre_graduado,
-                carrera=carrera_graduado,
-                anno_graduacion=anno_graduacion,
-                detalle_direccion_residencia=detalle_direccion_residencia,
-                ci=ci,
-                codigo_boleta=codigo_boleta,
-                imagen_boleta=imagen_boleta,
-                centro_estudio=centro_estudio,
-                municipio_direccion_residencia=municipio_residencia,
-                provincia_direccion_residencia=municipio_residencia.provincia,
+                    nombre=nombre_graduado,
+                    carrera=carrera_graduado,
+                    anno_graduacion=anno_graduacion,
+                    detalle_direccion_residencia=detalle_direccion_residencia,
+                    ci=ci,
+                    codigo_boleta=codigo_boleta,
+                    imagen_boleta=imagen_boleta,
+                    centro_estudio=centro_estudio,
+                    municipio_direccion_residencia=municipio_residencia,
+                    provincia_direccion_residencia=municipio_residencia.provincia,
             )
             graduado.save()
             expediente=Expediente_movimiento_externo(
-                graduado=graduado,
-                organismo_liberacion=organismo_liberacion,
-                organismo_aceptacion=organismo_aceptacion,
-                facultado_liberacion=facultado_liberacion,
-                facultado_aceptacion=facultado_aceptacion,
-                comprimido=comprimido,
-                entidad_liberacion=entidad_liberacion,
-                entidad_aceptacion=entidad_aceptacion,
-                mun_entidad_liberacion= municipio_entidad_liberacion,
-                mun_entidad_aceptacion=municipio_entidad_aceptacion,
-                causal_movimiento=causal_movimiento,
-                sintesis_causal_movimiento=sintesis_causal_movimiento,
+                    graduado=graduado,
+                    organismo_liberacion=organismo_liberacion,
+                    organismo_aceptacion=organismo_aceptacion,
+                    facultado_liberacion=facultado_liberacion,
+                    facultado_aceptacion=facultado_aceptacion,
+                    comprimido=comprimido,
+                    entidad_liberacion=entidad_liberacion,
+                    entidad_aceptacion=entidad_aceptacion,
+                    mun_entidad_liberacion= municipio_entidad_liberacion,
+                    mun_entidad_aceptacion=municipio_entidad_aceptacion,
+                    causal_movimiento=causal_movimiento,
+                    sintesis_causal_movimiento=sintesis_causal_movimiento,
             )
 
             expediente.save()
@@ -180,9 +150,9 @@ def registrar_expediente(request,vista):
             messages.add_message(request, messages.SUCCESS, "El expediente ha sido registrado con éxito.")
             notificar_accion_expediente(request,"registrar",expediente)
             if vista == "estandar":
-             return redirect("/registrar_expediente_estandar")
+                 return redirect("/registrar_expediente_estandar")
             else:
-             return redirect("/gestion_expedientes")
+                 return redirect("/gestion_expedientes")
 
     else:
         form = RegistroExpedienteForm()
@@ -345,7 +315,6 @@ def editar_expediente(request,id_expediente,vista):
 
 #listados--------------------------------------------------------------------------------------------------------
 
-@cache_por_user(ttl=3600, cache_post=False)
 @login_required()
 def listado_expedientes_aprobados(request):
     perfil=Perfil_usuario.objects.get(usuario=request.user)
@@ -364,11 +333,33 @@ def listado_expedientes_aprobados(request):
 
     else:
         expedientes=paginar(request,Expediente_aprobado.objects.all().order_by("-fecha_aprobado").values(*fields))
-        context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes':expedientes}
+        context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes':expedientes,'paginas':crear_lista_pages(expedientes)}
     return render(request, "ExpedientesAprobados/expedientes_aprobados.html", context)
 
 
-@cache_por_user(ttl=3600, cache_post=False)
+
+
+
+@login_required
+def buscar_expedientes_aprobados_ci(request,ci):
+  fields=['id','codigo_DE_RS','expediente__graduado__nombre','expediente__organismo_liberacion__siglas','expediente__organismo_aceptacion__siglas','expediente__graduado__carrera__nombre','fecha_aprobado']
+  expedientes=paginar(request,Expediente_aprobado.objects.filter(expediente__graduado__ci=ci).order_by("-fecha_aprobado").values(*fields))
+  context={'expedientes':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "ExpedientesAprobados/expedientes_aprobados.html", context)
+
+
+@login_required
+def buscar_expedientes_aprobados_rs(request,rs):
+  rs_inicial=rs
+  rs="DE-RS %s"%rs
+  fields=['id','codigo_DE_RS','expediente__graduado__nombre','expediente__organismo_liberacion__siglas','expediente__organismo_aceptacion__siglas','expediente__graduado__carrera__nombre','fecha_aprobado']
+  expedientes=paginar(request,Expediente_aprobado.objects.filter(codigo_DE_RS=rs).order_by("-fecha_aprobado").values(*fields))
+  context={'expedientes':expedientes,'busqueda':'si','termino_busqueda':'por RS',"valor_busqueda":rs_inicial,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "ExpedientesAprobados/expedientes_aprobados.html", context)
+
+
+
+
 @login_required()
 def listado_expedientes_pendientes(request):
     perfil=Perfil_usuario.objects.get(usuario=request.user)
@@ -379,11 +370,16 @@ def listado_expedientes_pendientes(request):
        context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_pendientes':expedientes_pendientes,'organismo':organismo}
     else:
       expedientes_pendientes=paginar(request,Expediente_pendiente.objects.all().order_by("-fecha_pendiente"))
-      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_pendientes':expedientes_pendientes}
+      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_pendientes':expedientes_pendientes,'paginas':crear_lista_pages(expedientes_pendientes)}
     return render(request, "ExpedientesPendientes/expedientes_pendientes.html", context)
 
+@login_required
+def buscar_expedientes_pendientes_ci(request,ci):
+  expedientes=paginar(request,Expediente_pendiente.objects.filter(expediente__graduado__ci=ci).order_by("-fecha_pendiente"))
+  context={'expedientes_pendientes':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "ExpedientesPendientes/expedientes_pendientes.html", context)
 
-@cache_por_user(ttl=3600, cache_post=False)
+
 @login_required()
 def listado_expedientes_rechazado(request):
     perfil=Perfil_usuario.objects.get(usuario=request.user)
@@ -394,11 +390,18 @@ def listado_expedientes_rechazado(request):
        context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_rechazados':expedientes_rechazados,'organismo':organismo}
     else:
       expedientes_rechazados=paginar(request,Expediente_rechazado.objects.all().order_by("-fecha_rechazo"))
-      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_rechazados':expedientes_rechazados}
+      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_rechazados':expedientes_rechazados,'paginas':crear_lista_pages(expedientes_rechazados)}
     return render(request, "ExpedientesRechazados/expedientes_rechzados.html", context)
 
 
-@cache_por_user(ttl=3600, cache_post=False)
+
+@login_required
+def buscar_expedientes_rechazados_ci(request,ci):
+  expedientes=paginar(request,Expediente_rechazado.objects.filter(expediente__graduado__ci=ci).order_by("-fecha_rechazo"))
+  context={'expedientes_rechazados':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "ExpedientesRechazados/expedientes_rechzados.html", context)
+
+
 @login_required()
 def listado_expedientes_no_aprobados(request):
     perfil=Perfil_usuario.objects.get(usuario=request.user)
@@ -409,21 +412,15 @@ def listado_expedientes_no_aprobados(request):
        context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_no_aprob':expedientes_no_aprob,'organismo':organismo}
     else:
       expedientes_no_aprob=paginar(request,Expediente_no_aprobado.objects.all().order_by("-fecha_no_aprobado"))
-      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_no_aprob':expedientes_no_aprob}
+      context = {'categoria':perfil.categoria.nombre,'foto':foto,'expedientes_no_aprob':expedientes_no_aprob,'paginas':crear_lista_pages(expedientes_no_aprob)}
     return render(request, "ExpedientesNoAprobados/expedientes_no_aprobados.html", context)
 
-def paginar(request,lista_objetos):
-    paginator=Paginator(lista_objetos,100)
-    try:
-        pagina=int(request.GET.get("pagina","1"))
-    except ValueError:
-        pagina=1
-    try:
-        lista_objetos=paginator.page(pagina)
-    except(InvalidPage, EmptyPage):
-        lista_objetos=paginator.page(paginator.num_pages)
-    return lista_objetos
 
+@login_required
+def buscar_expedientes_no_aprobados_ci(request,ci):
+  expedientes=paginar(request,Expediente_no_aprobado.objects.filter(expediente__graduado__ci=ci).order_by("-fecha_no_aprobado"))
+  context={'expedientes_no_aprob':expedientes,'busqueda':'si','termino_busqueda':'por CI',"valor_busqueda":ci,'paginas':crear_lista_pages(expedientes)}
+  return render(request, "ExpedientesNoAprobados/expedientes_no_aprobados.html", context)
 
 #Detalle------------------------------------------------------------------------------------------
 @login_required

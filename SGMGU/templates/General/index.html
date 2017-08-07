@@ -39,8 +39,8 @@
           <div class="modal-body modal_notificacion">
           </div>
           <div class="modal-footer">
-              <button type="button" class="btn btn-success" onclick="responder_notificacion();">Responder</button>
-              <button type="button" class="btn btn-danger" onclick="eliminar_notificacion();">Eliminar</button>
+              <button type="button" class="btn btn-success" onclick="Objeto.responder_notificacion();">Responder</button>
+              <button type="button" class="btn btn-danger" onclick="Objeto.eliminar_notificacion();">Eliminar</button>
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
           </div>
 
@@ -58,18 +58,18 @@
           <div class="container-fluid">
             <div class="navbar-header">
               <a id="titulo_inicioo" class="navbar-brand" href="/inicio"><strong style="color: red"> SIGU</strong><strong style="color: #1c8fd1">LEU</strong></a>
-                {% block busqueda %}
+                {% block busqueda_ficha %}
                     <div class="input-group nav_busqueda_graduado">
-                        {% if busqueda %}
-                            <input disabled type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
+                        {% if busqueda_ficha %}
+                            <input value="{{ ci }}" disabled type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
                         {% else %}
                             <input type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
                         {% endif %}
                          <div class="input-group-btn">
-                            {% if busqueda %}
+                            {% if busqueda_ficha %}
                                  <a type="button" class="btn btn-default btn_normal" href="/inicio"><span class="glyphicon glyphicon-refresh"></span> Limpiar</a>
                             {% else %}
-                                 <button type="button" class="btn btn-default btn_normal" onclick="buscar_ficha_graduado();"><span class="glyphicon glyphicon-search"></span></button>
+                                 <button type="button" class="btn btn-default btn_normal" onclick="Objeto.__init__('','graduado','ci_ficha_graduado').buscar('ci');"><span class="glyphicon glyphicon-search"></span></button>
                             {% endif %}
                          </div>
                     </div>
@@ -91,9 +91,9 @@
                             <li style="cursor: pointer; text-align: center;font-weight: bold; background-color: rgba(233, 233, 233, 0.95);color: #5b5b5b; font-size: medium" data-toggle="modal" data-target="#enviar_notificacion">Enviar Notificación</li>
                            {% for notificacion in notificaciones %}
                                {% if notificacion.revisado %}
-                                   <li id="{{ notificacion.id }}" class="notificacion" onclick="revisar_notificacion({{ notificacion.id }});">
+                                   <li id="{{ notificacion.id }}" class="notificacion" onclick="Objeto.__init__({{ notificacion.id }},'revisar_notificacion','').revisar_notificacion();">
                                {% else %}
-                                    <li id="{{ notificacion.id }}" class="notificacion notificacion_sin_revisar" onclick="revisar_notificacion({{ notificacion.id }});">
+                                    <li id="{{ notificacion.id }}" class="notificacion notificacion_sin_revisar" onclick="Objeto.__init__({{ notificacion.id }},'revisar_notificacion','').revisar_notificacion();">
                                  {% endif %}
                                         {% ifequal notificacion.emisor.perfil_usuario.foto ""%}
                                            <div class="pull-left foto"><span class="pull-left glyphicon glyphicon-user"></span></div>

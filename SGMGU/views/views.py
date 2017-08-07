@@ -148,12 +148,20 @@ def eliminar_notificacion(request,id_notificacion):
 
 
 def ficha_graduado(request,ci):
-    try:
-        datos_ubicado=UbicacionLaboral.objects.filter(ci=ci)[0]
-    except:
-        datos_ubicado=None
-    datos_movimientos=Expediente_aprobado.objects.filter(expediente__graduado__ci=ci)
-    contexto={'datos_ubicado':datos_ubicado,'datos_movimientos':datos_movimientos,'ci':ci,'busqueda':True}
+    try:     datos_ubicado=UbicacionLaboral.objects.filter(ci=ci)[0]
+    except:  datos_ubicado=None
+    try:     datos_inhabilitado=GraduadoInhabilitacion.objects.filter(ci=ci)[0]
+    except:  datos_inhabilitado=None
+    mov_externos=Expediente_aprobado.objects.filter(expediente__graduado__ci=ci)
+    mov_internos=Expediente_movimiento_interno.objects.filter(graduado__ci=ci)
+    contexto={
+        'datos_ubicado':datos_ubicado,
+        'mov_externos':mov_externos,
+        'mov_internos':mov_internos,
+        'ci':ci,
+        'busqueda_ficha':True,
+        'datos_inhabilitado':datos_inhabilitado
+    }
     return render(request,"General/ficha_graduado.html",contexto)
 
 

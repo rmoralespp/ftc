@@ -1,0 +1,70 @@
+{% extends "General/index.html" %}
+
+{% block encabezado %}
+    <header  style="margin-left: 10%;width: 75%">
+        {% if messages %}
+            {% for message in messages %}
+                 {% if message.level == 40 %}
+                     <p class="mensaje_error" ><span class="mensaje_error glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% else %}
+                    <p class="mensaje_exito" ><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
+                 {% endif %}
+            {% endfor %}
+        {% endif %}
+    </header>
+{% endblock %}
+
+
+{% block titulo_tabla %}
+     <div class="modal fade" id="modal_autocompletar_inhabilitado" role="dialog">
+                            <div class="modal-dialog">
+                                <!-- Modal content-->
+                                <div class="modal-content">
+                                    <form method="POST" action="/inhabilitaciones/autocompletar_inhabilitado">{% csrf_token %}
+                                        <div class="modal-header">
+                                            <h4 class="modal-title modal_reporte_title">Buscar datos del graduado</h4>
+                                        </div>
+                                        <div class="modal-body">
+                                             <div class="form-group">
+                                                <label class="label label-default">CI del Graduado</label>
+                                                <input required type="number"  class="form-control" name="ci" placeholder="Escriba el CI">
+                                             </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-success" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+        </div>
+
+
+{% endblock %}
+
+{% block section_superior %}
+    <div class="col-xs-9" style="margin-left: 10%">
+        <div class="panel panel-primary">
+            <div class="panel-heading" style="overflow:hidden;">
+                <div class="pull-left">{{ nombre_form }} Proceso</div>
+                {% if nombre_form != "Editar" %}
+                    <div class="pull-right autocompletar_epxediente"><a  class="btn btn-danger" data-toggle="modal" data-target="#modal_autocompletar_inhabilitado" href="#">Autocompletar</a></div>
+                {% endif %}
+            </div>
+
+            <div class="panel-body">
+                 <form method="post" action="{{ url }}">{% csrf_token %}
+                     {% include "General/forms_snippets.html" %}
+                         <div class="pull-right">
+                           <button class="btn btn-primary" type="submit"> Aceptar</button>
+                           <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
+                             <a class="btn btn-success btn_gestion" href="/inhabilitaciones">
+                                 <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+                             </a>
+                         </div>
+                 </form>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

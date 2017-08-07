@@ -11,7 +11,7 @@
 #body_login h1{
     text-rendering: optimizeLegibility;
     color: #565656;
-    font-family: Brush Script MT;
+    font-family: Brush Script MT,"Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
     font-size: 60px;
     text-align: center;
 }
@@ -30,7 +30,7 @@
 
 
 .form-signin h3{
-    font-family: "Century Gothic";
+    font-family: "Century Gothic","Roboto","Lucida Grande","DejaVu Sans","Bitstream Vera Sans",Verdana,Arial,sans-serif;
 
 }
 

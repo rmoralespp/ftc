@@ -364,7 +364,7 @@ class RegistroExpedienteForm(forms.Form):
             }))
 
       causal_movimiento = forms.ModelChoiceField(
-        queryset=Causal_movimiento.objects.all(),
+        queryset=Causal_movimiento.objects.filter(activo=True,tipo='ml'),
         label="Causa del movimiento",
         required=True,
         widget=forms.Select(
@@ -567,7 +567,7 @@ class RegistroMovimientoInternoForm(forms.Form):
             }))
 
       causal_movimiento = forms.ModelChoiceField(
-        queryset=Causal_movimiento.objects.all(),
+        queryset=Causal_movimiento.objects.filter(activo=True,tipo='ml'),
         label="Causa del movimiento",
         required=True,
         widget=forms.Select(
@@ -726,17 +726,15 @@ class RegistrarOrganismoForm(forms.ModelForm):
 
 
 class RegistrarCausalForm(forms.ModelForm):
-        nombre = forms.CharField(
-        label="Nombre",
-        widget=forms.TextInput(
-            attrs={
-                'class': 'form-control',
-                'placeholder': 'Escriba el nombre de la causal'
-            }))
 
         class Meta:
            model=Causal_movimiento
-           fields=["nombre"]
+           fields=["nombre","tipo"]
+           widgets={
+               'nombre':forms.TextInput(attrs={ 'class': 'form-control'}),
+               'tipo':forms.Select(attrs={ 'class': 'form-control'})
+           }
+
 
 
 
@@ -838,7 +836,7 @@ class Expedientes_segun_causal_form(forms.Form):
 
 
         causal = forms.ModelChoiceField(
-        queryset=Causal_movimiento.objects.filter(activo=True).order_by("nombre"),
+        queryset=Causal_movimiento.objects.filter(activo=True,tipo='ml').order_by("nombre"),
         required=True,
         widget=forms.Select(
             attrs={'class': 'form-control'}))
@@ -860,7 +858,7 @@ class UbicadoForm(forms.ModelForm):
                 "municipio_residencia": forms.Select(attrs={"class" : "form-control"}),
                 "provincia_ubicacion": forms.Select(attrs={"class" : "form-control"}),
                 "direccion_particular": forms.TextInput(attrs={"class" : "form-control"}),
-                "estado_ubicacion": forms.Select(attrs={"class" : "form-control", 'onchange':'cambiar_estado_ubicacion()'}),
+                "estado_ubicacion": forms.Select(attrs={"class" : "form-control", 'onchange':'Objeto.cambiar_estado_ubicacion()'}),
               }
     cumple_servicio_social= forms.ChoiceField(choices=((True,"Si"),(False,"No"),),widget=forms.Select(attrs={"class" : "form-control"}))
     sexo= forms.ChoiceField(choices=(("F","Femenino"),("M","Masculino"),),widget=forms.Select(attrs={"class" : "form-control"}))
@@ -995,3 +993,51 @@ class FormFactory:
            form=FormBuscarUbicadosCentroEstudio
 
         return form
+
+
+
+class ProcesoInhabilitacionForm(forms.ModelForm):
+    numero_resolucion=forms.CharField(label="Número resolución",required=True,widget=forms.TextInput(
+             attrs={ 'class': 'form-control', 'type':'number'}))
+
+    causal = forms.ModelChoiceField(
+        label="Causal",
+        required=True,
+        queryset=Causal_movimiento.objects.filter(activo=True,tipo='i'),
+        widget=forms.Select(
+
+            attrs={
+                'class': 'form-control',
+            }))
+
+    proceso = forms.ChoiceField(
+        label="Proceso",
+        required=True,
+        choices=[
+            ('i', 'Inhabilitación'),
+            ('s', 'Suspensión'),
+        ],
+    widget=forms.Select(
+
+            attrs={
+                'class': 'form-control',
+            }))
+
+
+    class Meta:
+        model=GraduadoInhabilitacion
+        fields=["nombre_apellidos","ci","carrera","nivel_educacional","provincia",'cumple_servicio_social','organismo']
+        widgets = {
+                "numero_resolucion":forms.TextInput(attrs={"class" : "form-control"}),
+                "nombre_apellidos":forms.TextInput(attrs={"class" : "form-control"}),
+                "ci": forms.TextInput(attrs={"class" : "form-control"}),
+                "nivel_educacional": forms.Select(attrs={"class" : "form-control"}),
+                "carrera": forms.Select(attrs={"class" : "form-control"}),
+                "provincia": forms.Select(attrs={"class" : "form-control"}),
+                "cumple_servicio_social": forms.Select(attrs={"class" : "form-control"}),
+                "organismo": forms.Select(attrs={"class" : "form-control"})
+                    }
+
+
+
+

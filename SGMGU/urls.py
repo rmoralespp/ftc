@@ -12,6 +12,7 @@ from SGMGU.views.view_movimientos_internos import *
 from SGMGU.views.views_dir_trabajo import *
 from SGMGU.views.views_reportes import *
 from SGMGU.views.views_ubicados import *
+from SGMGU.views.views_inhabilitaciones import *
 from SGMGU.views.views_disponibles import *
 from django.conf import settings
 from django.views.static import  serve
@@ -52,6 +53,8 @@ urlpatterns = [
     url(r'^gestion_expedientes/(?P<id_expediente>[\w]+)/modificar/$',editar_expediente,{'vista':'estandar'} ),
     url(r'^gestion_expedientes/(?P<id_expediente>[\w]+)/eliminar/$',eliminar_expediente),
     url(r'^registrar_expediente_estandar/$',registrar_expediente ,{'vista':'estandar'},name="registrar_expediente_estandar",),
+    url(r'^gestion_expedientes/ci/(?P<ci>[\w]+)$',buscar_expediente_ci),
+    url(r'^gestion_expedientes/id/(?P<id>[\w]+)$',buscar_expediente_id),
     url(r'^gestion_expedientes/(?P<id_expediente>[\w]+)$',detalle_expediente),
 
     url(r'^organismos$',gestion_organismos,name='organismos'),
@@ -95,7 +98,7 @@ urlpatterns = [
     url(r'^expedientes_rechazados/(?P<id_expediente>[\w]+)/editar$',editar_expediente,{'vista':'rechazado'}),
     url(r'^expedientes_aprobados/(?P<id_expediente>[\w]+)/editar$',editar_expediente,{'vista':'aprobado'}),
     url(r'^expedientes_no_aprobados/(?P<id_expediente>[\w]+)/editar$',editar_expediente,{'vista':'no_aprobado'}),
-
+    url(r'^expedientes_pendientes/ci/(?P<ci>[\w]+)$',buscar_expedientes_pendientes_ci),
 
 
     url(r'^expedientes_rechazados$',listado_expedientes_rechazado,name='rechazados'),
@@ -103,7 +106,7 @@ urlpatterns = [
     url(r'^no_aprobar_expediente_rechazado/(?P<id_expediente_rech>[\w]+)$',no_aprobar_expediente_rechazado),
     url(r'^pasar_a_pendientes_de_rechazo/(?P<id_expediente>[\w]+)$',pasar_a_pendientes_from_rechazo),
     url(r'^expedientes_rechazados/(?P<id_expediente>[\w]+)$',detalle_expediente_rechazado),
-
+    url(r'^expedientes_rechazados/ci/(?P<ci>[\w]+)$',buscar_expedientes_rechazados_ci),
 
 
     url(r'^expedientes_no_aprobados$',listado_expedientes_no_aprobados,name='no_aprobados'),
@@ -112,13 +115,15 @@ urlpatterns = [
     url(r'^aprobar_expediente_no_aprobado/(?P<id_expediente_no_aprob>[\w]+)$',aprobar_expediente_no_aprobado),
     url(r'^rechazar_expediente_no_aprobado/(?P<id_expediente_no_aprob>[\w]+)$',rechazar_expediente_no_aprobado),
     url(r'^expedientes_no_aprobados/(?P<id_expediente>[\w]+)$',detalle_expediente_no_aprobado),
-
+    url(r'^expedientes_no_aprobados/ci/(?P<ci>[\w]+)$',buscar_expedientes_no_aprobados_ci),
 
 
     url(r'^expedientes_aprobados$',listado_expedientes_aprobados,name='aprobados'),
     url(r'^pasar_a_pendientes/(?P<id_expediente>[\w]+)$',pasar_a_pendientes),
     url(r'^no_aprobar_expediente_aprobado/(?P<id_expediente_aprob>[\w]+)$',no_aprobar_expediente_aprobado),
     url(r'^rechazar_expediente_aprobado/(?P<id_expediente_aprob>[\w]+)$',rechazar_expediente_aprobado),
+    url(r'^expedientes_aprobados/ci/(?P<ci>[\w]+)$',buscar_expedientes_aprobados_ci),
+    url(r'^expedientes_aprobados/rs/(?P<rs>[\w]+)$',buscar_expedientes_aprobados_rs),
     url(r'^expedientes_aprobados/(?P<id_expediente>[\w]+)$',detalle_expediente_aprobado),
 
 
@@ -126,7 +131,7 @@ urlpatterns = [
     url(r'^movimientos_internos/(?P<id_expediente>[\w]+)/eliminar/$',eliminar_movimiento_interno),
     url(r'^movimientos_internos/(?P<id_expediente>[\w]+)/modificar/$',modificar_movimiento_interno),
     url(r'^movimientos_internos/registrar/$',registrar_movimiento_interno),
-
+    url(r'^movimientos_internos/ci/(?P<ci>[\w]+)$',buscar_movimientos_internos_ci),
 
     url(r'^reportes$',reportes,name='reportes'),
     url(r'^reportes/reporte_exp_org_carrera$',reporte_exp_organismo_carrera),
@@ -150,6 +155,23 @@ urlpatterns = [
     url(r'^ubicados/(?P<id_ubicacion>[\d]+)/pasar_a_disponibles',pasar_a_disponibles),
     url(r'^ubicados/(?P<id_ubicacion>[\d]+)/eliminar$',eliminar_ubicacion),
     url(r'^ubicados/propios/(?P<opcion>(organismo|carrera|provincia_residencia|provincia_ubicacion|centro_estudio){1})/(?P<id_opcion>[\w]+)$',filtrar_ubicados),
+
+
+     url(r'^inhabilitaciones$',inhabilitaciones,name="inhabilitaciones"),
+     url(r'^inhabilitaciones/registrar$',registrar_inhabilitacion),
+     url(r'^inhabilitaciones/autocompletar_inhabilitado$',autocompletar_inhabilitado),
+     url(r'^inhabilitaciones/ci/(?P<ci>[\d]+)$',buscar_ci_inhabilitado),
+     url(r'^inhabilitaciones/no/(?P<no>[\d]+)$',buscar_no_inhabilitado),
+     url(r'^inhabilitaciones/(?P<id_proceso>[\d]+)$',detalle_proceso),
+     url(r'^inhabilitaciones/(?P<id_proceso>[\d]+)/editar$',modificar_proceso),
+     url(r'^inhabilitaciones/(?P<id_proceso>[\d]+)/eliminar$',eliminar_proceso),
+     url(r'^exportar_total_procesos$',exportar_total_procesos),
+     url(r'^exportar_total_procesos_causales$',exportar_total_procesos_causales),
+     url(r'^exportar_total_procesos_organismos$',exportar_total_procesos_organismos),
+
+
+
+
 
      url(r'^disponibles/registrar$',registrar_disponibilidad),
      url(r'^disponibles$',m_disponibles,name="disponibles"),
@@ -177,6 +199,7 @@ urlpatterns = [
     url(r'^exportar_total_ubicados_provincias_ubicacion$',exportar_total_ubicados_provincias,{'opcion':'ubicacion'}),
     url(r'^exportar_total_ubicados_provincias_residencia$',exportar_total_ubicados_provincias,{'opcion':'residencia'}),
     url(r'^exportar_ubicados$',exportar_ubicados),
+    url(r'^exportar_ubicados_universidades$',exportar_ubicados_universidades),
     url(r'^ubicados/(?P<id_ubicacion>[\d]+)$',detalle_ubicacion),
 
     url(r'^graduado/ci/(?P<ci>[\d]+)$',ficha_graduado,name='ficha_graduado'),
