@@ -331,13 +331,13 @@ class GraduadoInhabilitacion(models.Model):
 
 
 class ProcesoInhabilitacion(models.Model):
-    numero_resolucion=models.IntegerField()
+    numero_resolucion=models.IntegerField(unique_for_year=True)
     graduado=models.ForeignKey(GraduadoInhabilitacion)
     fecha=models.DateTimeField(auto_now_add=True)
-    causal=models.ForeignKey(Causal_movimiento)
+    causal=models.ForeignKey(Causal_movimiento,blank=True,null=True)
     proceso=models.CharField(max_length=90,choices=[
         ('i', 'Inhabilitación'),
-        ('s', 'Suspensión'),
+        ('s', 'Suspensión de la Inhabilitación'),
     ])
 
 

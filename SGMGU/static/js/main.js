@@ -94,6 +94,15 @@ Objeto = {
         else {
             $('.codigo_boleta_fade').prop({'disabled':false,'required':true})
         }
+    },
+
+    cambiar_estado_inhabilitacion: function(){
+        if($('#id_proceso option').filter(':selected').val() == "s"){
+           $('.causal_inhabilitacion').prop({'disabled':true,'required':false}).val("-1").trigger("change");
+        }
+        else {
+            $('.causal_inhabilitacion').prop({'disabled':false,'required':true})
+        }
     }
 };
 

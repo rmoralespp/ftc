@@ -79,7 +79,7 @@ def autocompletar_inhabilitado(request):
     else:
          return redirect("/inicio")
 
-
+import datetime
 @login_required
 @permission_required(['administrador','especialista','juridico'])
 def registrar_inhabilitacion(request):
@@ -92,15 +92,18 @@ def registrar_inhabilitacion(request):
                 graduado.save()
             else:
                 graduado=graduados[0]
-            ProcesoInhabilitacion.objects.create(
-                graduado=graduado,
-                numero_resolucion=form.cleaned_data['numero_resolucion'],
-                causal=form.cleaned_data['causal'],
-                proceso=form.cleaned_data['proceso'],
-            )
-            messages.add_message(request, messages.SUCCESS, "El proceso se ha registrado con éxito.")
-            return redirect('/inhabilitaciones')
-
+            if ProcesoInhabilitacion.objects.filter(fecha__year=datetime.date.today().year,numero_resolucion=form.cleaned_data['numero_resolucion']).count()==0:
+                ProcesoInhabilitacion.objects.create(
+                    graduado=graduado,
+                    numero_resolucion=form.cleaned_data['numero_resolucion'],
+                    causal=form.cleaned_data['causal'],
+                    proceso=form.cleaned_data['proceso'],
+                )
+                messages.add_message(request, messages.SUCCESS, "El proceso se ha registrado con éxito.")
+                return redirect('/inhabilitaciones')
+            else:
+                messages.add_message(request, messages.ERROR, "Error: El número de la resolución ya existe")
+                return redirect('/inhabilitaciones/registrar')
     else:
         form=ProcesoInhabilitacionForm()
     return render(request, "Inhabilitaciones/form.html", {'form':form,'nombre_form':'Registar','url':'/inhabilitaciones/registrar'})

@@ -1002,12 +1002,12 @@ class ProcesoInhabilitacionForm(forms.ModelForm):
 
     causal = forms.ModelChoiceField(
         label="Causal",
-        required=True,
+        required=False,
         queryset=Causal_movimiento.objects.filter(activo=True,tipo='i'),
         widget=forms.Select(
 
             attrs={
-                'class': 'form-control',
+                'class': 'form-control causal_inhabilitacion',
             }))
 
     proceso = forms.ChoiceField(
@@ -1015,12 +1015,13 @@ class ProcesoInhabilitacionForm(forms.ModelForm):
         required=True,
         choices=[
             ('i', 'Inhabilitación'),
-            ('s', 'Suspensión'),
+            ('s', 'Suspensión de la Inhabilitación'),
         ],
     widget=forms.Select(
 
             attrs={
                 'class': 'form-control',
+                'onchange':'Objeto.cambiar_estado_inhabilitacion()'
             }))
 
 

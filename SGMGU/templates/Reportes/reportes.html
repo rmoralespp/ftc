@@ -24,9 +24,10 @@
             {% if user.perfil_usuario.categoria.nombre != "juridico"%}
                 <li class="active"><a class="tab_movimiento_laboral" data-toggle="tab" href="#movimiento_laboral">Movimiento Laboral</a></li>
                 <li><a class="tab_ubicados" data-toggle="tab" href="#ubicados">Ubicación Laboral</a></li>
-                <li><a class="tab_ubicados" data-toggle="tab" href="#inhabilitaciones">Inhabilitaciones</a></li>
-            {% else %}
+            {% elif  user.perfil_usuario.categoria.nombre == "juridico"%}
                 <li class="active"><a class="tab_ubicados" data-toggle="tab" href="#inhabilitaciones">Inhabilitaciones</a></li>
+            {% elif  user.perfil_usuario.categoria.nombre == "administrador"%}
+                <li><a class="tab_ubicados" data-toggle="tab" href="#inhabilitaciones">Inhabilitaciones</a></li>
             {% endif %}
         </ul>
         <br>
