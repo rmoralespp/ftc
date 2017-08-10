@@ -69,6 +69,7 @@
                     <p><strong>Entidad:</strong> {{ datos_ubicado.entidad }}</p>
                     <p><strong>Organismo:</strong> {{ datos_ubicado.organismo.nombre}}</p>
                     <p><strong>Provincia:</strong> {{ datos_ubicado.provincia_ubicacion }}</p>
+                    <p><strong>Estado:</strong> {{ datos_ubicado.estado_ubicacion|upper }}</p>
                     {% if not datos_ubicado.presentado %}
                         <p><strong>Causa de la no presentación del ubicado:</strong> {{ datos_ubicado.causa_no_presentacion|linebreaksbr }}</p>
                     {% endif %}

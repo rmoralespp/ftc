@@ -68,7 +68,7 @@ def filtrar_ubicados(request,opcion,id_opcion):
 @permission_required(['administrador','especialista','dpts','organismo','mes'])
 def m_ubicados(request,filtro):
     categoria=request.user.perfil_usuario.categoria.nombre
-    ubicados=UbicacionLaboral.objects.filter(Q(fecha_registro__year=datetime.date.today().year))
+    ubicados=UbicacionLaboral.objects.all()
     if categoria == "dpts":
         ubicados=ubicados.filter(centro_estudio__provincia=request.user.perfil_usuario.provincia)
     elif categoria == "organismo":
@@ -77,7 +77,7 @@ def m_ubicados(request,filtro):
     if  filtro == 'desfasados':
         ubicados=ubicados.filter(estado_ubicacion='desfasado')
     elif filtro == 'graduados':
-        ubicados=ubicados.filter(estado_ubicacion='graduado')
+        ubicados=ubicados.filter(estado_ubicacion='graduado',fecha_registro__year=datetime.date.today().year)
 
     ubicados=paginar(request,ubicados)
     context={'ubicados':ubicados,'nombre_pag':"Listado de ubicados %s"%filtro,'paginas':crear_lista_pages(ubicados),'filtro':filtro}

@@ -3,7 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="3be9a248-4de6-447a-bd41-36d61bf1858d" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/models.py" afterPath="$PROJECT_DIR$/SGMGU/models.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html" afterPath="$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html" afterPath="$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" afterPath="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
     </list>
     <ignored path="SGMLEU.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -31,41 +33,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="estilos_inicio.css" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="828" column="1" selection-start-line="828" selection-start-column="1" selection-end-line="828" selection-end-column="1" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/static/js/main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="106" column="2" selection-start-line="106" selection-start-column="2" selection-end-line="106" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="reportes.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/templates/Reportes/reportes.html">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
               <caret line="26" column="23" selection-start-line="26" selection-start-column="23" selection-end-line="26" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="context_proccesors.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/context_proccesors.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="41" column="164" selection-start-line="41" selection-start-column="164" selection-end-line="41" selection-end-column="164" />
               <folding />
             </state>
           </provider>
@@ -81,16 +53,6 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="configuraciones_plugins.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/static/js/configuraciones_plugins.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="155" column="23" selection-start-line="155" selection-start-column="23" selection-end-line="155" selection-end-column="23" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file leaf-file-name="gestion_expedientes.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/templates/Expedientes/gestion_expedientes.html">
           <provider selected="true" editor-type-id="text-editor">
@@ -101,14 +63,57 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.37639198">
+            <state vertical-scroll-proportion="0.0">
               <caret line="383" column="20" selection-start-line="383" selection-start-column="4" selection-end-line="383" selection-end-column="20" />
               <folding>
                 <element signature="e#11074#11450#0" expanded="false" />
                 <element signature="e#11503#12501#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ficha_graduado.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-7.8461537">
+              <caret line="71" column="87" selection-start-line="71" selection-start-column="87" selection-end-line="71" selection-end-column="87" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detalle_disponible.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_disponible.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="detalle_ubicado.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-8.5">
+              <caret line="130" column="79" selection-start-line="130" selection-start-column="79" selection-end-line="130" selection-end-column="79" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views_ubicados.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.15144767">
+              <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+              <folding>
+                <element signature="e#580#1026#0" expanded="false" />
+                <element signature="e#1179#2775#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -186,7 +191,6 @@
         <option value="$PROJECT_DIR$/SGMGU/templates/Inhabilitaciones/detalle.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Inhabilitaciones/inhabilitaciones.html" />
         <option value="$PROJECT_DIR$/SGMGU/views/views_disponibles.py" />
-        <option value="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Ubicados/ubicados.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Ubicados/disponibles.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/General/index.html" />
@@ -196,11 +200,9 @@
         <option value="$PROJECT_DIR$/SGMGU/templates/ExpedientesNoAprobados/detalle_expediente_no_aprobado.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/ExpedientesAprobados/detalle_expediente_aprobado.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/ExpedientesRechazados/detalle_expediente_rechzado.html" />
-        <option value="$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/MovimietosInternos/registrar_movimiento_interno.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Expedientes/registrar_expediente.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Expedientes/registrar_expediente_estandar.html" />
-        <option value="$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Inhabilitaciones/form.html" />
         <option value="$PROJECT_DIR$/SGMGU/views/utiles.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/MovimietosInternos/movimientos_internos.html" />
@@ -225,6 +227,9 @@
         <option value="$PROJECT_DIR$/SGMLEU/settings.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Reportes/reportes.html" />
         <option value="$PROJECT_DIR$/SGMGU/models.py" />
+        <option value="$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html" />
+        <option value="$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html" />
+        <option value="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
       </list>
     </option>
   </component>
@@ -265,6 +270,7 @@
     </navigator>
     <panes>
       <pane id="Scope" />
+      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -293,7 +299,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="SGMLEU" />
+              <option name="myItemId" value="SGMGU" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -308,6 +314,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="SGMGU" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="views" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -326,28 +336,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGMLEU" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGMLEU" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="SGMGU" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="templates" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Reportes" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -371,7 +359,6 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scratches" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -721,13 +708,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.115385">
-          <caret line="71" column="127" selection-start-line="71" selection-start-column="127" selection-end-line="71" selection-end-column="127" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/base.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.8846154">
@@ -763,13 +743,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="55" column="82" selection-start-line="55" selection-start-column="82" selection-end-line="55" selection-end-column="82" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/templates/Causales/gestion_causales.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.038462">
@@ -795,13 +768,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.9615384">
           <caret line="3" column="68" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.769231">
-          <caret line="117" column="91" selection-start-line="117" selection-start-column="91" selection-end-line="117" selection-end-column="91" />
         </state>
       </provider>
     </entry>
@@ -938,13 +904,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="241" column="38" selection-start-line="227" selection-start-column="11" selection-end-line="241" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/views/views_reportes.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1066,7 +1025,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37639198">
+        <state vertical-scroll-proportion="0.0">
           <caret line="383" column="20" selection-start-line="383" selection-start-column="4" selection-end-line="383" selection-end-column="20" />
           <folding>
             <element signature="e#11074#11450#0" expanded="false" />
@@ -1110,6 +1069,41 @@
             <element signature="e#25261#26260#0" expanded="false" />
             <element signature="e#26320#26795#0" expanded="false" />
             <element signature="e#26854#27343#0" expanded="false" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.8461537">
+          <caret line="71" column="87" selection-start-line="71" selection-start-column="87" selection-end-line="71" selection-end-column="87" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_disponible.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/detalle_ubicado.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-8.5">
+          <caret line="130" column="79" selection-start-line="130" selection-start-column="79" selection-end-line="130" selection-end-column="79" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.15144767">
+          <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
+          <folding>
+            <element signature="e#580#1026#0" expanded="false" />
+            <element signature="e#1179#2775#0" expanded="false" />
           </folding>
         </state>
       </provider>
