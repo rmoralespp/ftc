@@ -374,6 +374,29 @@ class DisponibilidadGraduados(models.Model):
 
 
 
+
+class DemandaGraduados(models.Model):
+    codigo_demanda = models.CharField(max_length=255,unique=True)
+    nombre_entidad = models.CharField(max_length=255)
+    codigo_municipio_entidad = models.IntegerField()
+    codigo_carrera = models.CharField(max_length=255)
+    codigo_organismo = models.CharField(max_length=255)
+    anno_realizacion = models.IntegerField()
+    anno_mas_uno = models.IntegerField(blank=True,null=True)
+    anno_mas_dos = models.IntegerField(blank=True,null=True)
+    anno_mas_tres = models.IntegerField(blank=True,null=True)
+    anno_mas_cuatro = models.IntegerField(blank=True,null=True)
+    anno_mas_cinco = models.IntegerField(blank=True,null=True)
+    anno_mas_seis = models.IntegerField(blank=True,null=True)
+    anno_mas_siete = models.IntegerField(blank=True,null=True)
+    anno_mas_ocho = models.IntegerField(blank=True,null=True)
+    anno_mas_nueve = models.IntegerField(blank=True,null=True)
+    anno_mas_diez = models.IntegerField(blank=True,null=True)
+
+
+
+
+
 @receiver(post_save)
 def limpiar_cache0(sender, instance, created, **kwargs):
         if created:
