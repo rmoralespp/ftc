@@ -10,6 +10,7 @@ from SGMGU.views.views_organismos import *
 from SGMGU.views.views_causales import *
 from SGMGU.views.view_movimientos_internos import *
 from SGMGU.views.views_dir_trabajo import *
+from SGMGU.views.views_carreras import *
 from SGMGU.views.views_reportes import *
 from SGMGU.views.views_ubicados import *
 from SGMGU.views.views_inhabilitaciones import *
@@ -81,7 +82,12 @@ urlpatterns = [
     url(r'^exportar_expedientes_causal$',exportar_expedientes_segun_causal),
 
 
-
+    #mario
+    url(r'^carreras$',gestion_carreras,name='carreras'),
+    url(r'^carreras/registrar_carrera/$',registrar_carrera),
+    url(r'^carreras/(?P<id_carrera>[\w]+)/eliminar/$',eliminar_carrera),
+    url(r'^carreras/(?P<id_carrera>[\w]+)/modificar/$',modificar_carrera),
+    #/mario
 
 
 

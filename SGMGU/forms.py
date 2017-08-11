@@ -288,7 +288,40 @@ class ModificarUserFormActual(forms.ModelForm):
                 'placeholder': 'Escriba su correo electrónico'
             }))
 
+#----Mario David------------------------------------------------------------------------
 
+class RegistrarCarreraForm(forms.ModelForm):
+    
+        class Meta:
+           model=Carrera
+           fields=["codigo_mes","nombre","tipo"]
+           widgets={
+               'tipo':forms.Select(
+                     attrs={
+                'class': 'form-control'
+               
+            })
+           }
+
+
+        codigo_mes = forms.CharField(
+        label="Código Mes",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el código de la carrera'
+            }))
+
+        nombre = forms.CharField(
+        label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el nombre de la carrera'
+            }))
+    
+
+#---------------------------------------------------------------------------------------
 
 #-----------------------------------------------------------------------------
 class ModificarContrasennaUserForm(forms.Form):

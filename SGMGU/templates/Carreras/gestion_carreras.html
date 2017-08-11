@@ -1,40 +1,51 @@
 {% extends "General/index.html" %} {% block encabezado %}
+
 <header class="row">
     {% if messages %} {% for message in messages %}
     <p class="mensaje_exito"><span class="mensaje_exito glyphicon glyphicon-ok"></span> {{ message }}</p>
     {% endfor %} {% endif %}
 </header>
 {% endblock %} {% block section_superior %}
-
 <div class="panel panel-primary">
-    <div class="panel-heading">Listado de Causales</div>
+    <div class="panel-heading">Seleccione la carrera a modificar</div>
     <div class="panel-body">
+
+
+
         <div class="table-responsive">
             <table class="table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%" id="tabla_gestion">
                 <thead>
+
                     <tr>
+                        <th>Identificador</th>
                         <th>Nombre</th>
+                        <th>Codigo Mes</th>
+                        <th>Activo</th>
                         <th>Tipo</th>
                         <th id="opciones_gestion_titulo">Opciones</th>
                     </tr>
                 </thead>
                 <tbody>
 
-                    {% for causal in causales %}
+                    {% for carrera in carreras %}
                     <tr>
-                        <td>{{ causal.nombre }}</td>
-                        <td>{{ causal.get_tipo_display }}</td>
+                        <td>{{ carrera.id }}</td>
+                        <td>{{ carrera.nombre }}</td>
+                        <td>{{ carrera.codigo_mes }}</td>
+                        <td>{{ carrera.activo }}</td>
+                        <td>Arreglar esto</td>
 
-                        <td id="opciones_gestion">
-                            <button id="{{ causal.id  }}" class="btn btn-info modal-causal" data-toggle="modal" data-target="#modal_modificar_causal" onclick="Objeto.__init__({{ causal.id }},'causales','modal_modificar_causal').modificar();">
+
+                        <td class="opciones_gestion">
+                            <button id="{{ carrera.id  }}" class="btn btn-info modal-carrera" data-toggle="modal" data-target="#modal_modificar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_modificar_carr').modificar();">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>
-                                </button>
+                              </button>
 
-                            <button id="{{ causal.id  }}" class="btn btn-danger modal-causal" data-toggle="modal" data-target="#modal_eliminar_causal" onclick="Objeto.__init__({{ causal.id }},'causales','modal_eliminar_causal').eliminar();">
+                            <button id="{{ carrera.id  }}" class="btn btn-danger modal-carrera" data-toggle="modal" data-target="#modal_eliminar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_eliminar_carr').eliminar();">
                                   <span class="glyphicon glyphicon-trash">
                                   </span>
-                                </button>
+                              </button>
                         </td>
                     </tr>
                     {% endfor %}
@@ -43,15 +54,16 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-success btn_gestion" href="/causales/registrar_causal">
-            <span class="glyphicon glyphicon-plus"></span> Registrar causal
+        <a class="btn btn-success btn_gestion" href="/carreras/registrar_carrera">
+            <span class="glyphicon glyphicon-plus"></span> Registrar carrera
         </a>
     </div>
-
 </div>
 
 
-<div class="modal fade" id="modal_eliminar_causal" role="dialog">
+
+
+<div class="modal fade" id="modal_eliminar_carr" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -59,19 +71,20 @@
                 <h4 class="modal-title">Confirmación de eliminación</h4>
             </div>
             <div class="modal-body">
-                <p>Está seguro de eliminar la causal seleccionada</p>
+                <p>Está seguro de eliminar la carrera seleccionada</p>
             </div>
             <div class="modal-footer">
                 <a type="submit" class="btn btn-default">Aceptar</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
+
     </div>
 </div>
 
 
 
-<div class="modal fade" id="modal_modificar_causal" role="dialog">
+<div class="modal fade" id="modal_modificar_carr" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -80,14 +93,16 @@
                 <h4 class="modal-title">Confirmación de modificación</h4>
             </div>
             <div class="modal-body">
-                <p>Está seguro de modificar la causal seleccionada</p>
+                <p>Está seguro de modificar la carrera seleccionada</p>
             </div>
             <div class="modal-footer">
                 <a type="submit" class="btn btn-default">Aceptar</a>
                 <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
             </div>
         </div>
+
     </div>
 </div>
+
 
 {% endblock %}
