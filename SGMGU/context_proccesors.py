@@ -49,6 +49,7 @@ def menu(request):
                     {'name':'Gestión de Causales','url':reverse('causales'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Dir Trabajo','url':reverse('dir_trabajo'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Carreras','url':reverse('carreras'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name':'Gestión de Centros de Estudios','url':reverse('carreras'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                ]
              },
             {'name':'Usuarios','url':reverse('usuarios'),'icon':'glyphicon glyphicon-user','visible':['administrador','especialista']}

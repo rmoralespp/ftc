@@ -320,6 +320,43 @@ class RegistrarCarreraForm(forms.ModelForm):
                 'placeholder': 'Escriba el nombre de la carrera'
             }))
     
+class RegistrarCentroEstudioForm(forms.ModelForm):
+    
+        class Meta:
+           model=Centro_estudio
+           fields=["codigo_mes","nombre","siglas","provincia"]
+           widgets={
+               'provincia':forms.Select(
+                     attrs={
+                'class': 'form-control'
+               
+            })
+           }
+
+
+        codigo_mes = forms.CharField(
+        label="Código Mes",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el código del centro de estudios'
+            }))
+
+        nombre = forms.CharField(
+        label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el nombre del centro de estudios'
+            }))
+        
+        siglas = forms.CharField(
+        label="Siglas",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el nombre de la carrera'
+            }))
 
 #---------------------------------------------------------------------------------------
 

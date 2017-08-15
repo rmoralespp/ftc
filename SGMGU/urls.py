@@ -14,6 +14,7 @@ from SGMGU.views.views_carreras import *
 from SGMGU.views.views_reportes import *
 from SGMGU.views.views_ubicados import *
 from SGMGU.views.views_inhabilitaciones import *
+from SGMGU.views.views_centros_estudios import *
 from SGMGU.views.views_disponibles import *
 from django.conf import settings
 from django.views.static import  serve
@@ -87,6 +88,11 @@ urlpatterns = [
     url(r'^carreras/registrar_carrera/$',registrar_carrera),
     url(r'^carreras/(?P<id_carrera>[\w]+)/eliminar/$',eliminar_carrera),
     url(r'^carreras/(?P<id_carrera>[\w]+)/modificar/$',modificar_carrera),
+
+#    url(r'^centros_estudios$',gestion_centros_estudios,name='centros_estudios'),
+#    url(r'^centros_estudios/registrar_centro_estudio/$',registrar_centro_estudio),
+#    url(r'^centros_estudios/(?P<id_centro_estudio>[\w]+)/eliminar/$',eliminar_centro_estudio),
+#    url(r'^centros_estudios/(?P<id_centro_estudio>[\w]+)/modificar/$',modificar_centro_estudio),
     #/mario
 
 
