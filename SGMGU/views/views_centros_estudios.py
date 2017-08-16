@@ -15,7 +15,7 @@ from django.db import models
 def gestion_centros_estudios(request):
     centro_estudio=Centro_estudio.objects.filter(activo=True)
     context = {'centros_estudios': centros_estudios}
-    return render(request, "centros_estudios/gestion_centros_estudios.html", context)
+    return render(request, "centros_estudios/gestion_centro_estudios.html", context)
 
 @login_required
 @permission_required(['administrador','especialista'])
@@ -43,19 +43,19 @@ def modificar_centro_estudios(request,id_centro_estudio):
             messages.add_message(request, messages.SUCCESS, "El centro de estudios ha sido modificado con éxito.")
             return redirect('/centros_estudios')
     else:
-        form = RegistrarCarreraForm(instance=centro_estudio)
+        form = RegistrarCentroEstudioForm(instance=centro_estudio)
     # Creamos el contexto
     context = {'form':form}
     # Y mostramos los datos
-    return render(request, "centros_estudios/modificar_carrera.html", context)
+    return render(request, "centros_estudios/modificar_centro_estudios.html", context)
 
 
 
 @login_required
 @permission_required(['administrador','especialista'])
-def eliminar_carrera(request,id_carrera):
-    carrera=Carrera.objects.get(id=id_carrera)
-    carrera.activo=False
-    carrera.save()
-    messages.add_message(request, messages.SUCCESS, "La carrera ha sido eliminada con éxito.")
-    return redirect('/carreras')
+def eliminar_centro_estudios(request,id_centro_estudios):
+    centro_estudios=Centro_estudio.objects.get(id=id_centro_estudios)
+    centro_estudios.activo=False
+    centro_estudios.save()
+    messages.add_message(request, messages.SUCCESS, "El centro de estudios ha sido eliminado con éxito.")
+    return redirect('/centros_estudios')
