@@ -14,7 +14,8 @@ from django.db import models
 @permission_required(['administrador','especialista'])
 def gestion_carreras(request):
     carreras=Carrera.objects.filter(activo=True)
-    context = {'carreras': carreras}
+    carreras=paginar(request,carreras)
+    context = {'carreras': carreras,'paginas':crear_lista_pages(carreras)}
     return render(request, "Carreras/gestion_carreras.html", context)
 
 @login_required
@@ -24,7 +25,7 @@ def registrar_carrera(request):
         form=CarreraForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "La carrera ha sido registrada con éxito.")
+            messages.add_message(request, messages.SUCCESS, "La carrera se ha registrado con éxito.")
             return redirect('/carreras')
     else:
         form = CarreraForm()
@@ -37,10 +38,14 @@ def registrar_carrera(request):
 def modificar_carrera(request,id_carrera):
     carrera=Carrera.objects.get(id=id_carrera)
     if request.method == 'POST':
+<<<<<<< HEAD
         form=CarreraForm(reques.POST,instance=carrera)
+=======
+        form=CarreraForm(request.POST,instance=carrera)
+>>>>>>> c1361591333c0658b8a557209bd639166a746f04
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "La carrera ha sido modificada con éxito.")
+            messages.add_message(request, messages.SUCCESS, "La carrera se ha modificado con éxito.")
             return redirect('/carreras')
     else:
         form = CarreraForm(instance=carrera)
@@ -59,3 +64,6 @@ def eliminar_carrera(request,id_carrera):
     carrera.save()
     messages.add_message(request, messages.SUCCESS, "La carrera ha sido eliminada con éxito.")
     return redirect('/carreras')
+
+
+

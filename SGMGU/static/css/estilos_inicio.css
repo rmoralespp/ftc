@@ -381,7 +381,9 @@ nav img{
 }
 
 
-#modal_eliminar_exp_int .modal-title, #modal_eliminar_exp .modal-title, #modal_eliminar_user .modal-title,#modal_eliminar_org .modal-title,#modal_eliminar_causal .modal-title{
+
+
+.modal_eliminar, #modal_eliminar_exp_int .modal-title, #modal_eliminar_exp .modal-title, #modal_eliminar_user .modal-title,#modal_eliminar_org .modal-title,#modal_eliminar_causal .modal-title{
      background-color: #d9534f;
      color: white;
      border-radius:  5px 5px 0px 0px !important;
@@ -414,7 +416,7 @@ nav img{
 }
 
 
-#modal_modificar_dir .modal-title , #modal_modificar_exp .modal-title,#modal_modificar_user .modal-title, #modal_modificar_org .modal-title ,#modal_modificar_ent .modal-title,#modal_modificar_causal .modal-title, #modal_modificar_exp_int .modal-title {
+.modal_modificar, #modal_modificar_dir .modal-title , #modal_modificar_exp .modal-title,#modal_modificar_user .modal-title, #modal_modificar_org .modal-title ,#modal_modificar_ent .modal-title,#modal_modificar_causal .modal-title, #modal_modificar_exp_int .modal-title {
      background-color: #5bc0de;
      color: white;
      border-radius:  5px 5px 0px 0px !important;

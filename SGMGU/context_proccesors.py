@@ -47,9 +47,9 @@ def menu(request):
                'menu':[
                     {'name':'Gestión de Organismos','url':reverse('organismos'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Causales','url':reverse('causales'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
-                    {'name':'Gestión de Dir Trabajo','url':reverse('dir_trabajo'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name':'Gestión de DPTSS','url':reverse('dir_trabajo'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Carreras','url':reverse('carreras'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
-                    {'name':'Gestión de Centros de Est.','url':reverse('centros_estudios'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name':'Gestión de Centros','url':reverse('centros_estudios'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                ]
              },
             {'name':'Usuarios','url':reverse('usuarios'),'icon':'glyphicon glyphicon-user','visible':['administrador','especialista']}

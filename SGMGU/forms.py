@@ -296,6 +296,7 @@ class CarreraForm(forms.ModelForm):
            model=Carrera
            fields=["codigo_mes","nombre","tipo"]
            widgets={
+<<<<<<< HEAD
                  'tipo':forms.Select(  attrs={ 'class': 'form-control' }),
                  'codigo_mes': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el código de la carrera'}),
                  'nombre': forms.TextInput(attrs={  'class': 'form-control',  'placeholder': 'Escriba el nombre de la carrera' })
@@ -305,6 +306,30 @@ class CarreraForm(forms.ModelForm):
 
       
        
+=======
+               'nombre':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escriba el nombre de la carrera'}),
+               'tipo':forms.Select(attrs={'class': 'form-control'} ),
+               'codigo_mes':forms.TextInput( attrs={'class': 'form-control','placeholder': 'Escriba el código de la carrera' }),
+           }
+
+
+        codigo_mes = forms.CharField(
+        required=False,
+        label="Código Mes",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el código de la carrera'
+            }))
+
+        nombre = forms.CharField(
+        label="Nombre",
+        widget=forms.TextInput(
+            attrs={
+                'class': 'form-control',
+                'placeholder': 'Escriba el nombre de la carrera'
+            }))
+>>>>>>> c1361591333c0658b8a557209bd639166a746f04
     
 class RegistrarCentroEstudioForm(forms.ModelForm):
     
