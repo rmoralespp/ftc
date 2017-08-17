@@ -13,9 +13,9 @@ from django.db import models
 @login_required
 @permission_required(['administrador','especialista'])
 def gestion_centros_estudios(request):
-    centro_estudio=Centro_estudio.objects.filter(activo=True)
+    centros_estudios=Centro_estudio.objects.filter(activo=True)
     context = {'centros_estudios': centros_estudios}
-    return render(request, "centros_estudios/gestion_centro_estudios.html", context)
+    return render(request, "CentroEstudios/gestion_centro_estudios.html", context)
 
 @login_required
 @permission_required(['administrador','especialista'])

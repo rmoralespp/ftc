@@ -101,6 +101,9 @@ class Carrera(models.Model):
 
     class Meta:
          ordering=["nombre"]
+    
+    def get_codigo_mes(self):
+        return self.codigo_mes if self.codigo_mes else 'No posee'
 
 
 

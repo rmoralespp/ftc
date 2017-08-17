@@ -17,7 +17,7 @@
                 <thead>
 
                     <tr>
-                        <th>Identificador</th>
+
                         <th>Nombre</th>
                         <th>Codigo Mes</th>
                         <th>Activo</th>
@@ -29,11 +29,11 @@
 
                     {% for carrera in carreras %}
                     <tr>
-                        <td>{{ carrera.id }}</td>
+
                         <td>{{ carrera.nombre }}</td>
-                        <td>{{ carrera.codigo_mes }}</td>
-                        <td>{{ carrera.activo }}</td>
-                        <td>Arreglar esto</td>
+                        <td>{{ carrera.get_codigo_mes }}</td>
+                        <td>{{ carrera.activo|yesno }}</td>
+                        <td>{{ carrera.get_tipo_display }}</td>
 
 
                         <td class="opciones_gestion">

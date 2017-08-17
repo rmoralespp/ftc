@@ -15,7 +15,7 @@ from django.db import models
 def gestion_carreras(request):
     carreras=Carrera.objects.filter(activo=True)
     context = {'carreras': carreras}
-    return render(request, "carreras/gestion_carreras.html", context)
+    return render(request, "Carreras/gestion_carreras.html", context)
 
 @login_required
 @permission_required(['administrador','especialista'])
