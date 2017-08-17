@@ -89,6 +89,7 @@ urlpatterns = [
     url(r'^carreras/(?P<id_carrera>[\w]+)/eliminar/$',eliminar_carrera),
     url(r'^carreras/(?P<id_carrera>[\w]+)/modificar/$',modificar_carrera),
 
+
     url(r'^centros_estudios$',gestion_centros_estudios,name='centros_estudios'),
     url(r'^centros_estudios/registrar_centro_estudio/$',registrar_centro_estudios),
     url(r'^centros_estudios/(?P<id_centro_estudio>[\w]+)/eliminar/$',eliminar_centro_estudios),

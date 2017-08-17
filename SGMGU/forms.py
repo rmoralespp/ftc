@@ -290,21 +290,20 @@ class ModificarUserFormActual(forms.ModelForm):
 
 #----Mario David------------------------------------------------------------------------
 
-class RegistrarCarreraForm(forms.ModelForm):
+class CarreraForm(forms.ModelForm):
     
         class Meta:
            model=Carrera
            fields=["codigo_mes","nombre","tipo"]
            widgets={
-               'tipo':forms.Select(
-                     attrs={
-                'class': 'form-control'
-               
-            })
+               'nombre':forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escriba el nombre de la carrera'}),
+               'tipo':forms.Select(attrs={'class': 'form-control'} ),
+               'codigo_mes':forms.TextInput( attrs={'class': 'form-control','placeholder': 'Escriba el código de la carrera' }),
            }
 
 
         codigo_mes = forms.CharField(
+        required=False,
         label="Código Mes",
         widget=forms.TextInput(
             attrs={

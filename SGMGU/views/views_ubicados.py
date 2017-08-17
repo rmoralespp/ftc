@@ -78,6 +78,8 @@ def m_ubicados(request,filtro):
         ubicados=ubicados.filter(estado_ubicacion='desfasado')
     elif filtro == 'graduados':
         ubicados=ubicados.filter(estado_ubicacion='graduado',fecha_registro__year=datetime.date.today().year)
+    else:
+        ubicados=ubicados.filter(fecha_registro__year=datetime.date.today().year)
 
     ubicados=paginar(request,ubicados)
     context={'ubicados':ubicados,'nombre_pag':"Listado de ubicados %s"%filtro,'paginas':crear_lista_pages(ubicados),'filtro':filtro}
