@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be9a248-4de6-447a-bd41-36d61bf1858d" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/SGMGU/templates/Carreras/modificar_carrera.html" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/context_proccesors.py" afterPath="$PROJECT_DIR$/SGMGU/context_proccesors.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/forms.py" afterPath="$PROJECT_DIR$/SGMGU/forms.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/models.py" afterPath="$PROJECT_DIR$/SGMGU/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css" afterPath="$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/templates/Carreras/gestion_carreras.html" afterPath="$PROJECT_DIR$/SGMGU/templates/Carreras/gestion_carreras.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/urls.py" afterPath="$PROJECT_DIR$/SGMGU/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/views/views_carreras.py" afterPath="$PROJECT_DIR$/SGMGU/views/views_carreras.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" afterPath="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/SGMGU/templates/Carreras/registrar_carrera.html" afterPath="$PROJECT_DIR$/SGMGU/templates/Carreras/form_carrera.html" />
     </list>
     <ignored path="SGMLEU.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -57,16 +47,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="13.230769">
               <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="GestionUbicados.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/GestionUbicados.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="128" column="41" selection-start-line="128" selection-start-column="41" selection-end-line="128" selection-end-column="41" />
               <folding />
             </state>
           </provider>
@@ -138,10 +118,23 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="views_carreras.py" pinned="false" current-in-tab="true">
+      <file leaf-file-name="views_ubicados.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.47629312">
+              <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+              <folding>
+                <element signature="e#580#1026#0" expanded="false" />
+                <element signature="e#1179#2775#0" expanded="false" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="views_carreras.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/views/views_carreras.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="2.3448277">
+            <state vertical-scroll-proportion="0.0">
               <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
               <folding>
                 <element signature="e#24#68#0" expanded="true" />
@@ -212,12 +205,12 @@
         <option value="$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css" />
         <option value="$PROJECT_DIR$/SGMGU/forms.py" />
         <option value="$PROJECT_DIR$/SGMGU/models.py" />
-        <option value="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Carreras/form_carrera.html" />
         <option value="$PROJECT_DIR$/SGMGU/urls.py" />
         <option value="$PROJECT_DIR$/SGMGU/views/views_carreras.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/Carreras/gestion_carreras.html" />
         <option value="$PROJECT_DIR$/SGMGU/static/js/main.js" />
+        <option value="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
       </list>
     </option>
   </component>
@@ -1074,17 +1067,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="84" column="116" selection-start-line="84" selection-start-column="78" selection-end-line="84" selection-end-column="116" />
-          <folding>
-            <element signature="e#580#1026#0" expanded="false" />
-            <element signature="e#1179#2775#0" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/GestionUbicados.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -1167,10 +1149,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/views/views_carreras.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.3448277">
+        <state vertical-scroll-proportion="0.0">
           <caret line="64" column="0" selection-start-line="64" selection-start-column="0" selection-end-line="64" selection-end-column="0" />
           <folding>
             <element signature="e#24#68#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/views/views_ubicados.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.47629312">
+          <caret line="78" column="9" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+          <folding>
+            <element signature="e#580#1026#0" expanded="false" />
+            <element signature="e#1179#2775#0" expanded="false" />
           </folding>
         </state>
       </provider>
