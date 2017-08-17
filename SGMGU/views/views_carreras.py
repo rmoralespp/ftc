@@ -21,15 +21,15 @@ def gestion_carreras(request):
 @permission_required(['administrador','especialista'])
 def registrar_carrera(request):
     if request.method == 'POST':
-        form=RegistrarCarreraForm(request.POST)
+        form=CarreraForm(request.POST)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, "La carrera ha sido registrada con éxito.")
             return redirect('/carreras')
     else:
-        form = RegistrarCarreraForm()
-    context = {'form':form}
-    return render(request, "carreras/registrar_carrera.html", context)
+        form = CarreraForm()
+    context = {'form':form,'nombre_accion':'Registrar'}
+    return render(request, "carreras/form_carrera.html", context)
 
 
 @login_required
@@ -37,17 +37,17 @@ def registrar_carrera(request):
 def modificar_carrera(request,id_carrera):
     carrera=Carrera.objects.get(id=id_carrera)
     if request.method == 'POST':
-        form=RegistrarCarreraForm(reques.POST)
+        form=CarreraForm(reques.POST,instance=carrera)
         if form.is_valid():
             form.save()
             messages.add_message(request, messages.SUCCESS, "La carrera ha sido modificada con éxito.")
             return redirect('/carreras')
     else:
-        form = RegistrarCarreraForm(instance=carrera)
+        form = CarreraForm(instance=carrera)
     # Creamos el contexto
-    context = {'form':form}
+    context = {'form':form,'nombre_accion':'Modificar'}
     # Y mostramos los datos
-    return render(request, "carreras/modificar_carrera.html", context)
+    return render(request, "carreras/form_carrera.html", context)
 
 
 
