@@ -1,16 +1,16 @@
-{% extends "Carreras/gestion_carreras.html" %} {% block encabezado %}
+{% extends "CentroEstudios/gestion_centro_estudios.html" %} {% block encabezado %}
 <header></header>
 {% endblock %} {% block section_superior %}
-<div class="col-xs-8 placeholder" id="div_registrar_carrera">
+<div class="col-xs-8 placeholder">
     <div class="panel panel-primary">
-        <div class="panel-heading">Modificar carrera</div>
+        <div class="panel-heading">Modificar Centro de Estudio</div>
         <div class="panel-body">
             {% if form %}
             <form method="post" id="registrar_carrera" enctype="multipart/form-data">{% csrf_token %} {% include "General/forms_snippets.html" %}
                 <div class="pull-right">
                     <button class="btn btn-primary" type="submit"> Aceptar</button>
                     <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
-                    <a class="btn btn-success btn_gestion" href="/carreras">
+                    <a class="btn btn-success btn_gestion" href="/centros_estudios">
                         <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
                     </a>
                 </div>

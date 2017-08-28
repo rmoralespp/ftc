@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'l%82qg(se&(f@$v5jzw+&d!jufb(q!o-pm4oqofjc-om3to4-j'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -92,7 +92,7 @@ DATABASES = {
         'NAME': 'sgmleu',
         'USER': 'postgres',
         'PASSWORD': 'Qaz.123',
-        'HOST': 'localhost',
+        'HOST': '192.168.0.38',
         'PORT': '5432'
     }
 
@@ -134,7 +134,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-MEDIA_ROOT = 'C:/Apache2.2/htdocs/SGMLEU/'
+#MEDIA_ROOT = 'C:/Apache2.2/htdocs/SGMLEU/'
 MEDIA_URL =  '/media/'
 STATIC_URL = '/static/'
 

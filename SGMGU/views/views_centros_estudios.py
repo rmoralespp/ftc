@@ -24,38 +24,38 @@ def registrar_centro_estudios(request):
         form=RegistrarCentroEstudioForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "El centro de estudios ha sido registrado con éxito.")
+            messages.add_message(request, messages.SUCCESS, "El centro de estudios se ha registrado con éxito.")
             return redirect('/centros_estudios')
     else:
         form = RegistrarCentroEstudioForm()
     context = {'form':form}
-    return render(request, "centros_estudios/registrar_centro_estudios.html", context)
+    return render(request, "CentroEstudios/registrar_centro_estudio.html", context)
 
 
 @login_required
 @permission_required(['administrador','especialista'])
 def modificar_centro_estudios(request,id_centro_estudio):
-    centros_estudios=Centro_estudio.objects.get(id=id_centro_estudio)
+    centro_estudios=Centro_estudio.objects.get(id=id_centro_estudio)
     if request.method == 'POST':
-        form=RegistrarCentroEstudioForm(reques.POST)
+        form=RegistrarCentroEstudioForm(request.POST,instance=centro_estudios)
         if form.is_valid():
             form.save()
-            messages.add_message(request, messages.SUCCESS, "El centro de estudios ha sido modificado con éxito.")
+            messages.add_message(request, messages.SUCCESS, "El centro de estudios se ha modificado con éxito.")
             return redirect('/centros_estudios')
     else:
-        form = RegistrarCentroEstudioForm(instance=centro_estudio)
+        form = RegistrarCentroEstudioForm(instance=centro_estudios)
     # Creamos el contexto
     context = {'form':form}
     # Y mostramos los datos
-    return render(request, "centros_estudios/modificar_centro_estudios.html", context)
+    return render(request, "CentroEstudios/modificar_centro_estudio.html", context)
 
 
 
 @login_required
 @permission_required(['administrador','especialista'])
-def eliminar_centro_estudios(request,id_centro_estudios):
-    centro_estudios=Centro_estudio.objects.get(id=id_centro_estudios)
+def eliminar_centro_estudios(request,id_centro_estudio):
+    centro_estudios=Centro_estudio.objects.get(id=id_centro_estudio)
     centro_estudios.activo=False
     centro_estudios.save()
-    messages.add_message(request, messages.SUCCESS, "El centro de estudios ha sido eliminado con éxito.")
+    messages.add_message(request, messages.SUCCESS, "El centro de estudios se ha eliminado con éxito.")
     return redirect('/centros_estudios')

@@ -1,7 +1,7 @@
-{% extends "carreras/gestion_carreras.html" %} {% block encabezado %} {% endblock %} {% block section_superior %}
-<div class="col-xs-8 placeholder" id="div_registrar_carrera">
+{% extends "CentroEstudios/gestion_centro_estudios.html" %} {% block encabezado %} {% endblock %} {% block section_superior %}
+<div class="col-xs-8 placeholder">
     <div class="panel panel-primary">
-        <div class="panel-heading">Registrar Carrera</div>
+        <div class="panel-heading">Registrar Centro de Estudios</div>
         <div class="panel-body">
 
             {% if form %}
@@ -9,7 +9,7 @@
                 <div class="pull-right">
                     <button class="btn btn-primary" type="submit"> Aceptar</button>
                     <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
-                    <a class="btn btn-success btn_gestion" href="/carreras"><span class="glyphicon glyphicon-arrow-left"> </span> Atrás
+                    <a class="btn btn-success btn_gestion" href="/centros_estudios"><span class="glyphicon glyphicon-arrow-left"> </span> Atrás
             </a>
                 </div>
             </form>

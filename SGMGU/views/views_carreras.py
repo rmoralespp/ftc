@@ -12,6 +12,23 @@ from django.db import models
 
 @login_required
 @permission_required(['administrador','especialista'])
+def buscar_carreras(request):
+    if request.method == "POST":
+        texto=request.POST['texto_carrera'].lower()
+
+        carreras=Carrera.objects.filter(activo=True,nombre__icontains=texto)
+    else:
+        carreras=[]
+    carreras=paginar(request,carreras)
+    context = {'carreras': carreras,'paginas':crear_lista_pages(carreras),'busqueda':True, 'texto':request.POST['texto_carrera']}
+    return render(request, "Carreras/gestion_carreras.html", context)
+
+
+
+
+
+@login_required
+@permission_required(['administrador','especialista'])
 def gestion_carreras(request):
     carreras=Carrera.objects.filter(activo=True)
     carreras=paginar(request,carreras)

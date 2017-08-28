@@ -7,7 +7,7 @@
 </header>
 {% endblock %} {% block section_superior %}
 <div class="panel panel-primary">
-    <div class="panel-heading">Seleccione el Centro de Estudios a modificar</div>
+    <div class="panel-heading">Listado de Centro de Estudios</div>
     <div class="panel-body">
 
 
@@ -20,7 +20,6 @@
                         <th>Código Mes</th>
                         <th>Nombre</th>
                         <th>Siglas</th>
-                        <th>Activo</th>
                         <th>Provincia</th>
                         <th id="opciones_gestion_titulo">Opciones</th>
                     </tr>
@@ -29,20 +28,18 @@
 
                     {% for centro_estudio in centros_estudios %}
                     <tr>
-                        <td>{{ carrera.id }}</td>
-                        <td>{{ carrera.nombre }}</td>
-                        <td>{{ carrera.codigo_mes }}</td>
-                        <td>{{ carrera.activo }}</td>
-                        <td>Arreglar esto</td>
-
+                        <td>{{ centro_estudio.codigo_mes }}</td>
+                        <td>{{ centro_estudio.nombre }}</td>
+                        <td>{{ centro_estudio.siglas }}</td>
+                        <td>{{ centro_estudio.provincia.siglas }}</td>
 
                         <td class="opciones_gestion">
-                            <button id="{{ carrera.id  }}" class="btn btn-info modal-carrera" data-toggle="modal" data-target="#modal_modificar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_modificar_carr').modificar();">
+                            <button id="{{ centro_estudio.id  }}" class="btn btn-info modal-centros_estudios" data-toggle="modal" data-target="#modal_modificar_centro" onclick="Objeto.__init__({{ centro_estudio.id }},'centros_estudios','modal_modificar_centro').modificar();">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>
                               </button>
 
-                            <button id="{{ carrera.id  }}" class="btn btn-danger modal-carrera" data-toggle="modal" data-target="#modal_eliminar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_eliminar_carr').eliminar();">
+                            <button id="{{ centro_estudio.id  }}" class="btn btn-danger modal-centros_estudios" data-toggle="modal" data-target="#modal_eliminar_centro" onclick="Objeto.__init__({{ centro_estudio.id }},'centros_estudios','modal_eliminar_centro').eliminar();">
                                   <span class="glyphicon glyphicon-trash">
                                   </span>
                               </button>
@@ -54,8 +51,8 @@
         </div>
     </div>
     <div class="panel-footer">
-        <a class="btn btn-success btn_gestion" href="/carreras/registrar_carrera">
-            <span class="glyphicon glyphicon-plus"></span> Registrar carrera
+        <a class="btn btn-success btn_gestion" href="/centros_estudios/registrar">
+            <span class="glyphicon glyphicon-plus"></span> Registrar centro
         </a>
     </div>
 </div>
@@ -63,15 +60,15 @@
 
 
 
-<div class="modal fade" id="modal_eliminar_carr" role="dialog">
+<div class="modal fade" id="modal_eliminar_centro" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Confirmación de eliminación</h4>
+                <h4 class="modal-title modal_eliminar">Confirmación de eliminación</h4>
             </div>
             <div class="modal-body">
-                <p>Está seguro de eliminar la carrera seleccionada</p>
+                <p>Está seguro de eliminar el centro de estudio seleccionado</p>
             </div>
             <div class="modal-footer">
                 <a type="submit" class="btn btn-default">Aceptar</a>
@@ -84,16 +81,16 @@
 
 
 
-<div class="modal fade" id="modal_modificar_carr" role="dialog">
+<div class="modal fade" id="modal_modificar_centro" role="dialog">
     <div class="modal-dialog">
 
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title">Confirmación de modificación</h4>
+                <h4 class="modal-title modal_modificar">Confirmación de modificación</h4>
             </div>
             <div class="modal-body">
-                <p>Está seguro de modificar la carrera seleccionada</p>
+                <p>Está seguro de modificar el centro de estudio seleccionado</p>
             </div>
             <div class="modal-footer">
                 <a type="submit" class="btn btn-default">Aceptar</a>

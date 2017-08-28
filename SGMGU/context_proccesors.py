@@ -39,7 +39,7 @@ def menu(request):
                   {'name':'Ubicados','url':reverse('ubicados'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista','organismo','dpts','mes']},
               ]
              },
-            {'name':'Inhabilitaciones','url':reverse('inhabilitaciones'),'icon':'glyphicon glyphicon-briefcase','visible':['administrador','especialista','juridico']},
+            {'name':'Inhabilitaciones','url':reverse('inhabilitaciones'),'icon':'glyphicon glyphicon-briefcase','visible':['administrador','juridico']},
 
             {'name':'Reportes','url':reverse('reportes'),'icon':'glyphicon glyphicon-menu-hamburger','visible':['administrador','especialista','organismo','dpts','invitado','mes','juridico']},
 

@@ -7,7 +7,7 @@
 </header>
 {% endblock %} {% block section_superior %}
 <div class="panel panel-primary">
-    <div class="panel-heading">Seleccione la carrera a modificar</div>
+    <div class="panel-heading">Listado de carreras</div>
 
 
 
@@ -23,7 +23,21 @@
 
          <div class="row">
             <div class="col-xs-3 pull-right">
-                     <!-- /aki tienes k tirar el panel de busquedaaaa -->
+                    <form method="post" action="/carreras/buscar">{% csrf_token %}
+
+                        {% if  busqueda%}
+                             <div class="div_panel_busqueda_carrera">
+                                <input  disabled type="text" name="texto_carrera" class="" value="{{ texto }}">
+                                 <a href="/carreras" class="">Limpiar</a>
+                             </div>
+
+                        {% else %}
+                              <div class="div_panel_busqueda_carrera">
+                                 <input placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
+                                 <input type="submit" class="" value="Buscar">
+                              </div>
+                        {% endif %}
+                    </form>
             </div><!-- /input-group -->
           </div>
      </div>
