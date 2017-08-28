@@ -1,3 +1,11 @@
+<<<<<<< HEAD:SGMGU/templates/Carreras/form_carrera.html
+{% extends "carreras/gestion_carreras.html" %} {% block encabezado %}
+<header class="row"></header>
+{% endblock %} {% block section_superior %}
+<div class="col-xs-8 placeholder" id="div_registrar_carrera" style="margin-left:10%">
+    <div class="panel panel-primary">
+        <div class="panel-heading">{{nombre_accion}} Carrera</div>
+=======
 {% extends "carreras/gestion_carreras.html" %}
 {% block encabezado %}
     <header></header>
@@ -7,6 +15,7 @@
 <div class="col-xs-8 placeholder" id="div_registrar_carrera">
     <div class="panel panel-primary">
         <div class="panel-heading">{{ nombre_accion }} Carrera</div>
+>>>>>>> c1361591333c0658b8a557209bd639166a746f04:SGMGU/templates/Carreras/form_carrera.html
         <div class="panel-body">
             {% if form %}
             <form method="post" id="registrar_carrera" enctype="multipart/form-data">{% csrf_token %} {% include "General/forms_snippets.html" %}
@@ -14,7 +23,7 @@
                     <button class="btn btn-primary" type="submit"> Aceptar</button>
                     <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
                     <a class="btn btn-success btn_gestion" href="/carreras"><span class="glyphicon glyphicon-arrow-left"> </span> Atrás
-            </a>
+                </a>
                 </div>
             </form>
             {% endif %}
