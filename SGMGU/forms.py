@@ -1111,3 +1111,21 @@ class ProcesoInhabilitacionForm(forms.ModelForm):
 
 
 
+class IndicacionForm(forms.ModelForm):
+    class Meta:
+        model=Indicacion
+        fields=["titulo","categoria","texto","fichero"]
+        widgets = {
+                "titulo":forms.TextInput(attrs={"class" : "form-control"}),
+                "categoria": forms.Select(attrs={"class" : "form-control"}),
+                "texto": forms.Textarea(attrs={"class" : "form-control"})
+                }
+
+
+class CategoriaIndicacionForm(forms.ModelForm):
+    class Meta:
+        model=CategoriaIndicacion
+        fields=["nombre"]
+        widgets = {
+                "nombre":forms.TextInput(attrs={"class" : "form-control"}),
+        }

@@ -364,3 +364,32 @@
                                     </form></div>
         </div>
     </div>
+
+
+
+    <div class="modal fade" id="modal_analisis_proceso_ubicacion" role="dialog">
+        <div class="modal-dialog">
+                                <!-- Modal content-->
+            <div class="modal-content">
+                                    <form method="post" action="/exportar_analisis_ubicacion">{% csrf_token %}
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_reporte_title">Análisis del Listado de Ubicados</h4>
+                                    </div>
+
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <input required type="number" name="anno" class="form-control" placeholder="Escriba el año">
+                                        </div>
+                                    </div>
+                                        <div class="modal-footer">
+                                            <input type="submit" class="btn btn-primary"  id="aceptar_exp_aprobado" value="Aceptar">
+                                            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                        </div>
+                                    </form></div>
+        </div>
+    </div>
+
+
+
+
+

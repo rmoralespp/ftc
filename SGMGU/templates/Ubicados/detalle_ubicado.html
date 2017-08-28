@@ -70,50 +70,51 @@
 {% block contenido_tabla %}
     <div class="row panel panel-primary">
         <div class="panel-heading">Datos de la ubicación de {{ ubicacion.nombre_apellidos  }} </div>
-        <div class="panel-heading">
-            <div class="btn-group"  data-toggle="buttons">
-
-
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" %}
-                    <a class="btn btn-danger btn_gestion " href="/ubicados/{{ ubicacion.id }}/modificar">
-                        <span class="glyphicon glyphicon-pencil"></span> Modificar ubicado
-                    </a>
-                {% endif %}
-
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "dpts" %}
-                    <a class="btn btn-danger btn_gestion " href="/ubicados/{{ ubicacion.id }}/pasar_a_disponibles">
-                        <span class="glyphicon glyphicon-chevron-up"></span> Pasar a  disponibles
-                    </a>
-                {% endif %}
-
-
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "organismo" %}
-
-                   {% if not ubicacion.presentado %}
-                        <a class="btn btn-danger btn_gestion " href="/ubicados/{{ ubicacion.id }}/presentacion">
-                            <span class="glyphicon glyphicon-check"></span> Confirmar  presentación
-                       </a>
-                   {% else %}
-                       <a class="btn btn-danger btn_gestion " data-toggle="modal" data-target="#modal_confirmar_no_presentacion_ubicado" href="#" onclick="Objeto.__init__({{ ubicacion.id }},'','modal_confirmar_no_presentacion_ubicado').no_presentar_ubicado();">
-                            <span class="glyphicon glyphicon-check"></span> Confirmar no presentación
-                       </a>
-                   {% endif %}
-
-                {% endif %}
-
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" %}
-                    <button id="{{ ubicacion.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_ubicacion" onclick="Objeto.__init__({{ ubicacion.id }},'ubicados','modal_eliminar_ubicacion').eliminar();">
-                        <span class="glyphicon glyphicon-trash"></span> Eliminar ubicado
-                    </button>
-                {% endif %}
-
-                <a class="btn btn-danger btn_gestion " href="/ubicados">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
-                </a>
-            </div>
-        </div>
         <div class="panel-body">
+            <div class="dropdown dropwdown_opciones_detalle">
+                <a class="dropdown-toggle a_opciones_detalle" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                   <ul class="dropdown-menu dropdown-menu-left usar_disenno_new">
+                       {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" %}
+                            <li><a class=" btn_gestion " href="/ubicados/{{ ubicacion.id }}/modificar">
+                                <span class="glyphicon glyphicon-pencil"></span> Modificar ubicado
+                            </a></li>
+                        {% endif %}
 
+                        {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "dpts" %}
+                            <li><a class=" btn_gestion " href="/ubicados/{{ ubicacion.id }}/pasar_a_disponibles">
+                                <span class="glyphicon glyphicon-chevron-up"></span> Pasar a  disponibles
+                            </a></li>
+                        {% endif %}
+
+
+                        {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "organismo" %}
+
+                           {% if not ubicacion.presentado %}
+                                <li><a class=" btn_gestion " href="/ubicados/{{ ubicacion.id }}/presentacion">
+                                    <span class="glyphicon glyphicon-check"></span> Presentar
+                               </a></li>
+                           {% else %}
+                               <li><a class=" btn_gestion " data-toggle="modal" data-target="#modal_confirmar_no_presentacion_ubicado" href="#" onclick="Objeto.__init__({{ ubicacion.id }},'','modal_confirmar_no_presentacion_ubicado').no_presentar_ubicado();">
+                                    <span class="glyphicon glyphicon-ban-circle"></span> No presentar
+                               </a></li>
+                           {% endif %}
+
+                        {% endif %}
+
+                        {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" %}
+                            <li><a id="{{ ubicacion.id  }}" class="" data-toggle="modal" data-target="#modal_eliminar_ubicacion" onclick="Objeto.__init__({{ ubicacion.id }},'ubicados','modal_eliminar_ubicacion').eliminar();">
+                                <span class="glyphicon glyphicon-trash"></span> Eliminar ubicado
+                            </a></li>
+                        {% endif %}
+
+                        <li><a class=" btn_gestion " href="/ubicados">
+                            <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                        </a></li>
+
+                   </ul>
+                </div>
 
 
 

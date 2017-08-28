@@ -1,0 +1,141 @@
+{% extends "General/index.html" %}
+
+
+{% block encabezado %}
+    <header class="row indicaciones">
+        <p class="titulo_indicaciones pull-left">{{ filtro }}</p>
+         {% if user.perfil_usuario.categoria.nombre == 'administrador' or user.perfil_usuario.categoria.nombre == 'especialista'%}
+             <a  class="registrar_indicacion pull-right" href="/indicaciones/registrar"> <span class="glyphicon glyphicon-plus"></span> Registrar</a>
+         {% endif %}
+    </header>
+
+
+{% endblock %}
+
+
+{% block titulo_tabla %}
+    <div class="modal fade" id="modal_eliminar_indicacion" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content-->
+                            <div class="modal-content" >
+                                    <div class="modal-header">
+                                        <h4 class="modal-title modal_eliminar">Confirmación de eliminación</h4>
+                                    </div>
+                                    <div class="modal-body" >
+                                        <p>¿Está seguro de eliminar la indicación seleccionada?</p>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="#" class="btn btn-primary">Aceptar</a>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+                                    </div>
+
+                            </div>
+                        </div>
+        </div>
+
+{% endblock %}
+
+{% block section_superior %}
+
+      <div class="indicaciones_list">
+          {% if indicaciones%}
+                         {% for indicacion in indicaciones %}
+                            <article class="indicacion">
+                                <div href="#" class="indicacion_header">
+                                    <p href="#" class="titulo pull-left">{{ indicacion.titulo}}</p>
+                                    {% if user.perfil_usuario.categoria.nombre == 'administrador' or user.perfil_usuario.categoria.nombre == 'especialista'%}
+
+                                        <a data-toggle="modal" data-target="#modal_eliminar_indicacion" onclick="Objeto.__init__({{ indicacion.id }},'indicaciones','modal_eliminar_indicacion').eliminar();" href="#" class="opciones pull-right"><span class="glyphicon glyphicon-trash"></span></a>
+                                        <a href="/indicaciones/{{ indicacion.id }}/editar" class="opciones pull-right"><span class="glyphicon glyphicon-pencil"></span></a>
+                                    {% endif %}
+                                </div>
+
+
+                                <div class="indicacion_texto">{{ indicacion.texto|linebreaksbr}}</div>
+                                {% if indicacion.fichero %}
+                                    <div class="indicacion_download">
+                                        <a href="/indicaciones/{{ indicacion.id }}/download">Haz click para la descarga de: {{ indicacion.get_nombre_fichero}}</a>
+                                    </div>
+                                {% endif %}
+
+
+
+                                  <div class="indicacion_otros_detalles">
+                                     <p class="indicacion_fecha">Hace {{ indicacion.fecha_registro |timesince}}</p>
+                                     <p class="indicacion_autor">Por: {{ indicacion.autor.first_name }} {{ indicacion.autor.last_name }}|{{ indicacion.autor.perfil_usuario.organismo.siglas }}</p>
+                                  </div>
+                            </article>
+
+                         {% endfor%}
+          {% else %}
+              <h3>No hay indicaciones registradas</h3>
+          {% endif %}
+           </div>
+
+      <div class="div_aside">
+                    <h1>Categorías</h1>
+                    {% if user.perfil_usuario.categoria.nombre == 'administrador' or user.perfil_usuario.categoria.nombre == 'especialista'%}
+                         <a href="/indicaciones/categorias/registrar"><span class="registrar_categoria glyphicon glyphicon-plus"></span></a>
+                    {% endif %}
+                    <ul>
+                        <li style="background-color: #b9b9b9"><a href="/indicaciones">Todas</a></li>
+                        {% for categoria in categorias %}
+
+                            {% if categoria.id == id_categoria_actual%}
+                                <li class="activo"><a href="/indicaciones/categorias/{{ categoria.id }}">{{ categoria.nombre }}</a></li>
+                            {% else %}
+                                <li><a href="/indicaciones/categorias/{{ categoria.id }}">{{ categoria.nombre }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                    </ul>
+                </div>
+
+
+         {% if indicaciones|length > 0 %}
+             {% block paginate %}
+                        <ul class="pagination center-block">
+                        {% if indicaciones.has_previous %}
+                            <li>
+                                <a href="?pagina={{ indicaciones.previous_page_number }}" aria-label="Previous">
+                                    Anterior
+                                </a>
+                            </li>
+                        {% else %}
+                            <li class="disabled">
+                                <a href="#" aria-label="Previous">
+                                    Anterior
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if paginas %}
+                        {% for pagina in paginas %}
+                            {% if pagina == indicaciones.number  %}
+                                  <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                            {% else %}
+                                 <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% else %}
+                            <li class="active"><a href="?pagina=1">1</a></li>
+                        {% endif %}
+
+                        {% if indicaciones.has_next %}
+                            <li>
+                                <a href="?pagina={{ indicaciones.next_page_number }}" aria-label="Next">
+                                    Próximo
+                                </a>
+                            </li>
+                        {% else %}
+
+                            <li class="disabled">
+                                <a  href="#" aria-label="Next">
+                                    Próximo
+                                </a>
+                            </li>
+                        {% endif %}
+                    </ul>
+             {% endblock %}
+         {% endif %}
+
+
+{% endblock %}

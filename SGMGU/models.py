@@ -398,6 +398,29 @@ class DemandaGraduados(models.Model):
 
 
 
+class CategoriaIndicacion(models.Model):
+   nombre=models.CharField(max_length=256)
+
+   def __unicode__(self):return self.nombre
+
+class Indicacion(models.Model):
+    titulo=models.CharField(max_length=256)
+    categoria=models.ForeignKey(CategoriaIndicacion)
+    texto=models.TextField()
+    autor=models.ForeignKey(User)
+    fecha_registro=models.DateTimeField(auto_now_add=True)
+    fichero=models.FileField(upload_to='uploads/archivos_indicaciones/',blank=True, null=True)
+
+
+    def get_nombre_fichero(self):
+        if self.fichero:
+            return self.fichero.name.split("/")[-1]
+        else: return None
+
+    class Meta:
+        ordering=["-fecha_registro"]
+        verbose_name_plural="Indicaciones"
+        verbose_name="Indicacion"
 
 
 @receiver(post_save)

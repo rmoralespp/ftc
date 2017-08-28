@@ -102,21 +102,21 @@ Objeto = {
 $(document).on('ready', function() {
 
 
-    $("button[name='btn_aprobar_exp']").on('click', function() {
+    $("a[name='btn_aprobar_exp']").on('click', function() {
         $('#aceptar_exp_aprobado').attr('name', $(this).attr('id'));
 
     });
 
-    $("button[name='btn_rechazar_exp']").on('click', function() {
+    $("a[name='btn_rechazar_exp']").on('click', function() {
         $('#aceptar_exp_rechazado').attr('name', $(this).attr('id'));
 
     });
 
-    $("button[name='btn_no_aprobar_exp']").on('click', function() {
+    $("a[name='btn_no_aprobar_exp']").on('click', function() {
         $('#aceptar_exp_no_aprobado').attr('name', $(this).attr('id'));
     });
 
-    $("button[name='btn_exportar_exp']").on('click', function() {
+    $("a[name='btn_exportar_exp']").on('click', function() {
         $('#aceptar_exp_exportado').attr('name', $(this).attr('id'));
 
     });
@@ -142,15 +142,15 @@ $(document).on('ready', function() {
     });
 
 
-    $("button[name='btn_pasar_pend_exp']").on('click', function() {
+    $("a[name='btn_pasar_pend_exp']").on('click', function() {
         $("div[id='modal_pasar_pend_exp']").find("a").attr('href', "/pasar_a_pendientes/" + $(this).attr('id') + "");
     });
 
-    $("button[name='btn_pasar_a_pend_exp_re']").on('click', function() {
+    $("a[name='btn_pasar_a_pend_exp_re']").on('click', function() {
         $("div[id='modal_pasar_pend_exp']").find("a").attr('href', "/pasar_a_pendientes_de_rechazo/" + $(this).attr('id') + "");
     });
 
-    $("button[name='btn_pasar_a_pend_exp_no']").on('click', function() {
+    $("a[name='btn_pasar_a_pend_exp_no']").on('click', function() {
         $("div[id='modal_pasar_pend_exp']").find("a").attr('href', "/pasar_a_pendientes_de_no_aprobado/" + $(this).attr('id') + "");
     });
 

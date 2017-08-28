@@ -61,28 +61,28 @@
 {% block contenido_tabla %}
     <div class="panel panel-primary">
         <div class="panel-heading">Expediente del graduado {{ expediente.graduado.nombre  }} </div>
-        <div class="panel-heading">
-                 <div class="btn-group" data-toggle="buttons" >
-
-                {% if categoria == "especialista" or categoria == "administrador"%}
-                    <button id="{{ expediente.id  }}" onclick="click_btn_mod_exp({{ expediente.id  }});" class="btn btn-danger  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp">
-                                  <span class="glyphicon glyphicon-pencil">
-                                  </span> Editar Expediente
-                    </button>
-
-                    <button id="{{ expediente.id  }}"  onclick="click_btn_eli_exp({{ expediente.id  }});" class="btn btn-danger modal-expediente" data-toggle="modal" data-target="#modal_eliminar_exp">
-                                  <span class="glyphicon glyphicon-trash">
-                                  </span> Eliminar Expediente
-                    </button>
-                {% endif %}
-
-                <a class="btn btn-danger btn_gestion " href="/gestion_expedientes">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
-                </a>
-            </div>
-        </div>
         <div class="panel-body">
+              <div class="dropdown dropwdown_opciones_detalle">
+                <a class="dropdown-toggle a_opciones_detalle" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                   <ul class="dropdown-menu dropdown-menu-left usar_disenno_new">
+                       {% if categoria == "especialista" or categoria == "administrador"%}
+                            <li><a id="{{ expediente.id  }}" onclick="Objeto.__init__({{ expediente.id }},'gestion_expedientes','modal_modificar_exp').modificar();" class="  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp">
+                                          <span class="glyphicon glyphicon-pencil">
+                                          </span> Editar Expediente
+                            </a></li>
 
+                            <li><a id="{{ expediente.id  }}"  onclick="Objeto.__init__({{ expediente.id }},'gestion_expedientes','modal_eliminar_exp').eliminar();" class=" modal-expediente" data-toggle="modal" data-target="#modal_eliminar_exp">
+                                          <span class="glyphicon glyphicon-trash">
+                                          </span> Eliminar Expediente
+                            </a></li>
+                        {% endif %}
+                         <li><a class=" btn_gestion " href="/gestion_expedientes">
+                            <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                         </a></li>
+                   </ul>
+               </div>
 
 
         <div id="datos_exp"  class="col-xs-12">

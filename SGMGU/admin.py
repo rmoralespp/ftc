@@ -109,3 +109,6 @@ admin.site.register(UbicacionLaboral)
 admin.site.register(DisponibilidadGraduados)
 admin.site.register(ProcesoInhabilitacion)
 admin.site.register(GraduadoInhabilitacion)
+
+admin.site.register(Indicacion)
+admin.site.register(CategoriaIndicacion)

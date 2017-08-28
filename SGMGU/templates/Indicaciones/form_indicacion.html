@@ -1,0 +1,42 @@
+{% extends "Ubicados/GestionUbicados.html" %}
+
+
+{% block encabezado %}
+    <header class="row"></header>
+{% endblock %}
+
+
+{% block section_superior %}
+{% endblock %}
+
+{% block titulo_tabla %} {% endblock %}
+
+{% block contenido_tabla %}
+    <div class="col-xs-9 placeholder" style="margin-left: 10%">
+     <div class="panel panel-primary">
+        <div class="panel-heading">{{ nombre}}</div>
+        <div class="panel-body">
+    {% if form %}
+        <form method="post" enctype="multipart/form-data">{% csrf_token %}
+            {% include "General/forms_snippets.html" %}
+            <div class="pull-right">
+                   <button class="btn btn-primary" type="submit"> Aceptar</button>
+                   <button class="btn btn-default" type="reset"><span></span> Limpiar</button>
+
+                    <a class="btn btn-success btn_gestion" href="/indicaciones">
+                     <span class="glyphicon glyphicon-arrow-left"> </span> Ir atrás
+                    </a>
+            </div>
+        </form>
+    {% endif %}
+    </div>
+     </div>
+    </div>
+{% endblock %}
+
+
+
+
+
+
+

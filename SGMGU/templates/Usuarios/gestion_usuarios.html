@@ -49,7 +49,14 @@
               {% for usuario in usuarios %}
 
                   <tr>
-                      <td>{{ usuario.username }}</td>
+                      <td>
+                            {% ifequal usuario.perfil_usuario.foto ""%}
+                                <span class="foto glyphicon glyphicon-user"></span>
+                            {% else %}
+                                <img src="/media/{{ usuario.perfil_usuario.foto }}" class="foto_perfil3">
+                            {% endifequal %}
+                            {{ usuario.username }}
+                      </td>
                       <td>{{ usuario.email }}</td>
                       <td>{{ usuario.perfil_usuario.organismo.siglas }}</td>
                       <td>{{ usuario.first_name }} {{ usuario.last_name }}</td>

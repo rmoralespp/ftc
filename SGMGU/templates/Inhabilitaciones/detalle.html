@@ -46,26 +46,32 @@
 {% block contenido_tabla %}
     <div class="row panel panel-primary">
         <div class="panel-heading">Proceso de {{ proceso.get_proceso_display  }} de {{proceso.graduado.nombre_apellidos  }} </div>
-        <div class="panel-heading">
-            <div class="btn-group"  data-toggle="buttons">
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "juridico"%}
-                    <a class="btn btn-danger btn_gestion " href="/inhabilitaciones/{{ proceso.id }}/editar">
-                        <span class="glyphicon glyphicon-pencil"></span> Editar
-                    </a>
-                {% endif %}
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "juridico"%}
-                    <button id="{{ proceso.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_proceso" onclick="Objeto.__init__({{ proceso.id }},'inhabilitaciones','modal_eliminar_proceso').eliminar();">
-                        <span class="glyphicon glyphicon-trash">
-                        </span> Eliminar proceso
-                    </button>
-                {% endif %}
-
-                <a class="btn btn-danger btn_gestion " href="/inhabilitaciones">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
-                </a>
-            </div>
-        </div>
         <div class="panel-body">
+
+        <div class="dropdown dropwdown_opciones_detalle">
+                <a class="dropdown-toggle a_opciones_detalle" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                   <ul class="dropdown-menu dropdown-menu-left usar_disenno_new">
+
+                       {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "juridico"%}
+                                <li><a class=" btn_gestion " href="/inhabilitaciones/{{ proceso.id }}/editar">
+                                    <span class="glyphicon glyphicon-pencil"></span> Editar
+                                </a></li>
+                       {% endif %}
+
+                       {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "juridico"%}
+                                <li><a id="{{ proceso.id  }}" class="" data-toggle="modal" data-target="#modal_eliminar_proceso" onclick="Objeto.__init__({{ proceso.id }},'inhabilitaciones','modal_eliminar_proceso').eliminar();">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span> Eliminar proceso
+                                </a></li>
+                       {% endif %}
+
+                            <li><a class=" btn_gestion " href="/inhabilitaciones">
+                                <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                            </a></li>
+                   </ul>
+        </div>
 
 
             <div id="datos_exp"  class="col-xs-12">

@@ -74,9 +74,11 @@
                         <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_organismos"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por organismos</p></a>
                         <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_provincias_ubicacion"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por provincias de ubicación</p></a>
                         <a href="#" data-toggle="modal" data-target="#modal_total_ubicados_provincias_residencia"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Totales de ubicados por provincias de residencia</p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_analisis_proceso_ubicacion"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Análisis del listado de Ubicados</p></a>
                     {% endif %}
                     {% if user.perfil_usuario.categoria.nombre == "dpts"  or  user.perfil_usuario.categoria.nombre == "organismo" %}
                         <a href="#" data-toggle="modal" data-target="#modal_ubicados"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados propios</p></a>
+                        <a href="#" data-toggle="modal" data-target="#modal_analisis_proceso_ubicacion"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Análisis del listado de Ubicados</p></a>
                     {% endif %}
                     {% if user.perfil_usuario.categoria.nombre == "dpts" %}
                         <a href="#" data-toggle="modal" data-target="#modal_ubicados_universidades"><p class="bg_second "><span class="glyphicon glyphicon-export"></span> Registro de ubicados de universidades propias</p></a>

@@ -89,12 +89,14 @@ def m_ubicados(request,filtro):
 @login_required
 @permission_required(['administrador','especialista','dpts','organismo','mes'])
 def buscar_ci_ubicado(request,ci):
-  ubicados=UbicacionLaboral.objects.filter(Q(fecha_registro__year=datetime.date.today().year))
-  if request.user.perfil_usuario.categoria.nombre == 'dpts':
-      ubicados=ubicados.filter(centro_estudio__provincia=request.user.perfil_usuario.provincia)
-  elif request.user.perfil_usuario.categoria.nombre == 'organismo':
-      ubicados=ubicados.filter(organismo=request.user.perfil_usuario.organismo)
+  categoria=request.user.perfil_usuario.categoria.nombre
+  ubicados=UbicacionLaboral.objects.all()
+  if categoria == 'dpts':
+      ubicados=ubicados.filter(fecha_registro__year=datetime.date.today().year,centro_estudio__provincia=request.user.perfil_usuario.provincia)
+  elif categoria == 'organismo':
+      ubicados=ubicados.filter(fecha_registro__year=datetime.date.today().year,organismo=request.user.perfil_usuario.organismo)
   ubicados=ubicados.filter(ci=ci)
+
   context={'ubicados':ubicados,'nombre_pag':"Listado de ubicados por ci: %s"%ci,'busqueda':'si',"valor_busqueda":ci}
   return render(request, "Ubicados/GestionUbicados.html", context)
 

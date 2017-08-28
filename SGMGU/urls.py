@@ -16,6 +16,7 @@ from SGMGU.views.views_ubicados import *
 from SGMGU.views.views_inhabilitaciones import *
 from SGMGU.views.views_centros_estudios import *
 from SGMGU.views.views_disponibles import *
+from SGMGU.views.views_indicaciones import *
 from django.conf import settings
 from django.views.static import  serve
 
@@ -81,6 +82,7 @@ urlpatterns = [
     url(r'^exportar_organismos_expedientes$',exportar_organismos_expedientes),
     url(r'^exportar_expedientes_carrera$',exportar_expedientes_segun_carrera),
     url(r'^exportar_expedientes_causal$',exportar_expedientes_segun_causal),
+
 
 
     #mario
@@ -197,7 +199,7 @@ urlpatterns = [
      url(r'^disponibles/buscar_disponibles_municipio_residencia$',buscar_disponibles,{'opcion':'municipio_residencia'}),
      url(r'^disponibles/buscar_disponibles_centro_estudio$',buscar_disponibles,{'opcion':'centro_estudio'}),
      url(r'^disponibles/(?P<opcion>(carrera|organismo|municipio_residencia|centro_estudio){1})/(?P<id_opcion>[\d]+)$',filtrar_disponibles),
-
+     url(r'^exportar_analisis_ubicacion$',exportar_analisis_ubicacion),
 
     url(r'^ubicados/buscar_ubicados_organismo$',buscar_ubicados,{'opcion':'organismo'}),
     url(r'^ubicados/buscar_ubicados_provincia_carrera$',buscar_ubicados,{'opcion':'carrera'}),
@@ -219,6 +221,15 @@ urlpatterns = [
     url(r'^movimiento_laboral$',movimiento_laboral,name='movimiento_laboral'),
     url(r'^ubicacion_laboral$',ubicacion_laboral,name='ubicacion_laboral'),
     url(r'^nomencladores$',nomencladores,name='nomencladores'),
+
+
+    url(r'^indicaciones$',indicaciones,name='indicaciones'),
+    url(r'^indicaciones/categorias/registrar$',registar_castegoria_indicacion),
+    url(r'^indicaciones/categorias/(?P<id_categoria>[\w]+)$',indicaciones,name='indicaciones_categorias'),
+    url(r'^indicaciones/(?P<id_indicacion>[\w]+)/download$',download_indicacion),
+    url(r'^indicaciones/registrar$',registrar_indicacion),
+    url(r'^indicaciones/(?P<id_indicacion>[\w]+)/editar$',editar_indicacion),
+    url(r'^indicaciones/(?P<id_indicacion>[\w]+)/eliminar$',eliminar_indicacion)
 
 
 ]

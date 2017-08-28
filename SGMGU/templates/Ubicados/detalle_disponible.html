@@ -27,7 +27,7 @@
                             <!-- Modal content-->
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title modal_reporte_title">Confirmación de eliminación</h4>
+                                    <h4 class="modal-title modal_eliminar">Confirmación de eliminación</h4>
                                 </div>
                                 <div class="modal-body">
                                     <p>Está seguro de eliminar la disponibilidad seleccionada</p>
@@ -46,27 +46,30 @@
 {% block contenido_tabla %}
     <div class="row panel panel-primary">
         <div class="panel-heading">Datos de {{ disponibilidad.nombre_apellidos  }} </div>
-        <div class="panel-heading">
-            <div class="btn-group"  data-toggle="buttons">
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "dpts"%}
-                    <a class="btn btn-danger btn_gestion " href="/disponibles/{{ disponibilidad.id }}/ubicar">
-                        <span class="glyphicon glyphicon-pencil"></span> Ubicar
-                    </a>
-                {% endif %}
-                {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista"%}
-                    <button id="{{ disponibilidad.id  }}" class="btn btn-danger" data-toggle="modal" data-target="#modal_eliminar_disponibilidad" onclick="Objeto.__init__({{ disponibilidad.id }},'disponibles','modal_eliminar_disponibilidad').eliminar();">
-                        <span class="glyphicon glyphicon-trash">
-                        </span> Eliminar disponibilidad
-                    </button>
-                {% endif %}
 
-                <a class="btn btn-danger btn_gestion " href="/disponibles">
-                    <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
-                </a>
-            </div>
-        </div>
         <div class="panel-body">
+            <div class="dropdown dropwdown_opciones_detalle">
+                <a class="dropdown-toggle a_opciones_detalle" type="button" data-toggle="dropdown">
+                    <span class="glyphicon glyphicon-cog"></span>
+                </a>
+                   <ul class="dropdown-menu dropdown-menu-left usar_disenno_new">
+                            {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista" or user.perfil_usuario.categoria.nombre == "dpts"%}
+                                <li><a class=" btn_gestion " href="/disponibles/{{ disponibilidad.id }}/ubicar">
+                                    <span class="glyphicon glyphicon-pencil"></span> Ubicar disponible
+                                </a></li>
+                            {% endif %}
+                            {% if user.perfil_usuario.categoria.nombre == "administrador" or user.perfil_usuario.categoria.nombre == "especialista"%}
+                                <li><a id="{{ disponibilidad.id  }}" class="" data-toggle="modal" data-target="#modal_eliminar_disponibilidad" onclick="Objeto.__init__({{ disponibilidad.id }},'disponibles','modal_eliminar_disponibilidad').eliminar();">
+                                    <span class="glyphicon glyphicon-trash">
+                                    </span> Eliminar disponible
+                                </a></li>
+                            {% endif %}
 
+                            <li><a class=" btn_gestion " href="/disponibles">
+                                <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
+                            </a></li>
+                   </ul>
+            </div>
 
             <div id="datos_exp"  class="col-xs-12">
             <h4 class="text-center">Datos del graduado:</h4>

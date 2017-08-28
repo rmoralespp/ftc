@@ -229,8 +229,66 @@ def detalle_disponibilidad(request,id_disponibilidad):
         return render(request, "Ubicados/detalle_disponible.html", context)
 
 
+from django.db.models import Count,Prefetch,F,Sum
 
 
 
 
 
+@login_required
+@permission_required(['administrador','especialista','invitado','organismo','dpts'])
+def exportar_analisis_ubicacion(request):
+
+      if request.method == 'POST':
+            anno=int(request.POST["anno"])
+            namedict = {"anno":anno}
+            query=QUERY_ANALISIS_PROCESO_UBICADO
+            provincias= list(Provincia.objects.raw(query,namedict))
+            response = HttpResponse(content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet')
+            response['Content-Disposition'] = "attachment; filename=Analisis_Listado_Ubicados_%s.xlsx"%anno
+            book = Workbook(response, {'in_memory': True})
+            bold = book.add_format({'bold': True, 'border': 1})
+            format = book.add_format({'border': 1})
+            sheet = book.add_worksheet("Listado")
+            sheet.set_column('A:A', 20)
+            sheet.set_column('B:B', 60)
+            sheet.set_column('C:C', 10)
+            sheet.set_column('D:D', 13)
+            sheet.set_column('E:E', 13)
+            sheet.write(0, 0,  "DPT",bold)
+            sheet.write(0, 1,  "Centros",bold)
+            sheet.write(0, 2,  "Total",bold)
+            sheet.write(0, 3,  "Ubicados",bold)
+            sheet.write(0, 4,  "Pendientes",bold)
+            provincia_inicial=provincias[0]
+            contador=0
+            cont=0
+            for i,provincia in enumerate(provincias):
+                contador=cont+i+1
+                if provincia.id != provincia_inicial.id:
+                    sheet.merge_range(contador,0,contador,1, "Total %s"%provincia_inicial.nombre_provincia,bold)
+                    sheet.write(contador, 2, provincia_inicial.total_provincia,bold)
+                    sheet.write(contador, 3, provincia_inicial.ubicados_provincia,bold)
+                    sheet.write(contador, 4, provincia_inicial.pendientes_provincia,bold)
+                    cont+=1
+                    contador=cont+i+1
+                    provincia_inicial=provincia
+                    sheet.write(contador, 0, provincia.nombre_provincia,format)
+                    sheet.write(contador, 1, provincia.nombre_centro,format)
+                    sheet.write(contador, 2, provincia.total_centro,format)
+                    sheet.write(contador, 3, provincia.ubicados_centro,format)
+                    sheet.write(contador, 4, provincia.pendientes_centro,format)
+
+
+                else:
+                    sheet.write(contador, 0, provincia.nombre_provincia,format)
+                    sheet.write(contador, 1, provincia.nombre_centro,format)
+                    sheet.write(contador, 2, provincia.total_centro,format)
+                    sheet.write(contador, 3, provincia.ubicados_centro,format)
+                    sheet.write(contador, 4, provincia.pendientes_centro,format)
+
+
+            book.close()
+            return response
+      else:
+        return Http404

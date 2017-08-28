@@ -78,3 +78,70 @@ def cache_por_user(ttl=None, prefix=None, cache_post=False):
             return response
         return apply_cache
     return decorator
+
+
+
+QUERY_ANALISIS_PROCESO_UBICADO= """
+
+select
+id,
+nombre_provincia,
+sum(pendientes) over (Partition by nombre_provincia) as pendientes_provincia,
+sum(ubicados)   over (Partition by nombre_provincia) as ubicados_provincia,
+sum( pendientes + ubicados) over (Partition by nombre_provincia) as total_provincia,
+nombre_centro,
+pendientes as pendientes_centro,
+ubicados   as ubicados_centro,
+total      as total_centro
+
+from (
+select
+id,
+nombre_provincia,
+nombre_centro,
+sum(pendientes) as pendientes,
+sum(ubicados) as ubicados,
+sum (pendientes + ubicados ) AS total
+from (
+
+SELECT
+p.id,
+p.nombre    as nombre_provincia,
+ce.nombre   as nombre_centro,
+count(d.id) as pendientes,
+0           as ubicados
+
+FROM "SGMGU_disponibilidadgraduados" d,  "SGMGU_centro_estudio" ce, "SGMGU_provincia" p
+
+where
+d.centro_estudio_id=ce.id and
+ce.provincia_id=p.id and
+EXTRACT (YEAR FROM d.fecha_registro) = '%(anno)s'
+
+group by p.id,p.nombre, ce.nombre
+
+
+UNION ALL
+
+
+SELECT
+p.id,
+p.nombre    as nombre_provincia,
+ce.nombre   as nombre_centro,
+0           as pendientes,
+count(u.id) as ubicados
+
+FROM  "SGMGU_ubicacionlaboral" u, "SGMGU_centro_estudio" ce, "SGMGU_provincia" p
+
+where
+
+u.centro_estudio_id=ce.id and
+ce.provincia_id=p.id and
+EXTRACT (YEAR FROM u.fecha_registro) = '%(anno)s'
+group by p.id,p.nombre, ce.nombre
+) q
+
+group by  q.id,q.nombre_provincia, q.nombre_centro
+order by  q.nombre_provincia, q.nombre_centro
+) q1 order by  q1.id, q1.nombre_centro
+"""
