@@ -175,6 +175,9 @@ def ubicacion_laboral(request):
 def nomencladores(request):
     return render(request, "General/index.html", {})
 
+def geforza(request):
+    return render(request, "General/index.html", {})
+
 import xlrd
 
 def extra():

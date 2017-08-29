@@ -88,7 +88,7 @@ urlpatterns = [
     #mario
     url(r'^carreras$',gestion_carreras,name='carreras'),
     url(r'^carreras/registrar_carrera$',registrar_carrera),
-     url(r'^carreras/buscar$',buscar_carreras),
+    url(r'^carreras/buscar$',buscar_carreras),
     url(r'^carreras/(?P<id_carrera>[\w]+)/eliminar$',eliminar_carrera),
     url(r'^carreras/(?P<id_carrera>[\w]+)/modificar$',modificar_carrera),
 
@@ -97,6 +97,10 @@ urlpatterns = [
     url(r'^centros_estudios/registrar$',registrar_centro_estudios),
     url(r'^centros_estudios/(?P<id_centro_estudio>[\w]+)/eliminar$',eliminar_centro_estudios),
     url(r'^centros_estudios/(?P<id_centro_estudio>[\w]+)/modificar$',modificar_centro_estudios),
+
+    #url para el menu de geforza
+    url(r'^geforza$',geforza,name='geforza'),
+
     #/mario
 
 

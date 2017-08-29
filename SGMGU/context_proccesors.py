@@ -43,6 +43,15 @@ def menu(request):
 
             {'name':'Reportes','url':reverse('reportes'),'icon':'glyphicon glyphicon-menu-hamburger','visible':['administrador','especialista','organismo','dpts','invitado','mes','juridico']},
 
+            {'name':'GeForza','url':reverse('geforza'),'icon':'glyphicon glyphicon-briefcase','visible':['administrador','especialista','organismo'],
+               'menu':[
+                    {'name':'Demanda','url':reverse('organismos'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name':'Existencia','url':reverse('causales'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name':'Fluctuación','url':reverse('dir_trabajo'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+
+               ]
+             },
+
             {'name':'Nomencladores','url':reverse('nomencladores'),'icon':'glyphicon glyphicon-bookmark','visible':['administrador','especialista'],
                'menu':[
                     {'name':'Gestión de Organismos','url':reverse('organismos'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
