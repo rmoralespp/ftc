@@ -67,8 +67,7 @@ TEMPLATES = [
                 'SGMGU.context_proccesors.profile',
                 'SGMGU.context_proccesors.menu',
                 'SGMGU.context_proccesors.notificaciones',
-                'SGMGU.context_proccesors.lista_usuarios',
-                'SGMGU.context_proccesors.annos',
+
             ],
         },
     },
@@ -92,7 +91,7 @@ DATABASES = {
         'NAME': 'sgmleu',
         'USER': 'postgres',
         'PASSWORD': 'Qaz.123',
-        'HOST': 'localhost',
+        'HOST': '192.168.0.38',
         'PORT': '5432'
     }
 
@@ -134,7 +133,7 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
-MEDIA_ROOT = 'C:/Apache2.2/htdocs/SGMLEU/'
+#MEDIA_ROOT = 'C:/Apache2.2/htdocs/SGMLEU/'
 MEDIA_URL =  '/media/'
 STATIC_URL = '/static/'
 

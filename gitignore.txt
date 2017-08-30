@@ -5,3 +5,4 @@
 *.png
 *.rar
 *.zip
+*.doc

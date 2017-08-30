@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
-from SGMGU.models import Perfil_usuario
-from django.core.urlresolvers import reverse
-import datetime
 
+from django.core.urlresolvers import reverse
+from .models import Notificacion
 
 def profile(request):
     current_url = request.resolver_match.url_name
@@ -99,8 +98,7 @@ def is_visible(item,cat):
 
 
 
-from .models import Notificacion
-from .models import User
+
 
 def notificaciones(request):
     current_url = request.resolver_match.url_name
@@ -114,17 +112,6 @@ def notificaciones(request):
 
 
 
-def lista_usuarios(request):
-    current_url = request.resolver_match.url_name
-    if current_url!="login" and request.path != "/":
-        usuarios=User.objects.filter(perfil_usuario__activo=True).exclude(id=request.user.id)
-        usuarios={'usuarios':usuarios}
-        return usuarios
-    else:
-        usuarios={'usuarios':[]}
-        return usuarios
 
 
-def annos(request):
-    anno_actual=datetime.datetime.today().year
-    return {'annos':range(2015,anno_actual+1)}
+
