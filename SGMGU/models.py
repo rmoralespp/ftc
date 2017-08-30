@@ -20,6 +20,12 @@ class Organismo(models.Model):
     class Meta:
          ordering=["nombre"]
 
+#-----------codigo mario david--------------
+
+    
+
+#---------------------------------------------
+
 class Categoria_usuario(models.Model):
     nombre=models.CharField(max_length=256)
 
@@ -396,7 +402,11 @@ class DemandaGraduados(models.Model):
     anno_mas_nueve = models.IntegerField(blank=True,null=True)
     anno_mas_diez = models.IntegerField(blank=True,null=True)
 
+#-----------codigo mario david--------------
 
+    
+
+#---------------------------------------------
 
 class CategoriaIndicacion(models.Model):
    nombre=models.CharField(max_length=256)

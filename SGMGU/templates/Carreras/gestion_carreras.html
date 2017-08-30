@@ -14,33 +14,32 @@
 
 
     <div class="panel-body">
-         <div class="panel-body-superior">
-         <div class="btn-group btn_group pull-left" >
-             <a class="btn btn-success btn_gestion" href="/carreras/registrar_carrera">
-                <span class="glyphicon glyphicon-plus"></span> Registrar carrera
-             </a>
-         </div>
+        <div class="panel-body-superior">
+            <div class="btn-group btn_group pull-left">
+                <a class="btn btn-success btn_gestion" href="/carreras/registrar_carrera">
+                    <span class="glyphicon glyphicon-plus"></span> Registrar carrera
+                </a>
+            </div>
 
-         <div class="row">
-            <div class="col-xs-3 pull-right">
-                    <form method="post" action="/carreras/buscar">{% csrf_token %}
-
-                        {% if  busqueda%}
-                             <div class="div_panel_busqueda_carrera">
-                                <input  disabled type="text" name="texto_carrera" class="" value="{{ texto }}">
-                                 <a href="/carreras" class="">Limpiar</a>
-                             </div>
+            <div class="row">
+                <div class="col-xs-3 pull-right">
+                    <form method="post" action="/carreras/buscar">{% csrf_token %} {% if busqueda%}
+                        <div class="div_panel_busqueda_carrera">
+                            <input disabled type="text" name="texto_carrera" class="" value="{{ texto }}">
+                            <a href="/carreras" class="">Limpiar</a>
+                        </div>
 
                         {% else %}
-                              <div class="div_panel_busqueda_carrera">
-                                 <input placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
-                                 <input type="submit" class="" value="Buscar">
-                              </div>
+                        <div class="div_panel_busqueda_carrera">
+                            <input placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
+                            <input type="submit" class="" value="Buscar">
+                        </div>
                         {% endif %}
                     </form>
-            </div><!-- /input-group -->
-          </div>
-     </div>
+                </div>
+                <!-- /input-group -->
+            </div>
+        </div>
         <div class="table-responsive">
             <table class="usar_DataTable_3 table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
                 <thead>
@@ -79,49 +78,42 @@
                 </tbody>
             </table>
         </div>
-          {% block paginate %}
-                <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
-                {% if carreras.has_previous %}
-                    <li>
-                        <a href="?pagina={{ carreras.previous_page_number }}" aria-label="Previous">
+        {% block paginate %}
+        <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+            {% if carreras.has_previous %}
+            <li>
+                <a href="?pagina={{ carreras.previous_page_number }}" aria-label="Previous">
                             Anterior
                         </a>
-                    </li>
-                {% else %}
-                    <li class="disabled">
-                        <a href="#" aria-label="Previous">
+            </li>
+            {% else %}
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
                             Anterior
                         </a>
-                    </li>
-                {% endif %}
-                {% if paginas %}
-                {% for pagina in paginas %}
-                    {% if pagina == carreras.number  %}
-                          <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
-                    {% else %}
-                         <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
-                    {% endif %}
-                {% endfor %}
-                {% else %}
-                    <li class="active"><a href="?pagina=1">1</a></li>
-                {% endif %}
-
-                {% if carreras.has_next %}
-                    <li>
-                        <a href="?pagina={{ carreras.next_page_number }}" aria-label="Next">
+            </li>
+            {% endif %} {% if paginas %} {% for pagina in paginas %} {% if pagina == carreras.number %}
+            <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+            {% else %}
+            <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+            {% endif %} {% endfor %} {% else %}
+            <li class="active"><a href="?pagina=1">1</a></li>
+            {% endif %} {% if carreras.has_next %}
+            <li>
+                <a href="?pagina={{ carreras.next_page_number }}" aria-label="Next">
                             Próximo
                         </a>
-                    </li>
-                {% else %}
+            </li>
+            {% else %}
 
-                    <li class="disabled">
-                        <a  href="#" aria-label="Next">
+            <li class="disabled">
+                <a href="#" aria-label="Next">
                             Próximo
                         </a>
-                    </li>
-                {% endif %}
-            </ul>
-                 {% endblock %}
+            </li>
+            {% endif %}
+        </ul>
+        {% endblock %}
     </div>
 
 </div>

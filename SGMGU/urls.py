@@ -17,6 +17,7 @@ from SGMGU.views.views_inhabilitaciones import *
 from SGMGU.views.views_centros_estudios import *
 from SGMGU.views.views_disponibles import *
 from SGMGU.views.views_indicaciones import *
+from SGMLEU.views.views_demanda import *
 from django.conf import settings
 from django.views.static import  serve
 
@@ -100,6 +101,8 @@ urlpatterns = [
 
     #url para el menu de geforza
     url(r'^geforza$',geforza,name='geforza'),
+
+    url(r'^demanda$',gestion_demanda,name='centros_estudios'),
 
     #/mario
 

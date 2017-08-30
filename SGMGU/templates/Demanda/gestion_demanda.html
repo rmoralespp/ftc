@@ -1,0 +1,160 @@
+{% extends "General/index.html" %} {% block encabezado %}
+
+<header>
+
+</header>
+{% endblock %} {% block section_superior %}
+<div class="panel panel-primary">
+    <div class="panel-heading">Listado de Demanda</div>
+
+    <div class="panel-body">
+        <div class="panel-body-superior">
+            <div class="btn-group btn_group pull-left">
+                <a class="btn btn-success btn_gestion" href="/carreras/registrar_carrera">
+                    <span class="glyphicon glyphicon-plus"></span> Registrar carrera
+                </a>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-3 pull-right">
+                    <form method="post" action="/carreras/buscar">{% csrf_token %} {% if busqueda%}
+                        <div class="div_panel_busqueda_carrera">
+                            <input disabled type="text" name="texto_carrera" class="" value="{{ texto }}">
+                            <a href="/carreras" class="">Limpiar</a>
+                        </div>
+
+                        {% else %}
+                        <div class="div_panel_busqueda_carrera">
+                            <input placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
+                            <input type="submit" class="" value="Buscar">
+                        </div>
+                        {% endif %}
+                    </form>
+                </div>
+                <!-- /input-group -->
+            </div>
+        </div>
+        <div class="table-responsive">
+            <table class="usar_DataTable_3 table table-striped table-bordered dt-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+
+                    <tr>
+
+                        <th>Nombre</th>
+                        <th>Codigo Mes</th>
+                        <th>Tipo</th>
+                        <th id="opciones_gestion_titulo">Opciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    {% for carrera in carreras %}
+                    <tr>
+
+                        <td>{{ carrera.nombre }}</td>
+                        <td>{{ carrera.get_codigo_mes }}</td>
+                        <td>{{ carrera.get_tipo_display }}</td>
+
+
+                        <td class="opciones_gestion">
+                            <button id="{{ carrera.id  }}" class="btn btn-info modal-carrera" data-toggle="modal" data-target="#modal_modificar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_modificar_carr').modificar();">
+                                  <span class="glyphicon glyphicon-pencil">
+                                  </span>
+                              </button>
+
+                            <button id="{{ carrera.id  }}" class="btn btn-danger modal-carrera" data-toggle="modal" data-target="#modal_eliminar_carr" onclick="Objeto.__init__({{ carrera.id }},'carreras','modal_eliminar_carr').eliminar();">
+                                  <span class="glyphicon glyphicon-trash">
+                                  </span>
+                              </button>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        {% block paginate %}
+        <ul class="pagination pull-right" style="position: relative;top: -25px;padding: 0;margin: 0">
+            {% if carreras.has_previous %}
+            <li>
+                <a href="?pagina={{ carreras.previous_page_number }}" aria-label="Previous">
+                            Anterior
+                        </a>
+            </li>
+            {% else %}
+            <li class="disabled">
+                <a href="#" aria-label="Previous">
+                            Anterior
+                        </a>
+            </li>
+            {% endif %} {% if paginas %} {% for pagina in paginas %} {% if pagina == carreras.number %}
+            <li class="active"><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+            {% else %}
+            <li><a href="?pagina={{ pagina }}">{{ pagina }}</a></li>
+            {% endif %} {% endfor %} {% else %}
+            <li class="active"><a href="?pagina=1">1</a></li>
+            {% endif %} {% if carreras.has_next %}
+            <li>
+                <a href="?pagina={{ carreras.next_page_number }}" aria-label="Next">
+                            Próximo
+                        </a>
+            </li>
+            {% else %}
+
+            <li class="disabled">
+                <a href="#" aria-label="Next">
+                            Próximo
+                        </a>
+            </li>
+            {% endif %}
+        </ul>
+        {% endblock %}
+    </div>
+
+</div>
+
+
+
+
+<div class="modal fade" id="modal_eliminar_carr" role="dialog">
+    <div class="modal-dialog">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title modal_eliminar">Confirmación de eliminación</h4>
+            </div>
+            <div class="modal-body">
+                <p>Está seguro de eliminar la carrera seleccionada</p>
+            </div>
+            <div class="modal-footer">
+                <a type="submit" class="btn btn-default">Aceptar</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<div class="modal fade" id="modal_modificar_carr" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title modal_modificar">Confirmación de modificación</h4>
+            </div>
+            <div class="modal-body">
+                <p>Está seguro de modificar la carrera seleccionada</p>
+            </div>
+            <div class="modal-footer">
+                <a type="submit" class="btn btn-default">Aceptar</a>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}
