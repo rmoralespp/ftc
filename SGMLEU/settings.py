@@ -67,8 +67,7 @@ TEMPLATES = [
                 'SGMGU.context_proccesors.profile',
                 'SGMGU.context_proccesors.menu',
                 'SGMGU.context_proccesors.notificaciones',
-                'SGMGU.context_proccesors.lista_usuarios',
-                'SGMGU.context_proccesors.annos',
+
             ],
         },
     },
