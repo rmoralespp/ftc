@@ -33,7 +33,7 @@
 
                         {% else %}
                               <div class="div_panel_busqueda_carrera">
-                                 <input placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
+                                 <input required placeholder="Escriba aquí" type="text" name="texto_carrera" class="">
                                  <input type="submit" class="" value="Buscar">
                               </div>
                         {% endif %}
@@ -46,9 +46,8 @@
                 <thead>
 
                     <tr>
-
-                        <th>Nombre</th>
                         <th>Codigo Mes</th>
+                        <th>Nombre</th>
                         <th>Tipo</th>
                         <th id="opciones_gestion_titulo">Opciones</th>
                     </tr>
@@ -57,9 +56,8 @@
 
                     {% for carrera in carreras %}
                     <tr>
-
-                        <td>{{ carrera.nombre }}</td>
                         <td>{{ carrera.get_codigo_mes }}</td>
+                        <td>{{ carrera.nombre }}</td>
                         <td>{{ carrera.get_tipo_display }}</td>
 
 

@@ -11,12 +11,7 @@
           </div>
           <div class="modal-body" style="height:250px; overflow-y:auto;">
             <textarea  required rows="7" class="form-control" name="texto" placeholder="Escriba el texto de la notificación"></textarea>
-            <select id="select_usuarios_notificaciones" multiple class="form-control" name="remitente" style="width: 100%; margin-top: 5px !important;">
-              {% for user in usuarios %}
-                      <option value="{{ user.id }}">{{ user.first_name }} {{ user.last_name }} ({{user.perfil_usuario.organismo.siglas  }})</option>
-              {% endfor %}
-            </select>
-
+            <select id="select_usuarios_notificaciones" multiple class="form-control" name="remitente" style="width: 100%; margin-top: 5px !important;"></select>
           </div>
           <div class="modal-footer">
             <button type="submit" class="btn btn-success">Enviar</button>
@@ -56,14 +51,16 @@
   <body id="body_index">
       <nav class="navbar navbar-inverse navbar-fixed-top">
           <div class="container-fluid">
-            <div class="navbar-header">
-              <a id="titulo_inicioo" class="navbar-brand" href="/inicio"><strong style="color: red"> SIGU</strong><strong style="color: #1c8fd1">LEU</strong></a>
-                {% block busqueda_ficha %}
+            <div class="navbar-header" style="position: relative">
+               <img id="titulo_inicioo" src="{% static "img/logo.png" %}">
+            </div>
+            <div id="navbar" class="navbar-collapse collapse">
+              {% block busqueda_ficha %}
                     <div class="input-group nav_busqueda_graduado">
                         {% if busqueda_ficha %}
-                            <input value="{{ ci }}" disabled type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
+                            <input value="{{ ci }}" disabled type="number" id="ci_ficha_graduado" class="form-control" aria-label="..."  style="height:35px;">
                         {% else %}
-                            <input type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI para buscar el graduado" style="height:32px;">
+                            <input type="number" id="ci_ficha_graduado" class="form-control" aria-label="..." placeholder="Escriba el CI..." style="height:35px;">
                         {% endif %}
                          <div class="input-group-btn">
                             {% if busqueda_ficha %}
@@ -73,22 +70,21 @@
                             {% endif %}
                          </div>
                     </div>
-                {% endblock %}
-            </div>
-            <div id="navbar" class="navbar-collapse collapse">
+              {% endblock %}
+
               <ul class="nav navbar-nav navbar-right">
                    <li class="dropdown">
                        <a  href="#" aria-haspopup="true" aria-expanded="true" class="dropdown-toggle" role="button" data-toggle="dropdown">
                            {% if cantidad_no_revisadas == 0%}
-                               <span class="glyphicon glyphicon glyphicon-comment"></span>
+                               <span class="glyphicon glyphicon glyphicon-envelope"></span>
                            {% else %}
                                <span class="span_cant_notificaciones">{{ cantidad_no_revisadas }}</span>
-                               <span class="glyphicon glyphicon glyphicon-comment glyphicon_notificaciones"></span>
+                               <span class="glyphicon glyphicon glyphicon-envelope glyphicon_notificaciones"></span>
                            {% endif %}
                            Notificaciones
                        </a>
                        <ul class="dropdown-menu dropdown_notificaciones">
-                            <li style="cursor: pointer; text-align: center;font-weight: bold; background-color: rgba(233, 233, 233, 0.95);color: #5b5b5b; font-size: medium" data-toggle="modal" data-target="#enviar_notificacion">Enviar Notificación</li>
+                            <li  class="enviar_notificacion" data-toggle="modal" data-target="#enviar_notificacion" onclick="Objeto.__init__({{ user.id }},'notificaciones_usuarios','').listar_usuarios();">Enviar Notificación</li>
                            {% for notificacion in notificaciones %}
                                {% if notificacion.revisado %}
                                    <li id="{{ notificacion.id }}" class="notificacion" onclick="Objeto.__init__({{ notificacion.id }},'revisar_notificacion','').revisar_notificacion();">
@@ -98,11 +94,11 @@
                                         {% ifequal notificacion.emisor.perfil_usuario.foto ""%}
                                            <div class="pull-left foto"><span class="pull-left glyphicon glyphicon-user"></span></div>
                                        {% else %}
-                                           <img src="/media/{{ notificacion.emisor.perfil_usuario.foto }}" class="foto_perfil2 foto pull-left">
+                                           <img src="/media/{{ notificacion.emisor.perfil_usuario.foto }}" class="foto_perfil2  pull-left">
                                        {% endifequal %}
-                                       <span class=" emisor">{{ notificacion.emisor.first_name}} {{ notificacion.emisor.last_name }} <em class="text-muted"><small>({{ notificacion.emisor.perfil_usuario.organismo.siglas }})</small></em></span>
+                                       <span class=" emisor">{{ notificacion.emisor.first_name}} {{ notificacion.emisor.last_name }} <small class="text-muted">({{ notificacion.emisor.perfil_usuario.organismo.siglas }})</small></span>
                                        <br>
-                                       <span class="texto texto_estandar">{{ notificacion.texto|truncatechars:50 }}</span>
+                                       <span class="texto texto_estandar">{{ notificacion.texto|truncatechars:48 }}</span>
                                </li>
                       {% endfor %}
                     </ul>
@@ -114,7 +110,7 @@
                    {% endif %}
                    {% if user.is_authenticated %}
                           <li class="dropdown">
-                              <a id="btn_salir" href="#" aria-haspopup="true" aria-expanded="true" class="dropdown-toggle" role="button" data-toggle="dropdown">
+                              <a name="{{ user.id }}" id="btn_salir" href="#" aria-haspopup="true" aria-expanded="true" class="dropdown-toggle" role="button" data-toggle="dropdown">
                                   {{ user }}
                                   <span class="caret"></span>
                               </a>
@@ -169,20 +165,20 @@
               {% endblock %}
               <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
                   {% block encabezado %}
+
                       <div class="div_img_fondo">
                           <img src="{% static "img/fondos_sin_letras.jpg" %}">
-                          <h3 class="titulo_index">Sistema para la gestión de la ubicación</h3>
+                          <!--h3 class="titulo_index">Sistema para la gestión de la ubicación</h3>
                           <h3 class="titulo_index"> laboral de los egresados</h3>
-                          <h3 class="titulo_index"> universitarios</h3>
-
-
+                          <h3 class="titulo_index"> universitarios</h3-->
                       </div>
+
 
 
                   {% endblock %}
                     <div class="row">
                       {% block section_superior %}
-                         <img class="img_principal img-responsive img-rounded" src="{% static "img/logo-mtss.png" %}">
+                         <!--img class="img_principal img-responsive img-rounded" src="{% static "img/logo-mtss.png" %}"-->
                       {% endblock %}
                   </div>
 

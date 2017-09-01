@@ -75,7 +75,7 @@
                                     <td>{{ expediente_pend.expediente.entidad_liberacion}}</td>
                                  {% endif %}
                                 <td>{{ expediente_pend.expediente.graduado.carrera.nombre}}</td>
-                                <td>{{ expediente_pend.sintesis_rechazo|truncatewords:8}}</td>
+                                <td>{{ expediente_pend.sintesis_rechazo|truncatechars:15}}</td>
 
                                 <td>{{ expediente_pend.fecha_rechazo|date:"Y/m/d" }} {{ expediente_pend.fecha_rechazo|time:"H:i" }}</td>
 
