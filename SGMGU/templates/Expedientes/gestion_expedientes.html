@@ -115,7 +115,7 @@
                       <td>{{expediente.organismo_aceptacion__siglas}}</td>
                       <td>{{ expediente.fecha_registro|date:"Y/m/d" }}</td>
                       <td id="opciones_gestion">
-                              <a href="/gestion_expedientes/{{ expediente.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span>Detalles</a>
+                              <a href="/gestion_expedientes/{{ expediente.id }}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span>Detalles</a>
                               <button id="{{ expediente.id  }}" onclick="Objeto.__init__({{ expediente.id }},'gestion_expedientes','modal_modificar_exp').modificar();" class="btn btn-info  modal-expediente" data-toggle="modal" data-target="#modal_modificar_exp">
                                   <span class="glyphicon glyphicon-pencil">
                                   </span>

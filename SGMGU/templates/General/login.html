@@ -9,7 +9,7 @@
 
          <form class="form-signin" method="POST" id="login">
 
-             <img class="logo_login" src="{% static "img/logo_login.png" %}">
+             <img class="logo_login" src="{% static "img/logo.png" %}">
              <h3 style="color: #585858" class="form-signin-heading">Iniciar sesión</h3>
              {% csrf_token %}
              <label for="username" class="sr-only">Usuario</label>
@@ -35,7 +35,7 @@
                  {% endif %}
              </div>
 
-             <button class="btn btn-lg btn-primary btn-block btn_login" type="submit">Aceptar</button>
+             <button class="btn btn-lg btn-block btn_login" type="submit">Aceptar</button>
          </form>
      </div>
     </body>

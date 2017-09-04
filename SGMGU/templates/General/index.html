@@ -136,6 +136,24 @@
           <div class="row">
               {% block aside %}
                   <div class="col-xs-2 col-md-2 sidebar">
+                  <div class="bienvenido">
+                      {% ifequal profile.foto ""%}
+                                  <div class="foto_bienvenido">
+                                   <span class="glyphicon glyphicon-user imagen_user_not_foto"></span>
+                                  </div>
+                              {% else %}
+                                  <img src="/media/{{ profile.foto }}" class="foto_bienvenido">
+                      {% endifequal %}
+
+                      <div class="texto">
+                          <p class="titulo">Bienvenido</p>
+                          {% if  user.first_name%}
+                                <p class="username"> {{ user.first_name }}</p>
+                          {% else %}
+                                <p class="username"> {{ user }}</p>
+                          {% endif %}
+                      </div>
+                  </div>
                   {% for item in menu %}
                      {% block aside1 %}
                          <ul class="nav nav-sidebar">
@@ -167,10 +185,7 @@
                   {% block encabezado %}
 
                       <div class="div_img_fondo">
-                          <img src="{% static "img/fondos_sin_letras.jpg" %}">
-                          <!--h3 class="titulo_index">Sistema para la gestión de la ubicación</h3>
-                          <h3 class="titulo_index"> laboral de los egresados</h3>
-                          <h3 class="titulo_index"> universitarios</h3-->
+                          <img src="{% static "img/Fondos FTC (4).jpg" %}">
                       </div>
 
 
@@ -178,7 +193,7 @@
                   {% endblock %}
                     <div class="row">
                       {% block section_superior %}
-                         <!--img class="img_principal img-responsive img-rounded" src="{% static "img/logo-mtss.png" %}"-->
+                         <!--img class="img_principal img-responsive img-rounded" src="{% static "img/login egresados.jpg" %}"-->
                       {% endblock %}
                   </div>
 

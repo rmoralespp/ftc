@@ -124,8 +124,16 @@ Objeto = {
         $("#select_usuarios_notificaciones").empty().val("-1").trigger("change");
         for(var i=0; i<datos.length;i++) {
                       var option=$("<option </option>");
+                     /* if(datos[i].perfil_usuario__foto == ""){
+                          var span=$("<span class='foto_listado_user glyphicon glyphicon-user'></span>");
+                      }
+                      else{
+                          var span=$("<img  class='foto_perfil3'>").attr('src','/media/'+datos[i].perfil_usuario__foto)
+                      }*/
+
                       option.val(datos[i].id);
-                      option.text(datos[i].first_name+" "+datos[i].last_name+" ("+datos[i].perfil_usuario__organismo__siglas+")");
+
+                      option.append(datos[i].first_name+" "+datos[i].last_name+" ("+datos[i].perfil_usuario__organismo__siglas+")");
                       $("#select_usuarios_notificaciones").append(option);
                   }
     }

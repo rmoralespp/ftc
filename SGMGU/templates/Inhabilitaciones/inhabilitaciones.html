@@ -90,7 +90,7 @@
                             <td>{{ inhabilitacion.graduado.provincia.siglas }} </td>
                             <td>{{ inhabilitacion.fecha|date:"Y/m/d" }} {{inhabilitacion.fecha|time:"H:i" }} </td>
                           <td id="opciones_gestion">
-                              <a href="/inhabilitaciones/{{ inhabilitacion.id }}" class="btn btn-primary"><span class="glyphicon glyphicon-plus"></span> Opciones</a>
+                              <a href="/inhabilitaciones/{{ inhabilitacion.id }}" class="btn btn-warning"><span class="glyphicon glyphicon-plus"></span> Opciones</a>
                           </td>
                         </tr>
                     {% endfor %}
