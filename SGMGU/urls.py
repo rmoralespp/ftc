@@ -17,7 +17,7 @@ from SGMGU.views.views_inhabilitaciones import *
 from SGMGU.views.views_centros_estudios import *
 from SGMGU.views.views_disponibles import *
 from SGMGU.views.views_indicaciones import *
-from SGMLEU.views.views_demanda import *
+from SGMGU.views.views_demanda import *
 from django.conf import settings
 from django.views.static import  serve
 

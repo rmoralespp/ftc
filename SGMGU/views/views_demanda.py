@@ -13,11 +13,11 @@ from django.db import models
 
 @login_required
 @permission_required(['administrador','especialista'])
-def gestion_carreras(request):
-    carreras=Carrera.objects.filter(activo=True)
-    carreras=paginar(request,carreras)
-    context = {'carreras': carreras,'paginas':crear_lista_pages(carreras)}
-    return render(request, "Carreras/gestion_carreras.html", context)
+def gestion_demanda(request):
+    demandas=DemandaGraduados.objects.filter(activo=True)
+    demandas=paginar(request,demandas)
+    context = {'demandas': demandas,'paginas':crear_lista_pages(demandas)}
+    return render(request, "Demandas/gestion_demanda.html", context)
 
 
 

@@ -306,13 +306,15 @@ class CarreraForm(forms.ModelForm):
 class DemandaForm(forms.ModelForm):
     
         class Meta:
-           model=Demanda
-           fields=["nombre_entidad","nombre","tipo"]
+           model=DemandaGraduados
+           fields=["codigo_demanda","nombre_entidad","codigo_municipio_entidad","codigo_carrera","codigo_organismo"]
            widgets={
 
                  'tipo':forms.Select(  attrs={ 'class': 'form-control' }),
                  'codigo_mes': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el código de la carrera'}),
                  'nombre': forms.TextInput(attrs={  'class': 'form-control',  'placeholder': 'Escriba el nombre de la carrera' })
+                  
+                  
                   }
              
 
