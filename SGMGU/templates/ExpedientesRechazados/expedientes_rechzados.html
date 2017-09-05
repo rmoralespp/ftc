@@ -75,12 +75,12 @@
                                     <td>{{ expediente_pend.expediente.entidad_liberacion}}</td>
                                  {% endif %}
                                 <td>{{ expediente_pend.expediente.graduado.carrera.nombre}}</td>
-                                <td>{{ expediente_pend.sintesis_rechazo|truncatewords:8}}</td>
+                                <td>{{ expediente_pend.sintesis_rechazo|truncatechars:15}}</td>
 
                                 <td>{{ expediente_pend.fecha_rechazo|date:"Y/m/d" }} {{ expediente_pend.fecha_rechazo|time:"H:i" }}</td>
 
                                 <td  id="opciones_gestion">
-                                    <a href="/expedientes_rechazados/{{expediente_pend.id}}" id="{{ expediente_pend.id }}" class="btn btn-primary ">
+                                    <a href="/expedientes_rechazados/{{expediente_pend.id}}" id="{{ expediente_pend.id }}" class="btn btn-warning ">
                                         <span class="glyphicon glyphicon-plus"></span> Detalles
                                     </a>
                                 </td>

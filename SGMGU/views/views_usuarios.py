@@ -198,4 +198,8 @@ def gestion_usuarios(request):
 
 
 
-
+from django.http import JsonResponse
+def listado_usuarios_notificaciones(request,id_usuario):
+    if request.is_ajax():
+        usuarios=User.objects.filter(perfil_usuario__activo=True).exclude(id=id_usuario).values("id","first_name", "last_name", "perfil_usuario__organismo__siglas","perfil_usuario__foto")
+        return JsonResponse(dict(usuarios=list(usuarios)))

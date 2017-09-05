@@ -59,8 +59,8 @@
 
 
 {% block contenido_tabla %}
-    <div class="panel panel-primary">
-        <div class="panel-heading">Expediente del graduado {{ expediente.graduado.nombre  }} </div>
+    <div class="row panel panel-primary">
+        <div class="panel-heading">Movimiento Laboral de {{ expediente.graduado.nombre  }} </div>
         <div class="panel-body">
               <div class="dropdown dropwdown_opciones_detalle">
                 <a class="dropdown-toggle a_opciones_detalle" type="button" data-toggle="dropdown">
@@ -78,6 +78,13 @@
                                           </span> Eliminar Expediente
                             </a></li>
                         {% endif %}
+
+                        {% if   expediente.comprimido %}
+                           <li>
+                               <a  href="/descargar_comprimido/{{ expediente.id }}"><span class="glyphicon glyphicon-download-alt"></span> Comprimido</a>
+                           </li>
+                        {% endif %}
+
                          <li><a class=" btn_gestion " href="/gestion_expedientes">
                             <span class="glyphicon glyphicon-arrow-left"></span> Ir atrás
                          </a></li>
@@ -85,7 +92,7 @@
                </div>
 
 
-        <div id="datos_exp"  class="col-xs-12">
+        <div id="datos_exp"  class="datos_exp_50 datos_graduado">
         <h4 class="text-center">Datos del graduado:</h4>
         <p><strong>Nombre y apellidos:</strong> {{ expediente.graduado.nombre }} {{ expediente.graduado.apellidos }}</p>
         {% if expediente.graduado.carrera %}
@@ -123,19 +130,14 @@
                <p><strong>Código de la boleta</strong> {{ expediente.graduado.codigo_boleta }}</p>
            {% endif %}
 
-           {% if expediente.graduado.imagen_boleta %}
-               <figure class="col-xs-12 imagen_boleta">
-                <img  id="img_boleta" class="img-thumbnail" src="/media/{{ expediente.graduado.imagen_boleta }}">
-                <figcaption>Imagen de la boleta</figcaption>
-               </figure>
-        {% endif %}
+
        </div>
 
 
 
 
-       <div id="datos_exp"    class="col-xs-12">
-        <h4 class="text-center">Datos de la entidad que lo libera:</h4>
+       <div id="datos_exp"    class="datos_exp_50 datos_entidad">
+        <h4 class="text-center">Datos de la entidad que libera:</h4>
         <p><strong>Nombre de la entidad:</strong> {{ expediente.entidad_liberacion }}</p>
         <p><strong>Organismo:</strong> {{ expediente.organismo_liberacion.nombre}}</p>
         <p><strong>Provincia:</strong> {{ expediente.mun_entidad_liberacion.provincia.nombre }}</p>
@@ -144,8 +146,8 @@
        </div>
 
 
-       <div id="datos_exp"  class="col-xs-12">
-        <h4 class="text-center">Datos de la entidad que lo acepta:</h4>
+       <div id="datos_exp"  class="datos_exp_50 datos_entidad">
+        <h4 class="text-center">Datos de la entidad que acepta:</h4>
         <p><strong>Nombre de la entidad:</strong> {{ expediente.entidad_aceptacion }}</p>
         <p><strong>Organismo:</strong> {{ expediente.organismo_aceptacion.nombre}}</p>
         <p><strong>Provincia:</strong> {{ expediente.mun_entidad_aceptacion.provincia.nombre }}</p>
@@ -154,27 +156,12 @@
        </div>
 
 
-        {% if   expediente.comprimido %}
-           <div id="datos_exp" class="col-xs-12">
-               <h4 class="text-center">Comprimido con los documentos del expediente:</h4>
-               <a style="margin-left: 150px; font-weight: 900; color: #575151" href="/descargar_comprimido/{{ expediente.id }}"><span class="glyphicon glyphicon-download-alt"></span> Descargar Comprimido</a>
-           </div>
-        {% endif %}
 
-            {% if   expediente.carta_expediente %}
-
-               <div id="datos_exp" class="col-xs-12">
-                    <h4 class="text-center">Informe del expediente aprobado por el MTSS :</h4>
-                    <a style="margin-left: 150px; font-weight: 900; color:  #575151" href="/descargar_informe/{{ expediente.id }}" class="pull-left"><span class="glyphicon glyphicon-download-alt"></span> Descargar Informe</a>
-                    <a style="margin-right: 150px; font-weight: 900; color: #575151" href="/ver_informe/{{ expediente.id }}" class="pull-right"><span class="glyphicon glyphicon-eye-open"></span> Ver Informe</a> </p>
-
-               </div>
-        {% endif %}
 
         </div>
         <div class="panel-footer">
-            {% if  expediente.fecha_aprobado %}
-            <p class="text-muted"> <span class="glyphicon glyphicon-time"></span> Expediente aprobado el {{ expediente.fecha_aprobado }}</p>
+            {% if  expediente.fecha_registro %}
+            <p class="text-muted"> <span class="glyphicon glyphicon-time"></span> Registrado el {{ expediente.fecha_registro }}</p>
             {% endif %}
         </div>
     </div>

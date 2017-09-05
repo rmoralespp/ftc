@@ -71,11 +71,11 @@
                                      <td>{{ expediente.expediente.entidad_liberacion}}</td>
                                 {% endif %}
                                 <td>{{ expediente.expediente.graduado.carrera.nombre}}</td>
-                                <td>{{ expediente.sintesis_no_aprobado|truncatewords:8}}</td>
+                                <td>{{ expediente.sintesis_no_aprobado|truncatechars:15}}</td>
                                 <td>{{ expediente.fecha_no_aprobado|date:"Y/m/d" }} {{ expediente.fecha_no_aprobado|time:"H:i" }}</td>
 
                                 <td  id="opciones_gestion">
-                                    <a href="/expedientes_no_aprobados/{{expediente.id}}" id="{{ expediente.id }}" class="btn btn-primary ">
+                                    <a href="/expedientes_no_aprobados/{{expediente.id}}" id="{{ expediente.id }}" class="btn btn-warning ">
                                     <span class="glyphicon glyphicon-plus"></span> Detalles
                                     </a>
                                 </td>

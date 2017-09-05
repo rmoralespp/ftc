@@ -62,11 +62,23 @@ Objeto = {
     },
 
     responder_notificacion: function() {
-        $('#lista_notificaciones').modal('hide');
-        emisor = $("#lista_notificaciones").find(".modal-body").attr("id");
-        $("#select_usuarios_notificaciones option[value=" + emisor + "]").prop("selected", true).trigger("change");
-        $('#enviar_notificacion').find(".modal-title").text("Responder Notificación");
-        $('#enviar_notificacion').modal('show');
+        id_usuario=$('#btn_salir').prop('name');
+        $.ajax({
+            url: "notificaciones_usuarios/"+id_usuario,
+            type: "get",
+            success: function(data) {
+                Objeto.llenar_usuarios_notificaciones(data.usuarios);
+                $('#lista_notificaciones').modal('hide');
+                emisor = $("#lista_notificaciones").find(".modal-body").attr("id");
+                $("#select_usuarios_notificaciones option[value=" + emisor + "]").prop("selected", true).trigger("change");
+                $('#enviar_notificacion').find(".modal-title").text("Responder Notificación");
+                $('#enviar_notificacion').modal('show');
+            }
+        });
+
+
+
+
     },
 
     eliminar_notificacion: function() {
@@ -95,7 +107,38 @@ Objeto = {
         } else {
             $('.causal_inhabilitacion').prop({ 'disabled': false, 'required': true })
         }
+    },
+
+    listar_usuarios: function() {
+        $.ajax({
+            url: Objeto.url_base,
+            type: "get",
+            success: function(data) {
+                  Objeto.llenar_usuarios_notificaciones(data.usuarios);
+                  $('#enviar_notificacion').find(".modal-title").text("Enviar Notificación");
+            }
+        });
+    },
+
+    llenar_usuarios_notificaciones: function(datos){
+        $("#select_usuarios_notificaciones").empty().val("-1").trigger("change");
+        for(var i=0; i<datos.length;i++) {
+                      var option=$("<option </option>");
+                     /* if(datos[i].perfil_usuario__foto == ""){
+                          var span=$("<span class='foto_listado_user glyphicon glyphicon-user'></span>");
+                      }
+                      else{
+                          var span=$("<img  class='foto_perfil3'>").attr('src','/media/'+datos[i].perfil_usuario__foto)
+                      }*/
+
+                      option.val(datos[i].id);
+
+                      option.append(datos[i].first_name+" "+datos[i].last_name+" ("+datos[i].perfil_usuario__organismo__siglas+")");
+                      $("#select_usuarios_notificaciones").append(option);
+                  }
     }
+
+
 };
 
 

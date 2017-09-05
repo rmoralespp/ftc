@@ -35,6 +35,7 @@ urlpatterns = [
     url(r'^enviar_notificacion$',enviar_notificacion),
     url(r'^revisar_notificacion/(?P<id_notificacion>[\w]+)$',revisar_notificacion),
     url(r'^eliminar_notificacion/(?P<id_notificacion>[\w]+)$',eliminar_notificacion),
+    url(r'^notificaciones_usuarios/(?P<id_usuario>[\w]+)$',listado_usuarios_notificaciones),
 
 
 
