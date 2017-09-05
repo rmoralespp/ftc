@@ -521,7 +521,7 @@ nav a{
 }
 
 .btn_normal{
-     padding: 5px 5px !important;
+     padding: 4px 5px !important;
 }
 
 
@@ -918,7 +918,9 @@ input[type=file]{
      background-color:  #2A3F54 !important;
      color: white !important;
 }
-
+.navbar-inverse .navbar-nav > .open > a, .navbar-inverse .navbar-nav > .open > a:focus, .navbar-inverse .navbar-nav > .open > a:hover {
+    background-color:  #D9DEE4 !important;
+}
 
 
 .subtexto_ficha_graduado{
