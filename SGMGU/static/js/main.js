@@ -1,4 +1,4 @@
-Objeto = {
+﻿Objeto = {
 
     __init__: function(id, modelo, ventana_id) {
         Objeto.id = id;
@@ -64,7 +64,7 @@ Objeto = {
     responder_notificacion: function() {
         id_usuario=$('#btn_salir').prop('name');
         $.ajax({
-            url: "notificaciones_usuarios/"+id_usuario,
+            url: "/notificaciones_usuarios/"+id_usuario,
             type: "get",
             success: function(data) {
                 Objeto.llenar_usuarios_notificaciones(data.usuarios);
