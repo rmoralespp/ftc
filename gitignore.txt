@@ -1,8 +1,0 @@
-*.pyc
-*.pdf
-*.jpg
-*.jpeg
-*.png
-*.rar
-*.zip
-*.doc
