@@ -2,6 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="3be9a248-4de6-447a-bd41-36d61bf1858d" name="Default" comment="">
+<<<<<<< HEAD
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SGMGU/templates/Entidades/form_entidad.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SGMGU/templates/Entidades/gestion_entidades.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/SGMGU/views/views_entidades.py" />
@@ -11,6 +12,9 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/forms.py" afterPath="$PROJECT_DIR$/SGMGU/forms.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/models.py" afterPath="$PROJECT_DIR$/SGMGU/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMGU/urls.py" afterPath="$PROJECT_DIR$/SGMGU/urls.py" />
+=======
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/SGMLEU/settings.py" afterPath="$PROJECT_DIR$/SGMLEU/settings.py" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
     </list>
     <ignored path="SGMLEU.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -37,6 +41,39 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+<<<<<<< HEAD
+=======
+      <file leaf-file-name="index.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/templates/General/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-81.07692">
+              <caret line="124" column="46" selection-start-line="121" selection-start-column="30" selection-end-line="124" selection-end-column="46" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gestion_usuarios.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/templates/Usuarios/gestion_usuarios.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="56" column="44" selection-start-line="52" selection-start-column="28" selection-end-line="56" selection-end-column="44" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="main.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/static/js/main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="135" column="22" selection-start-line="135" selection-start-column="22" selection-end-line="135" selection-end-column="22" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/models.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -49,26 +86,53 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="forms.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/forms.py">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="271">
               <caret line="317" column="0" lean-forward="true" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+=======
+      <file leaf-file-name="estilos_inicio.css" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-9.807693">
+              <caret line="540" column="1" selection-start-line="540" selection-start-column="1" selection-end-line="540" selection-end-column="1" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/SGMGU/urls.py">
+      <file leaf-file-name="settings.py" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/SGMLEU/settings.py">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="238">
               <caret line="106" column="39" lean-forward="false" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="39" />
               <folding />
+=======
+            <state vertical-scroll-proportion="0.6105263">
+              <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
       </file>
+      <file leaf-file-name="wsgi.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMLEU/wsgi.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="46" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="46" />
+              <folding>
+                <element signature="e#223#236#0" expanded="true" />
+              </folding>
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
+            </state>
+          </provider>
+        </entry>
+      </file>
+<<<<<<< HEAD
       <file leaf-file-name="views_entidades.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/SGMGU/views/views_entidades.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -77,10 +141,19 @@
               <folding>
                 <element signature="e#24#68#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="context_proccesors.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMGU/context_proccesors.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="70" column="22" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="22" />
+              <folding />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
             </state>
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
       <file leaf-file-name="views_carreras.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/SGMGU/views/views_carreras.py">
           <provider selected="true" editor-type-id="text-editor">
@@ -89,6 +162,14 @@
               <folding>
                 <element signature="e#24#68#0" expanded="true" />
               </folding>
+=======
+      <file leaf-file-name="urls.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/SGMLEU/urls.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+              <folding />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
             </state>
           </provider>
         </entry>
@@ -128,6 +209,11 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
+<<<<<<< HEAD
+=======
+        <option value="$PROJECT_DIR$/SGMGU/views/view_movimientos_internos.py" />
+        <option value="$PROJECT_DIR$/SGMGU/static/js/configuraciones_plugins.js" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
         <option value="$PROJECT_DIR$/SGMGU/views/views_inhabilitaciones.py" />
         <option value="$PROJECT_DIR$/SGMGU/templates/General/ficha_graduado.html" />
         <option value="$PROJECT_DIR$/SGMGU/views/views_ubicados.py" />
@@ -170,6 +256,7 @@
         <option value="$PROJECT_DIR$/SGMGU/views/views_usuarios.py" />
         <option value="$PROJECT_DIR$/SGMGU/static/js/main.js" />
         <option value="$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css" />
+        <option value="$PROJECT_DIR$/SGMLEU/urls.py" />
         <option value="$PROJECT_DIR$/SGMLEU/settings.py" />
         <option value="$PROJECT_DIR$/SGMGU/views/views.py" />
         <option value="$PROJECT_DIR$/SGMGU/models.py" />
@@ -236,6 +323,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< HEAD
           <PATH>
             <PATH_ELEMENT>
               <option name="myItemId" value="SGMLEU" />
@@ -316,6 +404,8 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+=======
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -696,6 +786,30 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
+<<<<<<< HEAD
+=======
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/CentroEstudios/registrar_centro_estudio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0">
+          <caret line="0" column="50" selection-start-line="0" selection-start-column="50" selection-end-line="0" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/CentroEstudios/modificar_centro_estudio.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="12" column="82" selection-start-line="12" selection-start-column="66" selection-end-line="12" selection-end-column="82" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/CentroEstudios/gestion_centro_estudios.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="41" column="167" selection-start-line="41" selection-start-column="167" selection-end-line="41" selection-end-column="167" />
+        </state>
+      </provider>
+    </entry>
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
     <entry file="file://$PROJECT_DIR$/SGMGU/views/views_inhabilitaciones.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="0">
@@ -712,8 +826,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/templates/Carreras/form_carrera.html">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
         </state>
       </provider>
     </entry>
@@ -994,8 +1113,13 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/SGMGU/views/views_disponibles.py">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="-68">
           <caret line="24" column="0" lean-forward="true" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
+=======
+        <state vertical-scroll-proportion="-81.07692">
+          <caret line="124" column="46" selection-start-line="121" selection-start-column="30" selection-end-line="124" selection-end-column="46" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
           <folding />
         </state>
       </provider>
@@ -1034,14 +1158,30 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/SGMGU/urls.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
           <caret line="106" column="39" lean-forward="false" selection-start-line="106" selection-start-column="22" selection-end-line="106" selection-end-column="39" />
+=======
+    <entry file="file://$PROJECT_DIR$/SGMGU/templates/Ubicados/ubicados.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="63" column="35" selection-start-line="63" selection-start-column="35" selection-end-line="63" selection-end-column="46" />
           <folding />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/static/css/estilos_inicio.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-9.807693">
+          <caret line="540" column="1" selection-start-line="540" selection-start-column="1" selection-end-line="540" selection-end-column="1" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
+          <folding />
+        </state>
+      </provider>
+    </entry>
+<<<<<<< HEAD
     <entry file="file://$PROJECT_DIR$/SGMGU/models.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="243">
@@ -1056,6 +1196,38 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="271">
           <caret line="317" column="0" lean-forward="true" selection-start-line="317" selection-start-column="0" selection-end-line="317" selection-end-column="0" />
+=======
+    <entry file="file://$PROJECT_DIR$/SGMLEU/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMGU/context_proccesors.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="70" column="22" selection-start-line="70" selection-start-column="18" selection-end-line="70" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMLEU/wsgi.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="21" column="46" selection-start-line="21" selection-start-column="40" selection-end-line="21" selection-end-column="46" />
+          <folding>
+            <element signature="e#223#236#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/SGMLEU/settings.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6105263">
+          <caret line="133" column="0" selection-start-line="133" selection-start-column="0" selection-end-line="133" selection-end-column="0" />
+>>>>>>> 4b540fe65b6f5e5aea6b476e42829c07cafbcef9
           <folding />
         </state>
       </provider>
