@@ -15,6 +15,7 @@ from SGMGU.views.views_reportes import *
 from SGMGU.views.views_ubicados import *
 from SGMGU.views.views_inhabilitaciones import *
 from SGMGU.views.views_centros_estudios import *
+from SGMGU.views.views_entidades import *
 from SGMGU.views.views_disponibles import *
 from SGMGU.views.views_indicaciones import *
 from SGMGU.views.views_demanda import *
@@ -87,7 +88,7 @@ urlpatterns = [
 
 
 
-    #mario
+    #mario------------------------------------------------------------------------------------------
     url(r'^carreras$',gestion_carreras,name='carreras'),
     url(r'^carreras/registrar_carrera$',registrar_carrera),
     url(r'^carreras/buscar$',buscar_carreras),
@@ -103,9 +104,11 @@ urlpatterns = [
     #url para el menu de geforza
     url(r'^geforza$',geforza,name='geforza'),
 
-    url(r'^demanda$',gestion_demanda,name='centros_estudios'),
+    url(r'^entidades',gestion_entidades,name='entidades'),
 
-    #/mario
+    #url(r'^demanda$',gestion_demanda,name='centros_estudios'),
+
+    #/mario-------------------------------------------------------------------------------------------
 
 
 

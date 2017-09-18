@@ -40,8 +40,6 @@ def menu(request):
              },
             {'name':'Inhabilitaciones','url':reverse('inhabilitaciones'),'icon':'glyphicon glyphicon-briefcase','visible':['administrador','juridico']},
 
-            {'name':'Reportes','url':reverse('reportes'),'icon':'glyphicon glyphicon-menu-hamburger','visible':['administrador','especialista','organismo','dpts','invitado','mes','juridico']},
-
             {'name':'GeForza','url':reverse('geforza'),'icon':'glyphicon glyphicon-briefcase','visible':['administrador','especialista','organismo'],
                'menu':[
                     {'name':'Demanda','url':reverse('organismos'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
@@ -51,6 +49,8 @@ def menu(request):
                ]
              },
 
+            {'name':'Reportes','url':reverse('reportes'),'icon':'glyphicon glyphicon-menu-hamburger','visible':['administrador','especialista','organismo','dpts','invitado','mes','juridico']},
+
             {'name':'Nomencladores','url':reverse('nomencladores'),'icon':'glyphicon glyphicon-bookmark','visible':['administrador','especialista'],
                'menu':[
                     {'name':'Gestión de Organismos','url':reverse('organismos'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
@@ -58,6 +58,7 @@ def menu(request):
                     {'name':'Gestión de DPT','url':reverse('dir_trabajo'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Carreras','url':reverse('carreras'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
                     {'name':'Gestión de Centros','url':reverse('centros_estudios'),'icon':'glyphicon glyphicon-chevron-right','visible':['administrador','especialista']},
+                    {'name': 'Gestión de Entidades', 'url': reverse('entidades'),'icon': 'glyphicon glyphicon-chevron-right', 'visible': ['administrador', 'especialista']},
                ]
              },
             {'name':'Usuarios','url':reverse('usuarios'),'icon':'glyphicon glyphicon-user','visible':['administrador','especialista']},

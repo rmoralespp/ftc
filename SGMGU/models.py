@@ -399,12 +399,23 @@ class DisponibilidadGraduados(models.Model):
     #anno_mas_seis = models.IntegerField(blank=True,null=True)
     #anno_mas_siete = models.IntegerField(blank=True,null=True)
     #anno_mas_ocho = models.IntegerField(blank=True,null=True)
-    #anno_mas_nueve = models.IntegerField(blank=True,null=True)
+    #anno_mas_nueve = models.IntegerField(blank=True,null=True) 
     #anno_mas_diez = models.IntegerField(blank=True,null=True)
 
 #-----------codigo mario david--------------
 
-    
+#class DemandaGraduados(models.Model):
+#     codigo_demanda = models.CharField(max_length=255,unique=True)
+#     codigo_entidad = models.ForeignKey(Entidad)
+
+class Entidad(models.Model):
+    id_codigo_entidad = models.CharField(primary_key=True, max_length = 250)
+    e_nombre = models.CharField(max_length = 250)
+    id_organismo_s = models.ForeignKey(Organismo)
+    municipio = models.IntegerField(blank = True , null = True)
+    id_tipo = models.IntegerField(blank = True , null = True)
+    estado = models.IntegerField(blank = True , null = True)
+    est_replica = models.IntegerField(blank = True , null = True)
 
 #---------------------------------------------
 

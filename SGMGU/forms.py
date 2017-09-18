@@ -297,10 +297,26 @@ class CarreraForm(forms.ModelForm):
            fields=["codigo_mes","nombre","tipo"]
            widgets={
 
-                 'tipo':forms.Select(  attrs={ 'class': 'form-control' }),
+                 'tipo':forms.Select(attrs={'class': 'form-control'}),
                  'codigo_mes': forms.TextInput(attrs={'class': 'form-control','placeholder': 'Escriba el código de la carrera'}),
-                 'nombre': forms.TextInput(attrs={  'class': 'form-control',  'placeholder': 'Escriba el nombre de la carrera' })
+                 'nombre': forms.TextInput(attrs={'class': 'form-control',  'placeholder': 'Escriba el nombre de la carrera'})
                   }
+
+class EntidadForm(forms.ModelForm):
+        class Meta:
+            model = Entidad
+            fields = ["id_codigo_entidad", "e_nombre", "id_organismo_s", "municipio", "id_tipo", "estado", "est_replica"]
+            widgets = {
+
+                'id_codigo_entidad': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escriba el código de la entidad'}),
+                'e_nombre': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Escriba el nombre de la entidad'}),
+                'id_organismo_s': forms.Select(attrs={'class': 'form-control'}),
+                'municipio': forms.Select(attrs={'class': 'form-control'}),
+                'id_tipo': forms.Select(attrs={'class': 'form-control'}),
+            }
+
+
+
 
 #trabajando en el Form de la demanda             
 #class DemandaForm(forms.ModelForm):
